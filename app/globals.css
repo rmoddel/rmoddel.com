@@ -32,7 +32,10 @@ body {
     radial-gradient(circle at 84% 10%, rgba(181, 91, 57, 0.12), transparent 28%),
     radial-gradient(circle at 72% 72%, rgba(217, 154, 88, 0.1), transparent 18%),
     linear-gradient(180deg, #f7f3ec 0%, #efe8df 54%, #e9dfd3 100%);
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body::before,
@@ -68,8 +71,8 @@ input,
 textarea,
 select,
 button {
-  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  letter-spacing: 0.012em;
+  font-family: var(--font-sans), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: 0.006em;
 }
 
 .pageShell {
