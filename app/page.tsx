@@ -1,122 +1,128 @@
+import type { Metadata } from "next";
+import { AiWidget } from "@/components/ai-widget";
 import { ContactForm } from "@/components/contact-form";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { packages, projects, proofItems, services } from "@/lib/site-content";
 
-const services = [
+const faqItems = [
   {
-    title: "Creative & Marketing",
-    body:
-      "Websites, logos, journal ads, flyers, campaigns, labels, fundraising visuals, and community-facing materials."
+    question: "What kinds of projects does Reuben Moddel help with?",
+    answer:
+      "The site highlights websites, logos, ads, campaigns, business writing, AI workflows, app plans, product specs, and related execution support."
   },
   {
-    title: "Business Writing & Messaging",
-    body:
-      "Emails, proposals, donor appeals, letters, pitch copy, website copy, executive summaries, and plain-English business documents."
+    question: "Who is this site for?",
+    answer:
+      "The positioning is aimed at businesses, nonprofits, founders, community organizations, and owners with rough ideas that need structure and polish."
   },
   {
-    title: "AI Workflow Consulting",
-    body:
-      "Workflow reviews, automation ideas, internal tools, SOPs, dashboards, data cleanup, and document processing strategy."
+    question: "What is the Idea-to-Execution Session?",
+    answer:
+      "It is a focused session to clarify what you are trying to create, identify the best direction, and map the next practical deliverable and next steps."
   },
   {
-    title: "MVP & Product Blueprinting",
-    body:
-      "Product specs, app planning, user flows, backend structure, feature lists, developer handoff docs, and AI-agent build instructions."
+    question: "How is AI used in the work?",
+    answer:
+      "The site explains that AI is used as an amplifier for speed, exploration, drafting, and structure, while human judgment handles final direction, taste, messaging, and quality control."
+  },
+  {
+    question: "What are the listed starting price ranges?",
+    answer:
+      "The site lists packages from $250+ for a Quick Creative Consult up to $3,000-$10,000 per month for a Fractional AI / Product Partner engagement."
   }
-];
-
-const projects = [
-  {
-    type: "Community Fundraising Campaign",
-    title: "Campaign identity and donor materials",
-    body:
-      "Campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.",
-    result:
-      "Created a polished campaign identity with practical fundraising materials."
-  },
-  {
-    type: "Dessert Brand Label & Packaging",
-    title: "Retail-ready product presentation",
-    body:
-      "Logo refinement, circular product label, kosher/parve badge layout, freezer instruction label, and typography cleanup.",
-    result: "Created a sharper, cleaner look for a small food brand."
-  },
-  {
-    type: "Journal Ads & Event Materials",
-    title: "Fast community-facing design support",
-    body:
-      "Ad copy, layout direction, headline concepts, typography cleanup, and WhatsApp-ready versions.",
-    result:
-      "Produced polished event and advertising materials quickly and affordably."
-  },
-  {
-    type: "Healthcare AI Platform Planning",
-    title: "Workflow and software direction",
-    body:
-      "Workflow analysis, product architecture, developer handoff specs, AI document processing strategy, and referral workflow planning.",
-    result:
-      "Organized complex referral workflows into a clearer software direction."
-  },
-  {
-    type: "Buyer Marketplace / Receipt Tracking",
-    title: "Product roadmap from a messy concept",
-    body:
-      "Receipt upload flow, runner/dealer workflow mapping, AI validation concept, dashboard planning, and backend structure.",
-    result: "Turned a fragmented marketplace idea into a structured roadmap."
-  },
-  {
-    type: "Business & Legal-Style Writing",
-    title: "Plain-English communication that still sounds serious",
-    body:
-      "Formal letters, dispute language, contract simplification, business communication, and negotiation wording.",
-    result:
-      "Helped people communicate clearly without robotic or over-lawyered language."
-  }
-];
-
-const packages = [
-  ["$250+", "Quick Creative Consult", "Direction on a website, ad, logo, campaign, or message."],
-  ["$500-$2,500+", "Creative Buildout", "Copy, concepts, visual direction, and polished materials for launch or outreach."],
-  ["$500-$1,500+", "AI Workflow Audit", "Workflow review, automation opportunities, and a plain-English action plan."],
-  ["$2,500-$7,500+", "MVP / App Blueprint", "User flows, features, backend logic, MVP scope, and build-ready planning docs."],
-  ["$3,000-$10,000/month", "Fractional AI / Product Partner", "Ongoing product direction, developer oversight, workflow strategy, and business-to-tech translation."]
 ] as const;
 
-const proofItems = [
-  "Screenshots and before/after examples",
-  "Short honest testimonials from real clients or organizers",
-  "Simple project descriptions showing what became clearer, sharper, or more usable"
-];
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://rmoddel.com/#person",
+      name: "Reuben Moddel",
+      url: "https://rmoddel.com",
+      jobTitle: "Creative AI Operator",
+      description:
+        "Reuben Moddel helps businesses, nonprofits, founders, and community organizations turn rough ideas into polished results.",
+      knowsAbout: [
+        "Websites",
+        "Business writing",
+        "AI workflow consulting",
+        "MVP planning",
+        "Creative direction",
+        "Product blueprinting"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://rmoddel.com/#service",
+      name: "rmoddel.com",
+      url: "https://rmoddel.com",
+      description:
+        "Creative AI operator services covering websites, ads, campaigns, business writing, workflows, and app planning.",
+      founder: {
+        "@id": "https://rmoddel.com/#person"
+      },
+      areaServed: "Worldwide",
+      serviceType: [
+        "Creative and marketing support",
+        "Business writing and messaging",
+        "AI workflow consulting",
+        "MVP and product blueprinting"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://rmoddel.com/#faq",
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer
+        }
+      }))
+    }
+  ]
+};
+
+export const metadata: Metadata = {
+  title: "Creative AI Operator for Real-World Business",
+  description:
+    "Reuben Moddel helps turn rough ideas into polished websites, ads, campaigns, business writing, workflows, and AI-powered systems.",
+  alternates: {
+    canonical: "/"
+  }
+};
 
 export default function HomePage() {
   return (
     <main className="pageShell">
-      <header className="siteHeader">
-        <a className="brand" href="#top">
-          <span className="brandMark">RM</span>
-          <span className="brandText">
-            <strong>Reuben Moddel</strong>
-            <span>Creative AI Operator for Real-World Business</span>
-          </span>
-        </a>
-        <nav className="siteNav">
-          <a href="#services">Services</a>
-          <a href="#work">Work</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <a className="button smallButton" href="#session">
-          Book a Session
-        </a>
-      </header>
+      <script
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        type="application/ld+json"
+      />
+      <SiteHeader />
 
       <section className="heroSection" id="top">
         <div className="heroCopy">
-          <p className="eyebrow">Bring me the mess. I’ll help make it make sense.</p>
+          <div className="heroRibbon">
+            <p className="eyebrow">Bring me the mess. I’ll help make it make sense.</p>
+            <span className="heroSpark">Human judgment x AI speed</span>
+          </div>
           <h1>Turn Rough Ideas Into Polished Results</h1>
           <p className="heroText">
             Websites, logos, ads, campaigns, business writing, app plans, and
             AI-powered workflows, created with practical business sense, creative
             direction, and AI-powered speed.
           </p>
+          <div className="heroTags" aria-label="Key offerings">
+            <span>Websites</span>
+            <span>Campaigns</span>
+            <span>Business Writing</span>
+            <span>AI Workflows</span>
+            <span>App Plans</span>
+          </div>
           <div className="heroActions">
             <a className="button" href="#session">
               Book an Idea-to-Execution Session
@@ -127,6 +133,7 @@ export default function HomePage() {
           </div>
         </div>
         <aside className="heroPanel">
+          <div className="heroPanelBadge">Idea to Execution</div>
           <p className="panelLabel">What clients usually bring</p>
           <ul>
             <li>Scattered notes and screenshots</li>
@@ -138,6 +145,20 @@ export default function HomePage() {
             Outcome: clear direction, sharp messaging, usable deliverables.
           </p>
         </aside>
+      </section>
+
+      <section className="tickerSection" aria-label="Audience">
+        <div className="tickerTrack">
+          <span>Businesses</span>
+          <span>Nonprofits</span>
+          <span>Founders</span>
+          <span>Community Organizations</span>
+          <span>Websites</span>
+          <span>Ads</span>
+          <span>Writing</span>
+          <span>Workflows</span>
+          <span>App Plans</span>
+        </div>
       </section>
 
       <section className="sectionCard">
@@ -165,8 +186,9 @@ export default function HomePage() {
           <h2>Clear deliverables across creative, writing, workflows, and product planning.</h2>
         </div>
         <div className="grid fourGrid">
-          {services.map((service) => (
-            <article className="contentCard" key={service.title}>
+          {services.map((service, index) => (
+            <article className="contentCard serviceCard" key={service.title}>
+              <p className="cardIndex">0{index + 1}</p>
               <h3>{service.title}</h3>
               <p>{service.body}</p>
             </article>
@@ -179,7 +201,7 @@ export default function HomePage() {
           <p className="eyebrow">How It Works</p>
           <h2>From rough concept to something usable.</h2>
         </div>
-        <div className="grid fourGrid">
+        <div className="grid fourGrid processGrid">
           {[
             ["01", "You explain the mess", "Bring the notes, screenshots, voice notes, draft, or half-built project."],
             ["02", "I clarify the direction", "We figure out what matters most and what the best first deliverable should be."],
@@ -201,8 +223,9 @@ export default function HomePage() {
           <h2>Real project types. Honest descriptions. No fake case studies.</h2>
         </div>
         <div className="grid twoGrid">
-          {projects.map((project) => (
-            <article className="contentCard" key={project.type}>
+          {projects.map((project, index) => (
+            <article className="contentCard projectCard" key={project.type}>
+              <p className="cardIndex">Case {index + 1}</p>
               <p className="microLabel">{project.type}</p>
               <h3>{project.title}</h3>
               <p>{project.body}</p>
@@ -260,8 +283,9 @@ export default function HomePage() {
           <h2>Flexible ways to work together.</h2>
         </div>
         <div className="grid twoGrid">
-          {packages.map(([price, title, body]) => (
-            <article className="contentCard" key={title}>
+          {packages.map(([price, title, body], index) => (
+            <article className="contentCard packageCard" key={title}>
+              <p className="cardIndex">Option 0{index + 1}</p>
               <p className="microLabel">{price}</p>
               <h3>{title}</h3>
               <p>{body}</p>
@@ -305,6 +329,21 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="sectionCard" id="faq">
+        <div className="sectionHeading">
+          <p className="eyebrow">FAQ</p>
+          <h2>Common questions this site already answers.</h2>
+        </div>
+        <div className="faqList">
+          {faqItems.map((item) => (
+            <article className="contentCard faqCard" key={item.question}>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="contactSection" id="contact">
         <div className="contactCopy">
           <p className="eyebrow">Start With a Conversation</p>
@@ -318,6 +357,8 @@ export default function HomePage() {
         </div>
         <ContactForm />
       </section>
+      <SiteFooter />
+      <AiWidget />
     </main>
   );
 }
