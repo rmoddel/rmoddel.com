@@ -2,22 +2,26 @@ export const services = [
   {
     title: "Creative & Marketing",
     body:
-      "Websites, logos, journal ads, flyers, campaigns, labels, fundraising visuals, and community-facing materials."
+      "Websites, logos, journal ads, flyers, campaigns, labels, fundraising visuals, and community-facing materials.",
+    items: ["Websites", "Campaign visuals", "Logos", "Fundraising materials"]
   },
   {
     title: "Business Writing & Messaging",
     body:
-      "Emails, proposals, donor appeals, letters, pitch copy, website copy, executive summaries, and plain-English business documents."
+      "Emails, proposals, donor appeals, letters, pitch copy, website copy, executive summaries, and plain-English business documents.",
+    items: ["Website copy", "Proposals", "Donor appeals", "Business documents"]
   },
   {
     title: "AI Workflow Consulting",
     body:
-      "Workflow reviews, automation ideas, internal tools, SOPs, dashboards, data cleanup, and document processing strategy."
+      "Workflow reviews, automation ideas, internal tools, SOPs, dashboards, data cleanup, and document processing strategy.",
+    items: ["Workflow reviews", "SOP direction", "Automation ideas", "Internal tools"]
   },
   {
     title: "MVP & Product Blueprinting",
     body:
-      "Product specs, app planning, user flows, backend structure, feature lists, developer handoff docs, and AI-agent build instructions."
+      "Product specs, app planning, user flows, backend structure, feature lists, developer handoff docs, and AI-agent build instructions.",
+    items: ["User flows", "Feature scope", "Backend structure", "Developer handoff docs"]
   }
 ] as const;
 
@@ -25,63 +29,125 @@ export const projects = [
   {
     type: "Community Fundraising Campaign",
     title: "Campaign identity and donor materials",
-    body:
-      "Campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.",
+    summary:
+      "A community campaign needed messaging and materials that felt credible, organized, and reusable across events.",
+    deliverables: [
+      "Campaign messaging",
+      "Pledge card concept",
+      "Poster direction",
+      "Parlor meeting signage",
+      "Reusable event materials"
+    ],
     result:
       "Created a polished campaign identity with practical fundraising materials."
   },
   {
     type: "Dessert Brand Label & Packaging",
     title: "Retail-ready product presentation",
-    body:
-      "Logo refinement, circular product label, kosher/parve badge layout, freezer instruction label, and typography cleanup.",
+    summary:
+      "A small food brand needed its packaging to look cleaner, more intentional, and more ready for real retail presentation.",
+    deliverables: [
+      "Logo refinement",
+      "Circular product label",
+      "Badge layout",
+      "Packaging copy refinement",
+      "Typography cleanup"
+    ],
     result: "Created a sharper, cleaner look for a small food brand."
   },
   {
     type: "Journal Ads & Event Materials",
     title: "Fast community-facing design support",
-    body:
-      "Ad copy, layout direction, headline concepts, typography cleanup, and WhatsApp-ready versions.",
+    summary:
+      "Community organizations needed polished materials quickly, without adding unnecessary process or agency overhead.",
+    deliverables: [
+      "Ad copy",
+      "Layout direction",
+      "Headline concepts",
+      "Typography cleanup",
+      "WhatsApp-ready versions"
+    ],
     result:
       "Produced polished event and advertising materials quickly and affordably."
   },
   {
-    type: "Healthcare AI Platform Planning",
-    title: "Workflow and software direction",
-    body:
-      "Workflow analysis, product architecture, developer handoff specs, AI document processing strategy, and referral workflow planning.",
-    result:
-      "Organized complex referral workflows into a clearer software direction."
-  },
-  {
-    type: "Buyer Marketplace / Receipt Tracking",
-    title: "Product roadmap from a messy concept",
-    body:
-      "Receipt upload flow, runner/dealer workflow mapping, AI validation concept, dashboard planning, and backend structure.",
-    result: "Turned a fragmented marketplace idea into a structured roadmap."
-  },
-  {
     type: "Business & Legal-Style Writing",
     title: "Plain-English communication that still sounds serious",
-    body:
-      "Formal letters, dispute language, contract simplification, business communication, and negotiation wording.",
+    summary:
+      "People needed written communication that felt formal and clear without becoming robotic, bloated, or over-lawyered.",
+    deliverables: [
+      "Formal letters",
+      "Dispute language",
+      "Contract simplification",
+      "Business communication",
+      "Negotiation wording"
+    ],
     result:
       "Helped people communicate clearly without robotic or over-lawyered language."
   }
 ] as const;
 
 export const packages = [
-  ["$250+", "Quick Creative Consult", "Direction on a website, ad, logo, campaign, or message."],
-  ["$500-$2,500+", "Creative Buildout", "Copy, concepts, visual direction, and polished materials for launch or outreach."],
-  ["$500-$1,500+", "AI Workflow Audit", "Workflow review, automation opportunities, and a plain-English action plan."],
-  ["$2,500-$7,500+", "MVP / App Blueprint", "User flows, features, backend logic, MVP scope, and build-ready planning docs."],
-  ["$3,000-$10,000/month", "Fractional AI / Product Partner", "Ongoing product direction, developer oversight, workflow strategy, and business-to-tech translation."]
+  {
+    price: "$250+",
+    title: "Strategy Session",
+    body:
+      "A focused working session to clarify the idea, sharpen the message, and decide the right next deliverable.",
+    bestFor: "Best when the project is still undefined and you need direction first."
+  },
+  {
+    price: "$500-$2,500+",
+    title: "Creative & Messaging Buildout",
+    body:
+      "Hands-on help creating or refining copy, campaign materials, website messaging, and visual direction.",
+    bestFor: "Best when the direction is clear and the materials now need to be made."
+  },
+  {
+    price: "$500-$1,500+",
+    title: "AI Workflow Review",
+    body:
+      "A practical review of repetitive work, where AI may help, and what the best first implementation should be.",
+    bestFor: "Best when there is real operational friction and AI may remove repetitive work."
+  },
+  {
+    price: "$2,500-$7,500+",
+    title: "MVP Blueprint",
+    body:
+      "A structured product plan with scope, flows, features, and developer-ready direction.",
+    bestFor: "Best when an app or internal tool needs structure before development starts."
+  },
+  {
+    price: "$3,000-$10,000/month",
+    title: "Ongoing Strategic Partner",
+    body:
+      "Ongoing support to keep ideas, execution, creative direction, and technical planning moving in the same direction.",
+    bestFor: "Best when multiple priorities need the same judgment across time."
+  }
 ] as const;
 
-export const proofItems = [
-  "Screenshots and before/after examples",
-  "Short honest testimonials from real clients or organizers",
-  "Simple project descriptions showing what became clearer, sharper, or more usable"
+export const workingPrinciples = [
+  {
+    title: "Start with the rough version",
+    body:
+      "Notes, screenshots, voice notes, half-written copy, and unfinished drafts are enough to begin."
+  },
+  {
+    title: "Use AI where it creates leverage",
+    body:
+      "AI speeds up exploration, drafting, structure, and iteration, but it does not replace direction."
+  },
+  {
+    title: "Aim for handoff-ready outputs",
+    body:
+      "The goal is not abstract advice. The goal is something you can use, publish, or hand to the next person."
+  }
+] as const;
+
+export const outcomePoints = [
+  "Clearer positioning and message",
+  "A practical next deliverable",
+  "Copy, design direction, or product structure",
+  "Something usable for you or your team"
 ] as const;
 
 export const websiteKnowledge = `
@@ -109,18 +175,16 @@ Main offer:
 - Outcomes include a clearer version of the idea, recommended direction, suggested deliverables, practical next steps, messaging angles, and relevant AI opportunities.
 
 Service packages and price ranges:
-- Quick Creative Consult: $250+.
-- Creative Buildout: $500-$2,500+.
-- AI Workflow Audit: $500-$1,500+.
-- MVP / App Blueprint: $2,500-$7,500+.
-- Fractional AI / Product Partner: $3,000-$10,000 per month.
+- Strategy Session: $250+.
+- Creative and Messaging Buildout: $500-$2,500+.
+- AI Workflow Review: $500-$1,500+.
+- MVP Blueprint: $2,500-$7,500+.
+- Ongoing Strategic Partner: $3,000-$10,000 per month.
 
 Selected work examples:
 - Community Fundraising Campaign: campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.
-- Dessert Brand Label and Packaging: logo refinement, circular product label, kosher/parve badge layout, freezer instruction label, and typography cleanup.
+- Dessert Brand Label and Packaging: logo refinement, circular product label, badge layout, packaging copy refinement, and typography cleanup.
 - Journal Ads and Event Materials: ad copy, layout direction, headline concepts, typography cleanup, and WhatsApp-ready versions.
-- Healthcare AI Platform Planning: workflow analysis, product architecture, developer handoff specs, AI document processing strategy, and referral workflow planning.
-- Buyer Marketplace / Receipt Tracking: receipt upload flow, runner/dealer workflow mapping, AI validation concept, dashboard planning, and backend structure.
 - Business and Legal-Style Writing: formal letters, dispute language, contract simplification, business communication, and negotiation wording.
 
 About:

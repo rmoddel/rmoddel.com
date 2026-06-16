@@ -3,33 +3,34 @@ import { AiWidget } from "@/components/ai-widget";
 import { ContactForm } from "@/components/contact-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { packages, projects, proofItems, services } from "@/lib/site-content";
+import {
+  outcomePoints,
+  packages,
+  projects,
+  services,
+  workingPrinciples
+} from "@/lib/site-content";
 
-const faqItems = [
+const fitItems = [
   {
-    question: "What kinds of projects does Reuben Moddel help with?",
-    answer:
-      "The site highlights websites, logos, ads, campaigns, business writing, AI workflows, app plans, product specs, and related execution support."
+    title: "When the idea is still messy",
+    body:
+      "You know what you want in broad terms, but the offer, message, structure, or deliverable still feels unclear."
   },
   {
-    question: "Who is this site for?",
-    answer:
-      "The positioning is aimed at businesses, nonprofits, founders, community organizations, and owners with rough ideas that need structure and polish."
+    title: "When words and design need to line up",
+    body:
+      "You need the idea to look right, sound right, and make practical sense at the same time."
   },
   {
-    question: "What is the Idea-to-Execution Session?",
-    answer:
-      "It is a focused session to clarify what you are trying to create, identify the best direction, and map the next practical deliverable and next steps."
+    title: "When AI might help, but only if it actually helps",
+    body:
+      "You want speed and leverage without turning the work into generic AI output or unnecessary complexity."
   },
   {
-    question: "How is AI used in the work?",
-    answer:
-      "The site explains that AI is used as an amplifier for speed, exploration, drafting, and structure, while human judgment handles final direction, taste, messaging, and quality control."
-  },
-  {
-    question: "What are the listed starting price ranges?",
-    answer:
-      "The site lists packages from $250+ for a Quick Creative Consult up to $3,000-$10,000 per month for a Fractional AI / Product Partner engagement."
+    title: "When execution needs direction",
+    body:
+      "You need someone who can clarify the work, shape the next step, and give developers, designers, or collaborators something usable."
   }
 ] as const;
 
@@ -71,18 +72,6 @@ const jsonLd = {
         "MVP and product blueprinting"
       ]
     },
-    {
-      "@type": "FAQPage",
-      "@id": "https://rmoddel.com/#faq",
-      mainEntity: faqItems.map((item) => ({
-        "@type": "Question",
-        name: item.question,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: item.answer
-        }
-      }))
-    }
   ]
 };
 
@@ -131,6 +120,18 @@ export default function HomePage() {
               See Work Samples
             </a>
           </div>
+          <div className="heroMiniGrid" aria-label="What this work produces">
+            {[
+              ["Clarity first", "The first step is making the idea coherent."],
+              ["Useful outputs", "The result should be ready to use or hand off."],
+              ["Range without drift", "Creative, writing, workflow, and product thinking stay aligned."]
+            ].map(([title, body]) => (
+              <article className="miniCard" key={title}>
+                <h3>{title}</h3>
+                <p>{body}</p>
+              </article>
+            ))}
+          </div>
         </div>
         <aside className="heroPanel">
           <div className="heroPanelBadge">Idea to Execution</div>
@@ -144,6 +145,11 @@ export default function HomePage() {
           <p className="panelResult">
             Outcome: clear direction, sharp messaging, usable deliverables.
           </p>
+          <div className="heroOutcomeList">
+            {outcomePoints.map((point) => (
+              <span key={point}>{point}</span>
+            ))}
+          </div>
         </aside>
       </section>
 
@@ -191,6 +197,11 @@ export default function HomePage() {
               <p className="cardIndex">0{index + 1}</p>
               <h3>{service.title}</h3>
               <p>{service.body}</p>
+              <div className="chipRow" aria-label={`${service.title} examples`}>
+                {service.items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
             </article>
           ))}
         </div>
@@ -228,7 +239,12 @@ export default function HomePage() {
               <p className="cardIndex">Case {index + 1}</p>
               <p className="microLabel">{project.type}</p>
               <h3>{project.title}</h3>
-              <p>{project.body}</p>
+              <p>{project.summary}</p>
+              <div className="detailList" aria-label={`${project.title} deliverables`}>
+                {project.deliverables.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
               <p className="resultText">Result: {project.result}</p>
             </article>
           ))}
@@ -250,6 +266,14 @@ export default function HomePage() {
             control still come from human judgment. AI can generate. I help
             decide what is actually good, useful, clear, and appropriate.
           </p>
+        </div>
+        <div className="grid threeGrid principleGrid">
+          {workingPrinciples.map((principle) => (
+            <article className="contentCard principleCard" key={principle.title}>
+              <h3>{principle.title}</h3>
+              <p>{principle.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -280,15 +304,21 @@ export default function HomePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Service Packages</p>
-          <h2>Flexible ways to work together.</h2>
+          <h2>Clear ways to work together.</h2>
         </div>
+        <p className="sectionIntro">
+          These are starting points, not rigid boxes. The right engagement depends
+          on whether you need strategy, materials, workflow thinking, or a full
+          product plan.
+        </p>
         <div className="grid twoGrid">
-          {packages.map(([price, title, body], index) => (
-            <article className="contentCard packageCard" key={title}>
+          {packages.map((pkg, index) => (
+            <article className="contentCard packageCard" key={pkg.title}>
               <p className="cardIndex">Option 0{index + 1}</p>
-              <p className="microLabel">{price}</p>
-              <h3>{title}</h3>
-              <p>{body}</p>
+              <p className="microLabel">{pkg.price}</p>
+              <h3>{pkg.title}</h3>
+              <p>{pkg.body}</p>
+              <p className="bestForText">{pkg.bestFor}</p>
             </article>
           ))}
         </div>
@@ -312,33 +342,23 @@ export default function HomePage() {
             business documents, and internal systems without losing the thread.
           </p>
         </div>
-      </section>
-
-      <section className="sectionCard">
-        <div className="sectionHeading">
-          <p className="eyebrow">Proof</p>
-          <h2>Use real proof, not manufactured credibility.</h2>
-        </div>
-        <div className="grid threeGrid">
-          {proofItems.map((item) => (
-            <article className="contentCard" key={item}>
-              <h3>{item}</h3>
-              <p>Keep this section anchored in real screenshots, project materials, and client feedback you can stand behind.</p>
-            </article>
+        <div className="chipRow" aria-label="What clients typically leave with">
+          {outcomePoints.map((point) => (
+            <span key={point}>{point}</span>
           ))}
         </div>
       </section>
 
-      <section className="sectionCard" id="faq">
+      <section className="sectionCard">
         <div className="sectionHeading">
-          <p className="eyebrow">FAQ</p>
-          <h2>Common questions this site already answers.</h2>
+          <p className="eyebrow">Best Fit</p>
+          <h2>Where this kind of help is most useful.</h2>
         </div>
-        <div className="faqList">
-          {faqItems.map((item) => (
-            <article className="contentCard faqCard" key={item.question}>
-              <h3>{item.question}</h3>
-              <p>{item.answer}</p>
+        <div className="grid twoGrid">
+          {fitItems.map((item) => (
+            <article className="contentCard fitCard" key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
             </article>
           ))}
         </div>
