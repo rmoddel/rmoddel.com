@@ -322,17 +322,17 @@ h3 {
 h1 {
   max-width: 8.6ch;
   margin-top: 18px;
-  font-size: clamp(4rem, 9vw, 7.6rem);
+  font-size: clamp(3rem, 7.2vw, 5.8rem);
 }
 
 h2 {
   max-width: 12ch;
-  font-size: clamp(2.4rem, 4.8vw, 4.5rem);
+  font-size: clamp(2rem, 4vw, 3.5rem);
 }
 
 h3 {
-  font-size: 1.42rem;
-  line-height: 1.08;
+  font-size: 1.24rem;
+  line-height: 1.12;
 }
 
 .heroText,
@@ -351,14 +351,14 @@ h3 {
 .aiWidgetNote,
 .aiBubble {
   color: var(--muted);
-  font-size: 1.02rem;
-  line-height: 1.76;
+  font-size: 0.96rem;
+  line-height: 1.68;
 }
 
 .heroText {
   max-width: 44rem;
   margin: 24px 0 0;
-  font-size: 1.16rem;
+  font-size: 1.03rem;
 }
 
 .heroTags {
@@ -398,7 +398,7 @@ h3 {
 
 .miniCard h3 {
   margin-bottom: 10px;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
 }
 
 .miniCard p,
@@ -516,8 +516,8 @@ h3 {
   max-width: 52rem;
   margin: -8px 0 24px;
   color: var(--muted);
-  font-size: 1rem;
-  line-height: 1.72;
+  font-size: 0.94rem;
+  line-height: 1.64;
 }
 
 .twoColumn,
@@ -747,35 +747,56 @@ h3 {
 
 .aiWidget {
   position: fixed;
-  right: 18px;
-  bottom: 18px;
+  right: 20px;
+  bottom: 20px;
   z-index: 20;
 }
 
 .aiWidgetToggle,
 .aiWidgetClose {
   border: 1px solid rgba(23, 20, 17, 0.12);
-  background: rgba(255, 252, 247, 0.94);
   color: var(--ink);
   cursor: pointer;
 }
 
 .aiWidgetToggle {
-  min-height: 54px;
-  padding: 0 20px;
-  border-radius: 999px;
+  display: grid;
+  gap: 2px;
+  min-width: 176px;
+  min-height: 64px;
+  padding: 12px 18px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top left, rgba(45, 122, 116, 0.18), transparent 34%),
+    linear-gradient(145deg, rgba(255, 252, 247, 0.96), rgba(243, 235, 227, 0.94));
+  box-shadow: 0 22px 56px rgba(61, 46, 33, 0.18);
+  text-align: left;
+}
+
+.aiWidgetToggleLabel {
   font-size: 0.95rem;
   font-weight: 900;
-  box-shadow: var(--shadow);
+  letter-spacing: -0.02em;
+}
+
+.aiWidgetToggleMeta {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .aiWidgetPanel {
-  width: min(390px, calc(100vw - 36px));
-  margin-top: 12px;
-  padding: 18px;
+  width: min(430px, calc(100vw - 32px));
+  margin-top: 14px;
+  padding: 20px;
   border: 1px solid var(--line);
-  border-radius: 28px;
-  background: rgba(255, 252, 247, 0.96);
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at top right, rgba(181, 91, 57, 0.12), transparent 28%),
+    radial-gradient(circle at top left, rgba(45, 122, 116, 0.14), transparent 24%),
+    rgba(255, 252, 247, 0.96);
 }
 
 .aiWidgetHeader {
@@ -789,32 +810,74 @@ h3 {
   width: 36px;
   height: 36px;
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.68);
   font-size: 1.4rem;
   line-height: 1;
+}
+
+.aiPromptRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.aiPromptChip {
+  padding: 10px 12px;
+  border: 1px solid rgba(23, 20, 17, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
 }
 
 .aiWidgetMessages {
   display: grid;
   gap: 10px;
-  max-height: 320px;
+  max-height: 340px;
   margin-top: 16px;
   overflow: auto;
 }
 
 .aiBubble {
-  padding: 12px 14px;
-  border-radius: 16px;
-  font-size: 0.95rem;
-  line-height: 1.58;
+  padding: 11px 13px;
+  border-radius: 18px;
+  font-size: 0.92rem;
+  line-height: 1.55;
   white-space: pre-wrap;
 }
 
+.aiBubbleParagraph {
+  margin: 0;
+}
+
+.aiBubbleParagraph + .aiBubbleParagraph,
+.aiBubbleParagraph + .aiBubbleList,
+.aiBubbleList + .aiBubbleParagraph,
+.aiBubbleList + .aiBubbleList {
+  margin-top: 10px;
+}
+
+.aiBubbleList {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.aiBubbleList li + li {
+  margin-top: 6px;
+}
+
 .aiBubble.assistant {
-  background: rgba(45, 122, 116, 0.08);
+  background:
+    linear-gradient(135deg, rgba(45, 122, 116, 0.12), rgba(255, 255, 255, 0.66)),
+    rgba(255, 255, 255, 0.72);
 }
 
 .aiBubble.user {
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 248, 242, 0.9);
   border: 1px solid rgba(23, 20, 17, 0.08);
 }
 
@@ -904,7 +967,7 @@ h3 {
 
   h1 {
     max-width: 9.5ch;
-    font-size: clamp(3.2rem, 13vw, 5.1rem);
+    font-size: clamp(2.6rem, 11vw, 4.3rem);
   }
 
   h2 {
@@ -927,6 +990,6 @@ h3 {
   }
 
   .aiWidgetPanel {
-    width: min(100vw - 20px, 390px);
+    width: min(100vw - 20px, 430px);
   }
 }

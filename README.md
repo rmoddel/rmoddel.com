@@ -16,18 +16,22 @@ Responsive Next.js marketing site for Reuben Moddel.
 - Contact form with client-side submission state
 - Server-side `/api/contact` route
 - Email delivery through the existing external mail relay
+- Branded virtual assistant widget with local LLM support and site-knowledge fallback
 
 ## Project Structure
 
 ```text
 app/
+  api/assistant/route.ts Local assistant API route
   api/contact/route.ts   Contact form API route
   globals.css            Site styling
   layout.tsx             Root layout + metadata
   page.tsx               Homepage content
 components/
+  ai-widget.tsx          Virtual assistant widget
   contact-form.tsx       Interactive contact form
 lib/
+  assistant.ts           Assistant prompt + fallback logic
   contact-email.ts       Contact email subject/body generation
 ```
 
@@ -62,6 +66,8 @@ EMAIL_API_URL=
 EMAIL_API_SECRET=
 EMAIL_FROM=
 CONTACT_TO=
+OLLAMA_BASE_URL=
+OLLAMA_MODEL=
 ```
 
 Notes:
@@ -70,6 +76,49 @@ Notes:
 - `EMAIL_API_SECRET` stays server-side and should not be exposed as a public browser env var
 - `EMAIL_FROM` must match a sender recognized by the relay
 - `CONTACT_TO` is the inbox that should receive website inquiries
+- `ASSISTANT_PROVIDER` selects the assistant backend: `ollama` for local development or `bedrock` for Amplify production
+- `OLLAMA_BASE_URL` points to a local Ollama instance if you want real local-model replies
+- `OLLAMA_MODEL` is the local model tag to use for the assistant
+- `BEDROCK_REGION` is the AWS Region to use for Amazon Bedrock
+- `BEDROCK_MODEL_ID` is the Bedrock model identifier used when `ASSISTANT_PROVIDER=bedrock`
+
+## Local Assistant
+
+The floating assistant is branded as `RueMode`, Reuben's virtual assistance.
+
+- The widget sends chat requests to `app/api/assistant/route.ts`
+- That route tries a same-machine Ollama model first
+- If no local model is available, it falls back to deterministic answers from site content
+
+Example local setup:
+
+```bash
+ollama serve
+ollama pull llama3.2:3b
+```
+
+## Amplify Production With Bedrock
+
+Use this env setup in Amplify:
+
+```bash
+ASSISTANT_PROVIDER=bedrock
+BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
+BEDROCK_REGION=us-east-1
+```
+
+Notes:
+
+- The assistant route switches providers from env only; no code change is needed between local and production
+- For local development, keep `ASSISTANT_PROVIDER=ollama`
+- In Amplify, the app needs an SSR Compute role with permission to call Bedrock runtime for the selected model
+- Amplify reserves custom env var names with an `AWS_` prefix, so use `BEDROCK_REGION`
+
+## Deployment Guide
+
+For full step-by-step setup, see:
+
+- [docs/assistant-deployment.md](/Users/rmoddel/code/rmo/rmoddel.com/docs/assistant-deployment.md:1)
 
 ## Build
 

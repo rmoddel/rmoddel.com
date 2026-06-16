@@ -1,123 +1,140 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { websiteKnowledge } from "@/lib/site-content";
-
-type ChatMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
-type AvailabilityState =
-  | "unknown"
-  | "available"
-  | "downloading"
-  | "downloadable"
-  | "unavailable"
-  | "unsupported";
+import { useMemo, useState } from "react";
+import {
+  assistantName,
+  assistantTitle,
+  type AssistantSource,
+  type AssistantMessage
+} from "@/lib/assistant";
 
 const starterMessage =
-  "Ask about services, packages, project types, or how the site describes Reuben's work.";
+  "Ask about services, pricing ranges, project types, or the best way to start.";
+
+const quickPrompts = [
+  "What services does Reuben offer?",
+  "What are the package price ranges?",
+  "What kinds of projects are a good fit?",
+  "How do I get started?"
+] as const;
+
+function renderMessageContent(content: string) {
+  const blocks = content
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return blocks.map((block, index) => {
+    const lines = block
+      .split("\n")
+      .map((line) => line.trim())
+      .filter(Boolean);
+
+    const isBulletList = lines.every((line) => /^[-*]\s+/.test(line));
+    const isNumberedList = lines.every((line) => /^\d+\.\s+/.test(line));
+
+    if (isBulletList || isNumberedList) {
+      const ListTag = isNumberedList ? "ol" : "ul";
+
+      return (
+        <ListTag className="aiBubbleList" key={`${block}-${index}`}>
+          {lines.map((line) => (
+            <li key={line}>{line.replace(/^([-*]|\d+\.)\s+/, "")}</li>
+          ))}
+        </ListTag>
+      );
+    }
+
+    return (
+      <p className="aiBubbleParagraph" key={`${block}-${index}`}>
+        {block}
+      </p>
+    );
+  });
+}
 
 export function AiWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
-  const [status, setStatus] = useState<AvailabilityState>("unknown");
   const [busy, setBusy] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [source, setSource] = useState<AssistantSource>("booting");
+  const [messages, setMessages] = useState<AssistantMessage[]>([
     { role: "assistant", content: starterMessage }
   ]);
-  const sessionRef = useRef<LanguageModelSession | null>(null);
 
-  async function ensureSession() {
-    if (sessionRef.current) {
-      return sessionRef.current;
+  const sourceLabel = useMemo(() => {
+    switch (source) {
+      case "local-llm":
+        return "Local model live";
+      case "bedrock":
+        return "Bedrock live";
+      case "site-knowledge":
+        return "Site knowledge fallback";
+      case "error":
+        return "Reply path degraded";
+      default:
+        return "Ready when you are";
     }
+  }, [source]);
 
-    if (typeof window === "undefined" || !("LanguageModel" in window)) {
-      setStatus("unsupported");
-      throw new Error("This browser does not support the built-in AI Prompt API.");
-    }
+  async function submitQuestion(question: string) {
+    const trimmed = question.trim();
 
-    const availability = await window.LanguageModel.availability({
-      expectedInputs: [{ type: "text", languages: ["en"] }],
-      expectedOutputs: [{ type: "text", languages: ["en"] }]
-    });
-
-    setStatus(availability);
-
-    if (availability === "unavailable") {
-      throw new Error("Built-in browser AI is unavailable on this device or browser.");
-    }
-
-    const session = await window.LanguageModel.create({
-      expectedInputs: [{ type: "text", languages: ["en"] }],
-      expectedOutputs: [{ type: "text", languages: ["en"] }],
-      initialPrompts: [
-        {
-          role: "system",
-          content: `
-You are the local AI assistant for rmoddel.com.
-Only answer using the website knowledge below.
-If the answer is not explicitly supported by the website knowledge, reply exactly:
-"I can only answer based on content currently shown on this website."
-Do not invent client names, extra credentials, timelines, pricing, or portfolio claims.
-Keep answers concise and practical.
-
-Website knowledge:
-${websiteKnowledge}
-          `.trim()
-        }
-      ]
-    });
-
-    sessionRef.current = session;
-
-    return session;
-  }
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-
-    const question = input.trim();
-
-    if (!question || busy) {
+    if (!trimmed || busy) {
       return;
     }
 
-    setMessages((current) => [...current, { role: "user", content: question }]);
+    const nextMessages = [...messages, { role: "user" as const, content: trimmed }];
+
+    setMessages(nextMessages);
     setInput("");
     setBusy(true);
 
     try {
-      const session = await ensureSession();
-      const response = await session.prompt(question);
+      const response = await fetch("/api/assistant", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          messages: nextMessages
+        })
+      });
 
-      setMessages((current) => [...current, { role: "assistant", content: response.trim() }]);
-    } catch (error) {
-      const message =
-        error instanceof Error
-          ? error.message
-          : "The browser AI widget could not answer right now.";
+      if (!response.ok) {
+        throw new Error("Assistant request failed.");
+      }
 
-      setMessages((current) => [...current, { role: "assistant", content: message }]);
+      const data = (await response.json()) as {
+        reply?: string;
+        source?: AssistantSource;
+      };
+
+      setSource(data.source ?? "site-knowledge");
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: data.reply?.trim() || "The assistant could not answer right now."
+        }
+      ]);
+    } catch {
+      setSource("error");
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content: "The assistant is unavailable right now. Try again in a moment."
+        }
+      ]);
     } finally {
       setBusy(false);
     }
   }
 
-  function statusText() {
-    switch (status) {
-      case "downloadable":
-      case "downloading":
-        return "Browser AI may need to download its local model before first use.";
-      case "unavailable":
-        return "Built-in browser AI is unavailable on this device.";
-      case "unsupported":
-        return "This browser does not expose the built-in Prompt API.";
-      default:
-        return "Runs locally in the browser and only answers from this site.";
-    }
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await submitQuestion(input);
   }
 
   return (
@@ -128,17 +145,18 @@ ${websiteKnowledge}
         onClick={() => setIsOpen((value) => !value)}
         type="button"
       >
-        AI Widget
+        <span className="aiWidgetToggleLabel">{assistantName}</span>
+        <span className="aiWidgetToggleMeta">Virtual assistance</span>
       </button>
       {isOpen ? (
         <section className="aiWidgetPanel">
           <div className="aiWidgetHeader">
             <div>
-              <p className="footerLabel">Local Browser AI</p>
-              <h3>Ask about this website</h3>
+              <p className="footerLabel">Reuben&apos;s Virtual Assistance</p>
+              <h3>{assistantName}</h3>
             </div>
             <button
-              aria-label="Close AI widget"
+              aria-label="Close virtual assistant"
               className="aiWidgetClose"
               onClick={() => setIsOpen(false)}
               type="button"
@@ -146,11 +164,26 @@ ${websiteKnowledge}
               ×
             </button>
           </div>
-          <p className="aiWidgetNote">{statusText()}</p>
+          <p className="aiWidgetNote">
+            {assistantTitle}. {sourceLabel}.
+          </p>
+          <div className="aiPromptRow" aria-label="Suggested prompts">
+            {quickPrompts.map((prompt) => (
+              <button
+                className="aiPromptChip"
+                disabled={busy}
+                key={prompt}
+                onClick={() => void submitQuestion(prompt)}
+                type="button"
+              >
+                {prompt}
+              </button>
+            ))}
+          </div>
           <div className="aiWidgetMessages">
             {messages.map((message, index) => (
               <div className={`aiBubble ${message.role}`} key={`${message.role}-${index}`}>
-                {message.content}
+                {renderMessageContent(message.content)}
               </div>
             ))}
           </div>
@@ -158,12 +191,12 @@ ${websiteKnowledge}
             <textarea
               name="question"
               onChange={(event) => setInput(event.target.value)}
-              placeholder="Ask about services, pricing, work samples, or positioning..."
+              placeholder="Ask about packages, services, project fit, or next steps..."
               rows={3}
               value={input}
             />
             <button className="button" disabled={busy} type="submit">
-              {busy ? "Thinking..." : "Ask"}
+              {busy ? "Thinking..." : "Ask RueMode"}
             </button>
           </form>
         </section>
