@@ -239,7 +239,9 @@ Check:
 The Bedrock implementation is already wired in:
 
 - [app/api/assistant/route.ts](/Users/rmoddel/code/rmo/rmoddel.com/app/api/assistant/route.ts:1)
+- [app/api/assistant/health/route.ts](/Users/rmoddel/code/rmo/rmoddel.com/app/api/assistant/health/route.ts:1)
 - [lib/assistant.ts](/Users/rmoddel/code/rmo/rmoddel.com/lib/assistant.ts:1)
+- [lib/assistant-provider.ts](/Users/rmoddel/code/rmo/rmoddel.com/lib/assistant-provider.ts:1)
 
 What the route does:
 
@@ -249,6 +251,13 @@ What the route does:
 4. Sends the conversation with `ConverseCommand`
 5. Returns the model text to the widget
 6. Falls back to site-knowledge answers if the provider call fails
+
+The health route reports:
+
+- current provider
+- configured model
+- whether the provider check succeeded
+- a short error when the provider is misconfigured or unreachable
 
 The relevant Bedrock env vars are:
 

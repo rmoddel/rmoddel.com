@@ -23,6 +23,7 @@ Responsive Next.js marketing site for Reuben Moddel.
 ```text
 app/
   api/assistant/route.ts Local assistant API route
+  api/assistant/health/route.ts Assistant health route
   api/contact/route.ts   Contact form API route
   globals.css            Site styling
   layout.tsx             Root layout + metadata
@@ -87,6 +88,7 @@ Notes:
 The floating assistant is branded as `RueMode`, Reuben's virtual assistance.
 
 - The widget sends chat requests to `app/api/assistant/route.ts`
+- The widget checks provider health via `app/api/assistant/health/route.ts`
 - That route tries a same-machine Ollama model first
 - If no local model is available, it falls back to deterministic answers from site content
 

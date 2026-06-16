@@ -167,6 +167,38 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="sectionCard conversionCard">
+        <div className="conversionHeader">
+          <div>
+            <p className="eyebrow">Fastest Paid Start</p>
+            <h2>Most people should begin with the strategy session.</h2>
+          </div>
+          <div className="conversionPrice">
+            <span>Starts at</span>
+            <strong>{packages[0].price}</strong>
+          </div>
+        </div>
+        <div className="twoColumn">
+          <p>
+            If the work is still fuzzy, the highest-leverage move is to pay for clarity first.
+            That usually saves time, avoids random execution, and leads to a better follow-on
+            project.
+          </p>
+          <p>
+            The session is built to turn loose notes, rough ideas, and half-formed goals into a
+            concrete next deliverable, sharper positioning, and a path you can act on immediately.
+          </p>
+        </div>
+        <div className="heroActions">
+          <a className="button" href="#session">
+            Start With the Strategy Session
+          </a>
+          <a className="button buttonGhost" href="#contact">
+            Ask About Fit
+          </a>
+        </div>
+      </section>
+
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Core Positioning</p>

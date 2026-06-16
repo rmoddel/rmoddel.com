@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   assistantName,
   assistantTitle,
@@ -14,9 +14,18 @@ const starterMessage =
 const quickPrompts = [
   "What services does Reuben offer?",
   "What are the package price ranges?",
+  "Which package should I start with?",
   "What kinds of projects are a good fit?",
   "How do I get started?"
 ] as const;
+
+type AssistantHealthResponse = {
+  provider: "ollama" | "bedrock";
+  healthy: boolean;
+  source: "local-llm" | "bedrock";
+  model?: string;
+  error?: string;
+};
 
 function renderMessageContent(content: string) {
   const blocks = content
@@ -58,6 +67,7 @@ export function AiWidget() {
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [source, setSource] = useState<AssistantSource>("booting");
+  const [health, setHealth] = useState<AssistantHealthResponse | null>(null);
   const [messages, setMessages] = useState<AssistantMessage[]>([
     { role: "assistant", content: starterMessage }
   ]);
@@ -76,6 +86,41 @@ export function AiWidget() {
         return "Ready when you are";
     }
   }, [source]);
+
+  useEffect(() => {
+    if (!isOpen || health) {
+      return;
+    }
+
+    let ignore = false;
+
+    async function loadHealth() {
+      try {
+        const response = await fetch("/api/assistant/health");
+
+        if (!response.ok) {
+          throw new Error("Health check failed.");
+        }
+
+        const data = (await response.json()) as AssistantHealthResponse;
+
+        if (!ignore) {
+          setHealth(data);
+          setSource(data.source);
+        }
+      } catch {
+        if (!ignore) {
+          setSource("error");
+        }
+      }
+    }
+
+    void loadHealth();
+
+    return () => {
+      ignore = true;
+    };
+  }, [health, isOpen]);
 
   async function submitQuestion(question: string) {
     const trimmed = question.trim();
@@ -167,6 +212,16 @@ export function AiWidget() {
           <p className="aiWidgetNote">
             {assistantTitle}. {sourceLabel}.
           </p>
+          <div className={`aiHealthPill ${health?.healthy ? "healthy" : "warning"}`}>
+            <span className="aiHealthDot" />
+            <span>
+              {health
+                ? `${health.provider === "bedrock" ? "Bedrock" : "Ollama"}: ${
+                    health.healthy ? `connected${health.model ? ` · ${health.model}` : ""}` : "check required"
+                  }`
+                : "Checking assistant backend..."}
+            </span>
+          </div>
           <div className="aiPromptRow" aria-label="Suggested prompts">
             {quickPrompts.map((prompt) => (
               <button
@@ -179,6 +234,26 @@ export function AiWidget() {
                 {prompt}
               </button>
             ))}
+          </div>
+          <div className="aiSalesCard">
+            <p className="microLabel">Best Paid Entry Point</p>
+            <h3>Idea-to-Execution Session</h3>
+            <p>
+              If the idea is still messy, start with the paid strategy session first. It is the
+              fastest path to clarity and the easiest yes for most qualified leads.
+            </p>
+            <div className="aiSalesActions">
+              <a className="button smallButton" href="#session" onClick={() => setIsOpen(false)}>
+                Book Session
+              </a>
+              <a
+                className="button buttonGhost smallButton"
+                href="#contact"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact Reuben
+              </a>
+            </div>
           </div>
           <div className="aiWidgetMessages">
             {messages.map((message, index) => (
