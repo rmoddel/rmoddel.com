@@ -3,7 +3,8 @@ const footerLinks = [
   { href: "#services", label: "Services" },
   { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" }
+  { href: "#contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" }
 ];
 
 export function SiteFooter() {
