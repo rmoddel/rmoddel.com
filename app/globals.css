@@ -339,13 +339,13 @@ h3 {
 h1 {
   max-width: 9ch;
   margin-top: 18px;
-  font-size: clamp(3rem, 7.2vw, 5.8rem);
+  font-size: clamp(2.4rem, 5.5vw, 4.1rem);
   font-weight: 700;
 }
 
 h2 {
   max-width: 13ch;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.75rem, 3.2vw, 2.6rem);
   font-weight: 650;
 }
 
