@@ -1,9 +1,10 @@
 const footerLinks = [
-  { href: "#top", label: "Home" },
-  { href: "#services", label: "Services" },
-  { href: "#work", label: "Work" },
-  { href: "#about", label: "About" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Home" },
+  { href: "/#services", label: "Services" },
+  { href: "/#work", label: "Work" },
+  { href: "/#about", label: "About" },
+  { href: "/resume", label: "Resume" },
+  { href: "/#contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" }
 ];
 
@@ -36,7 +37,7 @@ export function SiteFooter() {
             If the project is still messy, the best place to begin is the
             Idea-to-Execution Session.
           </p>
-          <a className="button" href="#session">
+          <a className="button" href="/#session">
             Book a Session
           </a>
         </div>
@@ -46,7 +47,7 @@ export function SiteFooter() {
             Websites, ads, campaigns, writing, workflow ideas, and product
             planning with practical business judgment.
           </p>
-          <a className="button" href="#contact">
+          <a className="button" href="/#contact">
             Start a Project
           </a>
         </div>

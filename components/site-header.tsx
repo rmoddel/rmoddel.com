@@ -1,16 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { href: "#services", label: "Services" },
   { href: "#work", label: "Work" },
   { href: "#about", label: "About" },
+  { href: "/resume", label: "Resume" },
   { href: "#contact", label: "Contact" }
 ];
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
 
   useEffect(() => {
     function handleResize() {
@@ -28,9 +32,17 @@ export function SiteHeader() {
     setIsOpen(false);
   }
 
+  function resolveHref(href: string) {
+    if (href.startsWith("#")) {
+      return isHomePage ? href : `/${href}`;
+    }
+
+    return href;
+  }
+
   return (
     <header className="siteHeader">
-      <a className="brand" href="#top" onClick={closeMenu}>
+      <a className="brand" href={isHomePage ? "#top" : "/"} onClick={closeMenu}>
         <span className="brandMark">RM</span>
         <span className="brandText">
           <strong>Reuben Moddel</strong>
@@ -54,12 +66,16 @@ export function SiteHeader() {
       <div className={`navShell ${isOpen ? "open" : ""}`}>
         <nav className="siteNav" id="site-nav">
           {navItems.map((item) => (
-            <a href={item.href} key={item.href} onClick={closeMenu}>
+            <a href={resolveHref(item.href)} key={item.href} onClick={closeMenu}>
               {item.label}
             </a>
           ))}
         </nav>
-        <a className="button smallButton navCta" href="#session" onClick={closeMenu}>
+        <a
+          className="button smallButton navCta"
+          href={isHomePage ? "#session" : "/#session"}
+          onClick={closeMenu}
+        >
           Book a Session
         </a>
       </div>
