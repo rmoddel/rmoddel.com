@@ -1,0 +1,105 @@
+export const resumeIdentity = {
+  name: "Reuben Moddel",
+  title: "Technical Lead and Operations Manager",
+  location: "Lakewood, NJ",
+  phone: "732-552-4475",
+  phoneHref: "tel:7325524475",
+  email: "rmoddel@gmail.com",
+  emailHref: "mailto:rmoddel@gmail.com"
+} as const;
+
+export const resumeSummary = [
+  "Practical, reliable Technical Lead and Operations Manager with a strong technical foundation and a proven record in managing teams, systems, and processes.",
+  "Began as a web developer, expanded into software analysis and operations, and progressed into technical leadership roles overseeing cross-functional work. Known for supporting developers, translating business needs into actionable tasks, improving workflows, and keeping projects moving."
+] as const;
+
+export const technicalSkills = [
+  "Project planning and coordination",
+  "Agile workflow: standups, sprints, and ticketing",
+  "Requirement gathering and documentation",
+  "Developer support and task clarification",
+  "Cross-functional communication",
+  "Cloud platforms: AWS and GCP",
+  "OpenAI API integrations",
+  "Web development background across multiple languages",
+  "Databases: MySQL, Postgres, DynamoDB, and Firebase",
+  "Tools: Jira, Trello, and ClickUp"
+] as const;
+
+export const leadershipSkills = [
+  "Operational strategy and process optimization",
+  "Cross-functional leadership",
+  "Vendor and stakeholder management",
+  "Analytics and SEO integration",
+  "Team training and development"
+] as const;
+
+export const education = {
+  school: "New Jersey Institute of Technology",
+  degree: "Master of Science, Management Information Systems",
+  completed: "Completed January 2011"
+} as const;
+
+export const professionalDevelopment = {
+  program: "Dale Carnegie - Skills for Success",
+  year: "2019"
+} as const;
+
+export const employmentHistory = [
+  {
+    title: "Director, Product Operations / Technical Lead",
+    company: "GPARENCY",
+    location: "Howell, NJ",
+    dates: "November 2021 - June 2025",
+    points: [
+      "Built and scaled an agile development team, including hiring and mentoring.",
+      "Delivered an MVP marketplace with product, design, and marketing teams.",
+      "Coordinated work across internal and overseas developers.",
+      "Created structured processes and analytics for leadership visibility."
+    ]
+  },
+  {
+    title: "Technical Operations Manager",
+    company: "Eastern Union",
+    location: "Howell, NJ",
+    dates: "August 2020 - November 2021",
+    points: [
+      "Oversaw migration from third-party tools to internal systems.",
+      "Led onboarding and training for junior team members.",
+      "Maintained operational reliability and supported KPIs.",
+      "Improved workflows across business units."
+    ]
+  },
+  {
+    title: "Software Analyst",
+    company: "CardCash",
+    location: "Lakewood, NJ",
+    dates: "October 2015 - August 2020",
+    points: [
+      "Developed automated workflows to reduce manual processing.",
+      "Collaborated across departments to improve operational systems.",
+      "Created testing and analytics processes for data integrity.",
+      "Documented improvements and reduced operational overhead."
+    ]
+  },
+  {
+    title: "Web Developer",
+    company: "Central Analysis Bureau",
+    location: "Lakewood, NJ",
+    dates: "February 2013 - October 2015",
+    points: [
+      "Built internal tools for staff operational workflows.",
+      "Developed early experience in building digital systems."
+    ]
+  },
+  {
+    title: "Web Developer",
+    company: "New York Guest Services",
+    location: "New York, NY",
+    dates: "July 2012 - February 2013",
+    points: [
+      "Developed website features and maintained internal systems.",
+      "Deepened practical knowledge of the software development lifecycle."
+    ]
+  }
+] as const;
