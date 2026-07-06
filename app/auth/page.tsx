@@ -412,6 +412,26 @@ export default function GmailTrashPurgePage() {
 
       <section className="sectionCard">
         <div className="sectionHeading">
+          <p className="eyebrow">Resume Download</p>
+          <h2>Customer success and operations version</h2>
+        </div>
+
+        <div className="contentCard">
+          <p>
+            This version is tailored for customer success, healthcare workflow, and technical
+            operations roles while staying grounded in the experience shown in the current resume.
+          </p>
+          <a
+            className="button buttonGhost smallButton resumeDownloadButton"
+            href="/resume-customer-success.pdf"
+          >
+            Download Customer Success Resume
+          </a>
+        </div>
+      </section>
+
+      <section className="sectionCard">
+        <div className="sectionHeading">
           <p className="eyebrow">Setup</p>
           <h2>Required environment variable</h2>
         </div>
