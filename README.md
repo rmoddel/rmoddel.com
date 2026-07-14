@@ -1,6 +1,6 @@
 # rmoddel.com
 
-Responsive Next.js marketing site for Reuben Moddel.
+Responsive Next.js personal portfolio site for Reuben Moddel.
 
 ## Stack
 
@@ -11,7 +11,7 @@ Responsive Next.js marketing site for Reuben Moddel.
 
 ## Features
 
-- One-page marketing site aligned to the current "Turn Rough Ideas Into Polished Results" positioning
+- One-page portfolio/about site aligned to product operations, technical leadership, workflow thinking, and human-centered execution
 - Responsive layout for desktop and mobile
 - Contact form with client-side submission state
 - Server-side `/api/contact` route
@@ -85,10 +85,10 @@ Notes:
 
 ## Local Assistant
 
-The floating assistant is branded as `RueMode`, Reuben's virtual assistance.
+The floating assistant is branded plainly as `Reuben's Assistant`.
 
 - The widget sends chat requests to `app/api/assistant/route.ts`
-- The widget checks provider health via `app/api/assistant/health/route.ts`
+- Provider health can be checked via `app/api/assistant/health/route.ts`
 - That route tries a same-machine Ollama model first
 - If no local model is available, it falls back to deterministic answers from site content
 

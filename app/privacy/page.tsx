@@ -8,6 +8,30 @@ export const metadata: Metadata = {
     "Privacy Policy for rmoddel.com and related projects published by Reuben Moddel.",
   alternates: {
     canonical: "/privacy"
+  },
+  openGraph: {
+    title: "Privacy Policy | Reuben Moddel",
+    description:
+      "Privacy policy for rmoddel.com and related projects published by Reuben Moddel.",
+    url: "/privacy",
+    siteName: "rmoddel.com",
+    locale: "en_US",
+    type: "article",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "rmoddel.com privacy policy"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Reuben Moddel",
+    description:
+      "Privacy policy for rmoddel.com and related projects published by Reuben Moddel.",
+    images: ["/twitter-image"]
   }
 };
 
@@ -64,9 +88,9 @@ export default function PrivacyPage() {
         <p className="sectionIntro">
           If you contact Reuben Moddel through this website, the site may
           collect the information you choose to submit, such as your name,
-          email address, phone number, business context, project description,
-          budget range, and timeline. That information is used only to review
-          inquiries, respond to requests, and discuss potential work.
+          email address, phone number, role or project context, timing,
+          compensation, budget, or related notes. That information is used only
+          to review inquiries, respond to requests, and discuss potential work.
         </p>
       </section>
 
@@ -122,8 +146,9 @@ export default function PrivacyPage() {
           <article className="contentCard">
             <h3>Communication and service delivery</h3>
             <p>
-              Information may be used to respond to inquiries, scope projects,
-              provide services, troubleshoot issues, and maintain normal business communication.
+              Information may be used to respond to inquiries, discuss roles or
+              projects, provide services where relevant, troubleshoot issues,
+              and maintain normal business communication.
             </p>
           </article>
 

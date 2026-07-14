@@ -12,11 +12,37 @@ import {
 } from "@/lib/resume-content";
 
 export const metadata: Metadata = {
-  title: "Resume",
+  title: "Resume | Product Operations and Technical Leadership",
   description:
-    "Resume for Reuben Moddel, Technical Lead and Operations Manager.",
+    "Resume for Reuben Moddel, a product operations and technical leader with experience across software, operations, workflow design, analytics, and cross-functional execution.",
   alternates: {
     canonical: "/resume"
+  },
+  openGraph: {
+    title: "Reuben Moddel Resume",
+    description:
+      "Product operations and technical leadership resume for Reuben Moddel.",
+    url: "/resume",
+    siteName: "rmoddel.com",
+    locale: "en_US",
+    type: "profile",
+    firstName: "Reuben",
+    lastName: "Moddel",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Reuben Moddel resume"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reuben Moddel Resume",
+    description:
+      "Product operations and technical leadership resume for Reuben Moddel.",
+    images: ["/twitter-image"]
   }
 };
 
@@ -111,7 +137,7 @@ export default function ResumePage() {
           <h2>Formal training with continued professional growth.</h2>
         </div>
         <div className="grid twoGrid">
-          <article className="contentCard packageCard">
+          <article className="contentCard structuredCard">
             <p className="microLabel">Education</p>
             <h3>{education.school}</h3>
             <p>{education.degree}</p>

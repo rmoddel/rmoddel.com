@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "28px", fontWeight: 700 }}>Reuben Moddel</div>
             <div style={{ fontSize: "20px", color: "#5c5550" }}>
-              Creative AI Operator for Real-World Business
+              Product Operations and Technical Leadership
             </div>
           </div>
         </div>
@@ -62,14 +62,14 @@ export default function OpenGraphImage() {
               color: "#82351d"
             }}
           >
-            Bring me the mess. I&apos;ll help make it make sense.
+            Human understanding. Technical judgment. Practical execution.
           </div>
           <div style={{ fontSize: "74px", lineHeight: 0.96 }}>
-            Turn Rough Ideas Into Polished Results
+            I Help People Make Sense of Messy Work
           </div>
           <div style={{ fontSize: "28px", color: "#5c5550", lineHeight: 1.35 }}>
-            Websites, ads, writing, workflows, and app plans with practical business sense,
-            creative direction, and AI-powered speed.
+            Product operations, workflow design, clear communication, and AI-enabled work
+            grounded in real human context.
           </div>
         </div>
       </div>

@@ -4,33 +4,32 @@ import { ContactForm } from "@/components/contact-form";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import {
+  capabilities,
   outcomePoints,
-  packages,
   projects,
-  services,
   workingPrinciples
 } from "@/lib/site-content";
 
-const fitItems = [
+const experienceHighlights = [
   {
-    title: "When the idea is still messy",
+    title: "Product operations and technical leadership",
     body:
-      "You know what you want in broad terms, but the offer, message, structure, or deliverable still feels unclear."
+      "Led cross-functional delivery, built operating rhythms, clarified priorities, supported developers, and helped leadership see what was happening."
   },
   {
-    title: "When words and design need to line up",
+    title: "Workflow and internal systems",
     body:
-      "You need the idea to look right, sound right, and make practical sense at the same time."
+      "Improved operational processes, migrated teams into better systems, built internal tools, and reduced manual work through practical automation."
   },
   {
-    title: "When AI might help, but only if it actually helps",
+    title: "Software background with business translation",
     body:
-      "You want speed and leverage without turning the work into generic AI output or unnecessary complexity."
+      "Started in web development, moved through software analysis, and grew into roles centered on explaining, coordinating, and improving technical work."
   },
   {
-    title: "When execution needs direction",
+    title: "Human-centered communication",
     body:
-      "You need someone who can clarify the work, shape the next step, and give developers, designers, or collaborators something usable."
+      "Used writing, training, documentation, and plain-English communication to help people understand what needs to happen next."
   }
 ] as const;
 
@@ -42,45 +41,81 @@ const jsonLd = {
       "@id": "https://rmoddel.com/#person",
       name: "Reuben Moddel",
       url: "https://rmoddel.com",
-      jobTitle: "Creative AI Operator",
+      image: "https://rmoddel.com/opengraph-image",
+      jobTitle: "Product Operations and Technical Leader",
       description:
-        "Reuben Moddel helps businesses, nonprofits, founders, and community organizations turn rough ideas into polished results.",
+        "Reuben Moddel helps people make sense of messy work through technical judgment, operational experience, clear writing, and human understanding.",
       knowsAbout: [
-        "Websites",
-        "Business writing",
-        "AI workflow consulting",
-        "MVP planning",
-        "Creative direction",
-        "Product blueprinting"
+        "Product operations",
+        "Technical operations",
+        "Workflow design",
+        "Developer support",
+        "Requirement gathering",
+        "AI-enabled workflows",
+        "Plain-English communication"
       ]
     },
     {
-      "@type": "ProfessionalService",
-      "@id": "https://rmoddel.com/#service",
+      "@type": "WebSite",
+      "@id": "https://rmoddel.com/#website",
       name: "rmoddel.com",
       url: "https://rmoddel.com",
+      inLanguage: "en-US",
       description:
-        "Creative AI operator services covering websites, ads, campaigns, business writing, workflows, and app planning.",
-      founder: {
+        "Personal portfolio for Reuben Moddel, focused on product operations, technical leadership, workflow thinking, and practical execution.",
+      author: {
+        "@id": "https://rmoddel.com/#person"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://rmoddel.com/#profile",
+      url: "https://rmoddel.com",
+      name: "Reuben Moddel",
+      description:
+        "Personal portfolio and working profile for Reuben Moddel.",
+      mainEntity: {
         "@id": "https://rmoddel.com/#person"
       },
-      areaServed: "Worldwide",
-      serviceType: [
-        "Creative and marketing support",
-        "Business writing and messaging",
-        "AI workflow consulting",
-        "MVP and product blueprinting"
-      ]
-    },
+      isPartOf: {
+        "@id": "https://rmoddel.com/#website"
+      }
+    }
   ]
 };
 
 export const metadata: Metadata = {
-  title: "Creative AI Operator for Real-World Business",
+  title: "Reuben Moddel | Product Operations and Technical Leadership",
   description:
-    "Reuben Moddel helps turn rough ideas into polished websites, ads, campaigns, business writing, workflows, and AI-powered systems.",
+    "Personal portfolio for Reuben Moddel, focused on product operations, technical leadership, workflow design, clear communication, and human-centered execution.",
   alternates: {
     canonical: "/"
+  },
+  openGraph: {
+    title: "Reuben Moddel | Product Operations and Technical Leadership",
+    description:
+      "A personal portfolio about making sense of messy work through product operations, technical judgment, workflow design, clear communication, and human understanding.",
+    url: "/",
+    siteName: "rmoddel.com",
+    locale: "en_US",
+    type: "profile",
+    firstName: "Reuben",
+    lastName: "Moddel",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Reuben Moddel - I help people make sense of messy work"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reuben Moddel | Product Operations and Technical Leadership",
+    description:
+      "Product operations, technical leadership, workflow design, clear communication, and human-centered execution.",
+    images: ["/twitter-image"]
   }
 };
 
@@ -96,35 +131,35 @@ export default function HomePage() {
       <section className="heroSection" id="top">
         <div className="heroCopy">
           <div className="heroRibbon">
-            <p className="eyebrow">Bring me the mess. I’ll help make it make sense.</p>
-            <span className="heroSpark">Human judgment x AI speed</span>
+            <p className="eyebrow">Personal portfolio and working profile</p>
+            <span className="heroSpark">Human understanding x technical judgment</span>
           </div>
-          <h1>Turn Rough Ideas Into Polished Results</h1>
+          <h1>I Help People Make Sense of Messy Work</h1>
           <p className="heroText">
-            Websites, logos, ads, campaigns, business writing, app plans, and
-            AI-powered workflows, created with practical business sense, creative
-            direction, and AI-powered speed.
+            I am Reuben Moddel, a product operations and technical leader who
+            helps teams clarify ambiguous work, translate between people and
+            systems, and turn practical judgment into movement.
           </p>
-          <div className="heroTags" aria-label="Key offerings">
-            <span>Websites</span>
-            <span>Campaigns</span>
-            <span>Business Writing</span>
-            <span>AI Workflows</span>
-            <span>App Plans</span>
+          <div className="heroTags" aria-label="Core strengths">
+            <span>Product Operations</span>
+            <span>Technical Leadership</span>
+            <span>Workflow Design</span>
+            <span>Clear Writing</span>
+            <span>AI With Judgment</span>
           </div>
           <div className="heroActions">
-            <a className="button" href="#session">
-              Book an Idea-to-Execution Session
+            <a className="button" href="#experience">
+              View Experience
             </a>
             <a className="button buttonGhost" href="#work">
-              See Work Samples
+              See Work Themes
             </a>
           </div>
           <div className="heroMiniGrid" aria-label="What this work produces">
             {[
-              ["Clarity first", "The first step is making the idea coherent."],
-              ["Useful outputs", "The result should be ready to use or hand off."],
-              ["Range without drift", "Creative, writing, workflow, and product thinking stay aligned."]
+              ["Human first", "The real situation matters before the tool, ticket, or plan."],
+              ["Clear translation", "Business, technical, and operational context need to line up."],
+              ["Practical output", "The work should help someone decide, build, explain, or move."]
             ].map(([title, body]) => (
               <article className="miniCard" key={title}>
                 <h3>{title}</h3>
@@ -134,16 +169,16 @@ export default function HomePage() {
           </div>
         </div>
         <aside className="heroPanel">
-          <div className="heroPanelBadge">Idea to Execution</div>
-          <p className="panelLabel">What clients usually bring</p>
+          <div className="heroPanelBadge">How I Think</div>
+          <p className="panelLabel">What I tend to notice first</p>
           <ul>
-            <li>Scattered notes and screenshots</li>
-            <li>Half-written copy and rough ideas</li>
-            <li>Unclear offers, websites, or campaigns</li>
-            <li>App concepts that need structure</li>
+            <li>What people are actually trying to accomplish</li>
+            <li>Where teams are talking past each other</li>
+            <li>Which constraint is real and which is noise</li>
+            <li>What needs to be clarified before execution</li>
           </ul>
           <p className="panelResult">
-            Outcome: clear direction, sharp messaging, usable deliverables.
+            The thread: strong human understanding, clear thinking, and useful execution.
           </p>
           <div className="heroOutcomeList">
             {outcomePoints.map((point) => (
@@ -155,82 +190,51 @@ export default function HomePage() {
 
       <section className="tickerSection" aria-label="Audience">
         <div className="tickerTrack">
-          <span>Businesses</span>
-          <span>Nonprofits</span>
-          <span>Founders</span>
-          <span>Community Organizations</span>
-          <span>Websites</span>
-          <span>Ads</span>
-          <span>Writing</span>
-          <span>Workflows</span>
-          <span>App Plans</span>
-        </div>
-      </section>
-
-      <section className="sectionCard conversionCard">
-        <div className="conversionHeader">
-          <div>
-            <p className="eyebrow">Fastest Paid Start</p>
-            <h2>Most people should begin with the strategy session.</h2>
-          </div>
-          <div className="conversionPrice">
-            <span>Starts at</span>
-            <strong>{packages[0].price}</strong>
-          </div>
-        </div>
-        <div className="twoColumn">
-          <p>
-            If the work is still fuzzy, the highest-leverage move is to pay for clarity first.
-            That usually saves time, avoids random execution, and leads to a better follow-on
-            project.
-          </p>
-          <p>
-            The session is built to turn loose notes, rough ideas, and half-formed goals into a
-            concrete next deliverable, sharper positioning, and a path you can act on immediately.
-          </p>
-        </div>
-        <div className="heroActions">
-          <a className="button" href="#session">
-            Start With the Strategy Session
-          </a>
-          <a className="button buttonGhost" href="#contact">
-            Ask About Fit
-          </a>
+          <span>Product Operations</span>
+          <span>Technical Leadership</span>
+          <span>Workflow Design</span>
+          <span>Developer Support</span>
+          <span>Requirements</span>
+          <span>Documentation</span>
+          <span>AI With Judgment</span>
+          <span>Human Understanding</span>
+          <span>Practical Execution</span>
         </div>
       </section>
 
       <section className="sectionCard">
         <div className="sectionHeading">
-          <p className="eyebrow">Core Positioning</p>
-          <h2>You Have the Idea. Now It Needs to Make Sense.</h2>
+          <p className="eyebrow">Core Thread</p>
+          <h2>Most of my work comes back to helping people think clearly.</h2>
         </div>
         <div className="twoColumn">
           <p>
-            Most people do not need more tech. They need someone who can
-            understand what they are trying to do, organize the idea, find the
-            right angle, and turn it into something real.
+            Across product operations, technical leadership, software analysis,
+            workflows, writing, and AI, the common thread is not the tool. It is
+            understanding the human situation well enough to make the next move
+            clearer.
           </p>
           <p>
-            I combine writing, design direction, business sense, software
-            thinking, and AI tools to help businesses, nonprofits, founders, and
-            community organizations move from idea to execution quickly.
+            I like work where context matters: where people need requirements
+            clarified, tradeoffs explained, teams aligned, systems improved, or
+            a messy goal turned into something others can act on.
           </p>
         </div>
       </section>
 
-      <section className="sectionCard" id="services">
+      <section className="sectionCard" id="capabilities">
         <div className="sectionHeading">
-          <p className="eyebrow">What I Help With</p>
-          <h2>Clear deliverables across creative, writing, workflows, and product planning.</h2>
+          <p className="eyebrow">Capabilities</p>
+          <h2>Where I tend to be useful.</h2>
         </div>
         <div className="grid fourGrid">
-          {services.map((service, index) => (
-            <article className="contentCard serviceCard" key={service.title}>
+          {capabilities.map((capability, index) => (
+            <article className="contentCard serviceCard" key={capability.title}>
               <p className="cardIndex">0{index + 1}</p>
-              <h3>{service.title}</h3>
-              <p>{service.body}</p>
-              <div className="chipRow" aria-label={`${service.title} examples`}>
-                {service.items.map((item) => (
+              <h3>{capability.title}</h3>
+              <p>{capability.body}</p>
+              <div className="chipRow" aria-label={`${capability.title} examples`}>
+                {capability.items.map((item) => (
                   <span key={item}>{item}</span>
                 ))}
               </div>
@@ -241,15 +245,15 @@ export default function HomePage() {
 
       <section className="sectionCard">
         <div className="sectionHeading">
-          <p className="eyebrow">How It Works</p>
-          <h2>From rough concept to something usable.</h2>
+          <p className="eyebrow">Working Style</p>
+          <h2>From messy context to useful movement.</h2>
         </div>
         <div className="grid fourGrid processGrid">
           {[
-            ["01", "You explain the mess", "Bring the notes, screenshots, voice notes, draft, or half-built project."],
-            ["02", "I clarify the direction", "We figure out what matters most and what the best first deliverable should be."],
-            ["03", "We create the thing", "That may be copy, design direction, a website, a document, a workflow, or a product plan."],
-            ["04", "You walk away with something practical", "Clear, professional, and ready to use or hand off."]
+            ["01", "Understand the people", "I try to understand the context, pressure, audience, and real-world constraints before jumping to a solution."],
+            ["02", "Name the actual problem", "The useful problem is often hiding under symptoms, requests, assumptions, or a tool someone already picked."],
+            ["03", "Structure the next move", "That may become requirements, a workflow, a document, a plan, a prototype, or a clearer conversation."],
+            ["04", "Make it usable", "I care about outputs people can understand, use, hand off, build from, or make decisions with."]
           ].map(([step, title, body]) => (
             <article className="contentCard stepCard" key={step}>
               <span>{step}</span>
@@ -262,8 +266,8 @@ export default function HomePage() {
 
       <section className="sectionCard" id="work">
         <div className="sectionHeading">
-          <p className="eyebrow">Selected Work</p>
-          <h2>Real project types. Honest descriptions. No fake case studies.</h2>
+          <p className="eyebrow">Selected Work Themes</p>
+          <h2>Examples of the kind of thinking I bring to the work.</h2>
         </div>
         <div className="grid twoGrid">
           {projects.map((project, index) => (
@@ -285,18 +289,18 @@ export default function HomePage() {
 
       <section className="sectionCard">
         <div className="sectionHeading">
-          <p className="eyebrow">AI With Human Judgment</p>
-          <h2>AI is an amplifier, not a replacement for judgment.</h2>
+          <p className="eyebrow">Human Understanding First</p>
+          <h2>AI is useful when it is guided by real context.</h2>
         </div>
         <div className="twoColumn">
           <p>
-            I use AI to move faster, explore more directions, sharpen copy, test
-            layouts, structure ideas, and speed up execution.
+            I use AI to move faster, explore options, structure ideas, draft,
+            summarize, test angles, and reduce repetitive work.
           </p>
           <p>
-            The final direction, taste, messaging, business logic, and quality
-            control still come from human judgment. AI can generate. I help
-            decide what is actually good, useful, clear, and appropriate.
+            But the important part is still human: knowing what problem we are
+            solving, who is affected, what tone fits, what tradeoff matters, and
+            what output is actually useful.
           </p>
         </div>
         <div className="grid threeGrid principleGrid">
@@ -309,69 +313,52 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="offerPanel" id="session">
+      <section className="sectionCard" id="experience">
         <div className="sectionHeading">
-          <p className="eyebrow">Main Offer</p>
-          <h2>Idea-to-Execution Session</h2>
-        </div>
-        <p>
-          For people who have an idea but do not know how to package it, write
-          it, design it, or build it.
-        </p>
-        <p>
-          In one focused session, we clarify what you are trying to create, what
-          matters most, and what the next practical deliverable should be.
-        </p>
-        <ul className="checkList">
-          <li>A clearer version of your idea</li>
-          <li>Recommended direction and deliverables</li>
-          <li>Practical next steps</li>
-          <li>Messaging angles and AI opportunities where relevant</li>
-        </ul>
-        <a className="button" href="#contact">
-          Book an Idea-to-Execution Session
-        </a>
-      </section>
-
-      <section className="sectionCard">
-        <div className="sectionHeading">
-          <p className="eyebrow">Service Packages</p>
-          <h2>Clear ways to work together.</h2>
+          <p className="eyebrow">Experience</p>
+          <h2>Work history with a consistent throughline.</h2>
         </div>
         <p className="sectionIntro">
-          These are starting points, not rigid boxes. The right engagement depends
-          on whether you need strategy, materials, workflow thinking, or a full
-          product plan.
+          My resume has the formal role-by-role detail. The short version is
+          that I have moved from web development into software analysis,
+          technical operations, product operations, and technical leadership.
         </p>
         <div className="grid twoGrid">
-          {packages.map((pkg, index) => (
-            <article className="contentCard packageCard" key={pkg.title}>
-              <p className="cardIndex">Option 0{index + 1}</p>
-              <p className="microLabel">{pkg.price}</p>
-              <h3>{pkg.title}</h3>
-              <p>{pkg.body}</p>
-              <p className="bestForText">{pkg.bestFor}</p>
+          {experienceHighlights.map((item, index) => (
+            <article className="contentCard structuredCard" key={item.title}>
+              <p className="cardIndex">Thread 0{index + 1}</p>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
             </article>
           ))}
+        </div>
+        <div className="heroActions">
+          <a className="button" href="/resume">
+            View Resume
+          </a>
+          <a className="button buttonGhost" href="/resume.pdf">
+            Download PDF
+          </a>
         </div>
       </section>
 
       <section className="sectionCard" id="about">
         <div className="sectionHeading">
           <p className="eyebrow">About Reuben Moddel</p>
-          <h2>I help people make sense of messy ideas.</h2>
+          <h2>I am most useful when the work needs judgment, not just output.</h2>
         </div>
         <div className="twoColumn">
           <p>
-            I am not a traditional designer, copywriter, developer, or
-            consultant. I am the person people call when they have a rough idea
-            and need help making it make sense.
+            I am not trying to present this site as a company. It is a portfolio
+            and working profile for the kind of roles and projects where my
+            range is useful: technical, operational, written, human, and
+            practical.
           </p>
           <p>
-            I combine business understanding, writing, design taste, software
-            thinking, AI tools, plain-English communication, and practical
-            execution. That range lets me move between websites, ads, app plans,
-            business documents, and internal systems without losing the thread.
+            My work experience has mostly lived in the middle: between business
+            goals and technical execution, between leadership and developers,
+            between messy inputs and clear next steps, and between AI speed and
+            human judgment.
           </p>
         </div>
         <div className="chipRow" aria-label="What clients typically leave with">
@@ -381,31 +368,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="sectionCard">
-        <div className="sectionHeading">
-          <p className="eyebrow">Best Fit</p>
-          <h2>Where this kind of help is most useful.</h2>
-        </div>
-        <div className="grid twoGrid">
-          {fitItems.map((item) => (
-            <article className="contentCard fitCard" key={item.title}>
-              <h3>{item.title}</h3>
-              <p>{item.body}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="contactSection" id="contact">
         <div className="contactCopy">
-          <p className="eyebrow">Start With a Conversation</p>
-          <h2>Have something you want to create?</h2>
+          <p className="eyebrow">Contact</p>
+          <h2>Reach out about a role, project, or conversation.</h2>
           <p>
-            Website, ad, logo, campaign, business document, workflow, or app
-            idea. Bring the rough version and tell me what you are trying to
-            build.
+            I am using this site as a portfolio for prospective job
+            opportunities, especially roles involving product operations,
+            technical operations, workflow design, AI-enabled execution, and
+            cross-functional clarity.
           </p>
-          <p>You do not need to have it all figured out. That is the point.</p>
+          <p>
+            I am also open to relevant project or service inquiries when the fit
+            makes sense. Send the context and I will respond directly.
+          </p>
         </div>
         <ContactForm />
       </section>

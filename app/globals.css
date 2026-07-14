@@ -118,6 +118,9 @@ button {
 }
 
 .siteHeader {
+  position: sticky;
+  top: 16px;
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -615,17 +618,13 @@ h3 {
 
 .serviceCard .chipRow,
 .projectCard .detailList,
-.packageCard .bestForText {
-  margin-top: 18px;
-}
-
 .projectCard {
   background:
     radial-gradient(circle at top right, rgba(0, 141, 127, 0.12), transparent 22%),
     linear-gradient(180deg, rgba(255, 252, 247, 0.99), rgba(255, 243, 234, 0.98));
 }
 
-.packageCard {
+.structuredCard {
   background:
     radial-gradient(circle at top left, rgba(232, 111, 66, 0.12), transparent 24%),
     linear-gradient(180deg, rgba(255, 252, 247, 0.99), rgba(255, 241, 232, 0.98));
@@ -781,6 +780,10 @@ h3 {
   right: 20px;
   bottom: 20px;
   z-index: 20;
+  display: flex;
+  max-width: calc(100vw - 40px);
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .aiWidgetToggle,
@@ -819,8 +822,12 @@ h3 {
 }
 
 .aiWidgetPanel {
+  display: flex;
+  flex-direction: column;
   width: min(430px, calc(100vw - 32px));
-  margin-top: 14px;
+  max-height: min(720px, calc(100vh - 40px));
+  max-height: min(720px, calc(100dvh - 40px));
+  min-height: 0;
   padding: 20px;
   border: 1px solid var(--line);
   border-radius: 32px;
@@ -828,13 +835,26 @@ h3 {
     radial-gradient(circle at top right, rgba(232, 111, 66, 0.14), transparent 28%),
     radial-gradient(circle at top left, rgba(0, 141, 127, 0.14), transparent 24%),
     rgba(255, 252, 247, 0.97);
+  overflow: hidden;
+}
+
+.aiWidgetHeader,
+.aiWidgetNote,
+.aiPromptRow,
+.aiWidgetMessages,
+.aiWidgetForm {
+  position: relative;
+  z-index: 1;
 }
 
 .aiWidgetHeader {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+  flex: 0 0 auto;
   gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(23, 20, 17, 0.08);
 }
 
 .aiWidgetClose {
@@ -850,7 +870,8 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 16px;
+  flex: 0 0 auto;
+  margin-top: 14px;
 }
 
 .aiPromptChip {
@@ -865,68 +886,17 @@ h3 {
   cursor: pointer;
 }
 
-.aiHealthPill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 14px;
-  padding: 9px 12px;
-  border: 1px solid rgba(23, 20, 17, 0.08);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ink);
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.aiHealthPill.warning {
-  color: #8b4f2f;
-}
-
-.aiHealthDot {
-  width: 9px;
-  height: 9px;
-  border-radius: 999px;
-  background: var(--accent-2);
-  box-shadow: 0 0 0 5px rgba(45, 122, 116, 0.12);
-}
-
-.aiHealthPill.warning .aiHealthDot {
-  background: var(--accent);
-  box-shadow: 0 0 0 5px rgba(181, 91, 57, 0.12);
-}
-
-.aiSalesCard {
-  margin-top: 16px;
-  padding: 16px;
-  border: 1px solid rgba(23, 20, 17, 0.08);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at top right, rgba(217, 154, 88, 0.14), transparent 32%),
-    rgba(255, 252, 247, 0.84);
-}
-
-.aiSalesCard h3 {
-  margin-top: 4px;
-}
-
-.aiSalesCard p:last-child {
-  margin-bottom: 0;
-}
-
-.aiSalesActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
-}
-
 .aiWidgetMessages {
   display: grid;
+  align-content: start;
   gap: 10px;
-  max-height: 340px;
+  flex: 1 1 auto;
+  min-height: 0;
   margin-top: 16px;
-  overflow: auto;
+  padding-right: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding-bottom: 8px;
 }
 
 .aiBubble {
@@ -970,8 +940,17 @@ h3 {
 
 .aiWidgetForm {
   display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  flex: 0 0 auto;
   gap: 12px;
   margin-top: 16px;
+}
+
+.aiWidgetForm textarea {
+  min-height: 52px;
+  max-height: 110px;
+  resize: none;
 }
 
 .conversionCard {
@@ -1206,9 +1185,22 @@ h3 {
   .aiWidget {
     right: 10px;
     bottom: 10px;
+    max-width: calc(100vw - 20px);
   }
 
   .aiWidgetPanel {
     width: min(100vw - 20px, 430px);
+    max-height: calc(100vh - 20px);
+    max-height: calc(100dvh - 20px);
+    padding: 16px;
+    border-radius: 24px;
+  }
+
+  .aiWidgetForm {
+    grid-template-columns: 1fr;
+  }
+
+  .aiWidgetForm .button {
+    width: 100%;
   }
 }

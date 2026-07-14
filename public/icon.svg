@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Reuben Moddel icon">
+  <rect width="512" height="512" rx="112" fill="#fff5ea"/>
+  <rect x="44" y="44" width="424" height="424" rx="88" fill="#181316"/>
+  <circle cx="404" cy="102" r="54" fill="#008d7f"/>
+  <circle cx="108" cy="404" r="54" fill="#e86f42"/>
+  <path d="M128 344V168h116c41 0 69 24 69 60 0 25-13 44-36 53l48 63h-59l-40-57h-48v57h-50Zm50-99h60c15 0 23-7 23-19s-8-19-23-19h-60v38Z" fill="#fffaf4"/>
+  <path d="M296 344V168h51l47 79 47-79h51v176h-50v-89l-32 53h-31l-33-53v89h-50Z" fill="#f5b14c"/>
+</svg>

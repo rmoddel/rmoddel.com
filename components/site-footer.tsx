@@ -1,7 +1,7 @@
 const footerLinks = [
   { href: "/", label: "Home" },
-  { href: "/#services", label: "Services" },
   { href: "/#work", label: "Work" },
+  { href: "/#experience", label: "Experience" },
   { href: "/#about", label: "About" },
   { href: "/resume", label: "Resume" },
   { href: "/#contact", label: "Contact" },
@@ -12,12 +12,12 @@ export function SiteFooter() {
   return (
     <footer className="siteFooter">
       <div className="footerLead">
-        <p className="eyebrow">Bring Me the Mess</p>
-        <h2>Clear thinking, strong messaging, and usable execution.</h2>
+        <p className="eyebrow">Reuben Moddel</p>
+        <h2>Clear thinking, human context, and practical execution.</h2>
         <p>
-          I help turn rough ideas into websites, campaigns, business writing,
-          workflow direction, and product plans that are easier to use, explain,
-          and move forward.
+          Personal portfolio for product operations, technical leadership,
+          workflow design, clear communication, and AI-enabled work grounded in
+          human understanding.
         </p>
       </div>
       <div className="footerMeta">
@@ -32,30 +32,30 @@ export function SiteFooter() {
           </nav>
         </div>
         <div>
-          <p className="footerLabel">Best Starting Point</p>
+          <p className="footerLabel">For Hiring Teams</p>
           <p className="footerText">
-            If the project is still messy, the best place to begin is the
-            Idea-to-Execution Session.
+            The resume has the formal role history; the homepage shows the
+            throughline in how I think and work.
           </p>
-          <a className="button" href="/#session">
-            Book a Session
+          <a className="button" href="/resume">
+            View Resume
           </a>
         </div>
         <div>
-          <p className="footerLabel">What I Help Build</p>
+          <p className="footerLabel">For Conversations</p>
           <p className="footerText">
-            Websites, ads, campaigns, writing, workflow ideas, and product
-            planning with practical business judgment.
+            Reach out about a role, collaboration, or service inquiry where
+            clear thinking and practical execution would help.
           </p>
           <a className="button" href="/#contact">
-            Start a Project
+            Contact Me
           </a>
         </div>
       </div>
       <div className="footerBar">
         <p>Reuben Moddel</p>
-        <p>Creative AI Operator for Real-World Business</p>
-        <p>Human judgment. AI speed. Practical results.</p>
+        <p>Product Operations and Technical Leadership</p>
+        <p>Human understanding. Clear thinking. Practical results.</p>
       </div>
     </footer>
   );

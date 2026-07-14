@@ -1,31 +1,91 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  assistantName,
-  assistantTitle,
-  type AssistantSource,
-  type AssistantMessage
-} from "@/lib/assistant";
+import { useEffect, useRef, useState } from "react";
+import { assistantName, type AssistantMessage } from "@/lib/assistant";
 
 const starterMessage =
-  "Ask about services, pricing ranges, project types, or the best way to start.";
+  "Ask about Reuben's background, work themes, capabilities, or ask me to send him a note.";
 
 const quickPrompts = [
-  "What services does Reuben offer?",
-  "What are the package price ranges?",
-  "Which package should I start with?",
-  "What kinds of projects are a good fit?",
-  "How do I get started?"
+  { label: "Background", prompt: "What is Reuben's professional background?" },
+  { label: "Capabilities", prompt: "Where is Reuben most useful?" },
+  { label: "Send a note", prompt: "I want to send Reuben a message." }
 ] as const;
 
-type AssistantHealthResponse = {
-  provider: "ollama" | "bedrock";
-  healthy: boolean;
-  source: "local-llm" | "bedrock";
-  model?: string;
-  error?: string;
+type ContactDraft = {
+  name?: string;
+  email?: string;
+  context?: string;
 };
+
+type ContactStep = "idle" | "name" | "email" | "context" | "confirm";
+
+const emailPattern = /[^\s<>@]+@[^\s<>@]+\.[^\s<>@]+/;
+
+function extractEmail(text: string) {
+  return text.match(emailPattern)?.[0] ?? "";
+}
+
+function normalizeText(text: string) {
+  return text.trim().toLowerCase();
+}
+
+function isContactRequest(text: string) {
+  const normalized = normalizeText(text);
+
+  return [
+    "contact",
+    "get in touch",
+    "send reuben",
+    "send him",
+    "send my info",
+    "send my information",
+    "send a note",
+    "send a message",
+    "message reuben",
+    "reach out",
+    "submit form",
+    "contact form",
+    "email reuben",
+    "hire",
+    "recruit",
+    "job opportunity"
+  ].some((phrase) => normalized.includes(phrase));
+}
+
+function isCancelRequest(text: string) {
+  return /^(cancel|stop|never mind|nevermind|abort)$/i.test(text.trim());
+}
+
+function isSendConfirmation(text: string) {
+  return /^(send|submit|yes|yes send|send it|go ahead|looks good|please send)$/i.test(
+    text.trim()
+  );
+}
+
+function cleanName(text: string) {
+  return text
+    .replace(emailPattern, "")
+    .replace(/^(my name is|name is|i am|i'm|this is)\s+/i, "")
+    .trim()
+    .replace(/[.,;:]+$/g, "");
+}
+
+function hasEnoughContext(text: string) {
+  return text.trim().replace(emailPattern, "").length >= 12;
+}
+
+function buildContactSummary(draft: Required<ContactDraft>) {
+  return [
+    "I have enough to send this to Reuben:",
+    "",
+    `- Name: ${draft.name}`,
+    `- Email: ${draft.email}`,
+    `- Context: ${draft.context}`,
+    "",
+    "Type “send” to submit it, or tell me what to change."
+  ].join("\n");
+}
 
 function renderMessageContent(content: string) {
   const blocks = content
@@ -66,61 +126,189 @@ export function AiWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
-  const [source, setSource] = useState<AssistantSource>("booting");
-  const [health, setHealth] = useState<AssistantHealthResponse | null>(null);
+  const [contactStep, setContactStep] = useState<ContactStep>("idle");
+  const [contactDraft, setContactDraft] = useState<ContactDraft>({});
   const [messages, setMessages] = useState<AssistantMessage[]>([
     { role: "assistant", content: starterMessage }
   ]);
-
-  const sourceLabel = useMemo(() => {
-    switch (source) {
-      case "local-llm":
-        return "Local model live";
-      case "bedrock":
-        return "Bedrock live";
-      case "site-knowledge":
-        return "Site knowledge fallback";
-      case "error":
-        return "Reply path degraded";
-      default:
-        return "Ready when you are";
-    }
-  }, [source]);
+  const messagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!isOpen || health) {
+    if (!isOpen) {
       return;
     }
 
-    let ignore = false;
+    const messageList = messagesRef.current;
 
-    async function loadHealth() {
-      try {
-        const response = await fetch("/api/assistant/health");
-
-        if (!response.ok) {
-          throw new Error("Health check failed.");
-        }
-
-        const data = (await response.json()) as AssistantHealthResponse;
-
-        if (!ignore) {
-          setHealth(data);
-          setSource(data.source);
-        }
-      } catch {
-        if (!ignore) {
-          setSource("error");
-        }
-      }
+    if (!messageList) {
+      return;
     }
 
-    void loadHealth();
+    const animationFrame = window.requestAnimationFrame(() => {
+      messageList.scrollTo({
+        top: messageList.scrollHeight,
+        behavior: "smooth"
+      });
+    });
 
     return () => {
-      ignore = true;
+      window.cancelAnimationFrame(animationFrame);
     };
-  }, [health, isOpen]);
+  }, [busy, isOpen, messages.length]);
+
+  async function sendContactDraft(draft: Required<ContactDraft>) {
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: draft.name,
+        email: draft.email,
+        phone: "",
+        helpType: "Chatbot inquiry",
+        project: draft.context,
+        timeline: "",
+        budget: "Submitted through chatbot"
+      })
+    });
+
+    const data = (await response.json()) as { ok?: boolean; error?: string };
+
+    if (!response.ok || !data.ok) {
+      throw new Error(data.error || "Could not send the message.");
+    }
+  }
+
+  async function handleContactFlow(text: string) {
+    if (isCancelRequest(text)) {
+      setContactStep("idle");
+      setContactDraft({});
+
+      return "No problem. I stopped the message draft.";
+    }
+
+    if (contactStep === "idle") {
+      const email = extractEmail(text);
+      const nextDraft: ContactDraft = email ? { email } : {};
+
+      setContactDraft(nextDraft);
+      setContactStep(email ? "name" : "name");
+
+      return email
+        ? "I can send a note to Reuben after I collect the basics. What name should I include?"
+        : "I can collect a note here and send it to Reuben. What is your name?";
+    }
+
+    if (contactStep === "name") {
+      const email = extractEmail(text);
+      const name = cleanName(text);
+      const nextDraft = {
+        ...contactDraft,
+        ...(email ? { email } : {}),
+        ...(name ? { name } : {})
+      };
+
+      if (!nextDraft.name || nextDraft.name.length < 2) {
+        return "What name should I include with the message?";
+      }
+
+      setContactDraft(nextDraft);
+
+      if (nextDraft.email) {
+        setContactStep("context");
+        return "Thanks. Briefly, what should I tell Reuben this is about?";
+      }
+
+      setContactStep("email");
+      return `Thanks, ${nextDraft.name}. What email should Reuben use to reply?`;
+    }
+
+    if (contactStep === "email") {
+      const email = extractEmail(text);
+
+      if (!email) {
+        return "Please send a valid email address so Reuben can reply.";
+      }
+
+      const nextDraft = {
+        ...contactDraft,
+        email
+      };
+
+      setContactDraft(nextDraft);
+      setContactStep("context");
+
+      return "Got it. Briefly, what should I tell Reuben this is about?";
+    }
+
+    if (contactStep === "context") {
+      if (!hasEnoughContext(text)) {
+        return "Please add a little more context: role, project, workflow, team need, or reason for reaching out.";
+      }
+
+      const nextDraft = {
+        ...contactDraft,
+        context: text.trim()
+      };
+
+      if (!nextDraft.name || !nextDraft.email || !nextDraft.context) {
+        setContactDraft(nextDraft);
+        setContactStep(!nextDraft.name ? "name" : !nextDraft.email ? "email" : "context");
+
+        return "I am missing one required detail before I can send it.";
+      }
+
+      const completeDraft = nextDraft as Required<ContactDraft>;
+
+      setContactDraft(completeDraft);
+      setContactStep("confirm");
+
+      return buildContactSummary(completeDraft);
+    }
+
+    if (contactStep === "confirm") {
+      if (isSendConfirmation(text)) {
+        const completeDraft = contactDraft as Required<ContactDraft>;
+
+        if (!completeDraft.name || !completeDraft.email || !completeDraft.context) {
+          setContactStep(!completeDraft.name ? "name" : !completeDraft.email ? "email" : "context");
+          return "I am missing one required detail before I can send it.";
+        }
+
+        try {
+          await sendContactDraft(completeDraft);
+          setContactStep("idle");
+          setContactDraft({});
+
+          return "Sent. Reuben will have your note and can reply by email.";
+        } catch {
+          return "I could not send that right now. You can try again by typing “send,” or use the contact form below.";
+        }
+      }
+
+      const email = extractEmail(text);
+      const nextDraft = {
+        ...contactDraft,
+        ...(email ? { email } : { context: text.trim() })
+      };
+
+      if (!nextDraft.name || !nextDraft.email || !nextDraft.context) {
+        setContactDraft(nextDraft);
+        setContactStep(!nextDraft.name ? "name" : !nextDraft.email ? "email" : "context");
+
+        return "I updated the draft, but I am missing one required detail.";
+      }
+
+      const completeDraft = nextDraft as Required<ContactDraft>;
+
+      setContactDraft(completeDraft);
+
+      return buildContactSummary(completeDraft);
+    }
+
+    return "I can collect a note for Reuben. What is your name?";
+  }
 
   async function submitQuestion(question: string) {
     const trimmed = question.trim();
@@ -136,6 +324,19 @@ export function AiWidget() {
     setBusy(true);
 
     try {
+      if (contactStep !== "idle" || isContactRequest(trimmed)) {
+        const reply = await handleContactFlow(trimmed);
+
+        setMessages((current) => [
+          ...current,
+          {
+            role: "assistant",
+            content: reply
+          }
+        ]);
+        return;
+      }
+
       const response = await fetch("/api/assistant", {
         method: "POST",
         headers: {
@@ -152,10 +353,8 @@ export function AiWidget() {
 
       const data = (await response.json()) as {
         reply?: string;
-        source?: AssistantSource;
       };
 
-      setSource(data.source ?? "site-knowledge");
       setMessages((current) => [
         ...current,
         {
@@ -164,7 +363,6 @@ export function AiWidget() {
         }
       ]);
     } catch {
-      setSource("error");
       setMessages((current) => [
         ...current,
         {
@@ -184,24 +382,26 @@ export function AiWidget() {
 
   return (
     <div className={`aiWidget ${isOpen ? "open" : ""}`}>
-      <button
-        aria-expanded={isOpen}
-        className="aiWidgetToggle"
-        onClick={() => setIsOpen((value) => !value)}
-        type="button"
-      >
-        <span className="aiWidgetToggleLabel">{assistantName}</span>
-        <span className="aiWidgetToggleMeta">Virtual assistance</span>
-      </button>
+      {!isOpen ? (
+        <button
+          aria-expanded={isOpen}
+          className="aiWidgetToggle"
+          onClick={() => setIsOpen(true)}
+          type="button"
+        >
+          <span className="aiWidgetToggleLabel">{assistantName}</span>
+          <span className="aiWidgetToggleMeta">Chat</span>
+        </button>
+      ) : null}
       {isOpen ? (
-        <section className="aiWidgetPanel">
+        <section aria-label="Chat with Reuben's Assistant" className="aiWidgetPanel">
           <div className="aiWidgetHeader">
             <div>
-              <p className="footerLabel">Reuben&apos;s Virtual Assistance</p>
+              <p className="footerLabel">Site assistant</p>
               <h3>{assistantName}</h3>
             </div>
             <button
-              aria-label="Close virtual assistant"
+              aria-label="Close chat"
               className="aiWidgetClose"
               onClick={() => setIsOpen(false)}
               type="button"
@@ -210,52 +410,22 @@ export function AiWidget() {
             </button>
           </div>
           <p className="aiWidgetNote">
-            {assistantTitle}. {sourceLabel}.
+            Ask about background, work themes, capabilities, or send a note.
           </p>
-          <div className={`aiHealthPill ${health?.healthy ? "healthy" : "warning"}`}>
-            <span className="aiHealthDot" />
-            <span>
-              {health
-                ? `${health.provider === "bedrock" ? "Bedrock" : "Ollama"}: ${
-                    health.healthy ? `connected${health.model ? ` · ${health.model}` : ""}` : "check required"
-                  }`
-                : "Checking assistant backend..."}
-            </span>
-          </div>
-          <div className="aiPromptRow" aria-label="Suggested prompts">
-            {quickPrompts.map((prompt) => (
+          <div className="aiPromptRow" aria-label="Suggested questions">
+            {quickPrompts.map(({ label, prompt }) => (
               <button
                 className="aiPromptChip"
                 disabled={busy}
-                key={prompt}
+                key={label}
                 onClick={() => void submitQuestion(prompt)}
                 type="button"
               >
-                {prompt}
+                {label}
               </button>
             ))}
           </div>
-          <div className="aiSalesCard">
-            <p className="microLabel">Best Paid Entry Point</p>
-            <h3>Idea-to-Execution Session</h3>
-            <p>
-              If the idea is still messy, start with the paid strategy session first. It is the
-              fastest path to clarity and the easiest yes for most qualified leads.
-            </p>
-            <div className="aiSalesActions">
-              <a className="button smallButton" href="#session" onClick={() => setIsOpen(false)}>
-                Book Session
-              </a>
-              <a
-                className="button buttonGhost smallButton"
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-              >
-                Contact Reuben
-              </a>
-            </div>
-          </div>
-          <div className="aiWidgetMessages">
+          <div aria-live="polite" className="aiWidgetMessages" ref={messagesRef}>
             {messages.map((message, index) => (
               <div className={`aiBubble ${message.role}`} key={`${message.role}-${index}`}>
                 {renderMessageContent(message.content)}
@@ -266,12 +436,12 @@ export function AiWidget() {
             <textarea
               name="question"
               onChange={(event) => setInput(event.target.value)}
-              placeholder="Ask about packages, services, project fit, or next steps..."
-              rows={3}
+              placeholder="Ask a question or type 'send Reuben a note'..."
+              rows={2}
               value={input}
             />
-            <button className="button" disabled={busy} type="submit">
-              {busy ? "Thinking..." : "Ask RueMode"}
+            <button className="button" disabled={busy || !input.trim()} type="submit">
+              {busy ? "Thinking..." : "Send"}
             </button>
           </form>
         </section>

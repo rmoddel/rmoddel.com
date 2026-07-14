@@ -80,43 +80,42 @@ export function ContactForm() {
         <input name="phone" type="tel" placeholder="Optional" />
       </label>
       <label>
-        What do you need help with?
-        <select name="helpType" defaultValue="Website">
-          <option>Website</option>
-          <option>Ad or campaign</option>
-          <option>Logo or branding</option>
-          <option>Writing or messaging</option>
-          <option>AI workflow</option>
-          <option>App idea</option>
+        Reason for reaching out
+        <select name="helpType" defaultValue="Job opportunity">
+          <option>Job opportunity</option>
+          <option>Recruiting conversation</option>
+          <option>Consulting or service inquiry</option>
+          <option>Collaboration</option>
+          <option>AI or workflow question</option>
           <option>Other</option>
         </select>
       </label>
       <label>
-        Briefly describe the project
+        Briefly describe the context
         <textarea
           name="project"
           rows={5}
-          placeholder="What are you trying to create?"
+          placeholder="Role, project, workflow, team need, or reason for reaching out"
           required
         />
       </label>
       <label>
-        Timeline
-        <input name="timeline" type="text" placeholder="e.g. This month" />
+        Timing
+        <input name="timeline" type="text" placeholder="e.g. This month, this quarter, flexible" />
       </label>
       <label>
-        Budget range
-        <input name="budget" type="text" placeholder="e.g. $500-$2,500" />
+        Compensation, budget, or notes
+        <input name="budget" type="text" placeholder="Optional context" />
       </label>
       <button className="button" type="submit" disabled={formState.status === "submitting"}>
-        {formState.status === "submitting" ? "Sending..." : "Start a Project"}
+        {formState.status === "submitting" ? "Sending..." : "Send Message"}
       </button>
       <p
         className={`formNotice ${formState.status}`}
         aria-live="polite"
         role="status"
       >
-        {formState.message || "Tell me what you are trying to create."}
+        {formState.message || "Share enough context for me to understand the fit."}
       </p>
     </form>
   );

@@ -32,11 +32,11 @@ export function createContactEmail(payload: ContactPayload) {
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
     `Phone: ${payload.phone || "Not provided"}`,
-    `Need help with: ${payload.helpType}`,
-    `Timeline: ${payload.timeline || "Not provided"}`,
-    `Budget: ${payload.budget || "Not provided"}`,
+    `Reason for reaching out: ${payload.helpType}`,
+    `Timing: ${payload.timeline || "Not provided"}`,
+    `Compensation, budget, or notes: ${payload.budget || "Not provided"}`,
     "",
-    "Project",
+    "Context",
     payload.project
   ].join("\n");
 
@@ -48,12 +48,12 @@ export function createContactEmail(payload: ContactPayload) {
         ${field("Name", payload.name)}
         ${field("Email", payload.email)}
         ${field("Phone", payload.phone || "Not provided")}
-        ${field("Need help with", payload.helpType)}
-        ${field("Timeline", payload.timeline || "Not provided")}
-        ${field("Budget", payload.budget || "Not provided")}
+        ${field("Reason for reaching out", payload.helpType)}
+        ${field("Timing", payload.timeline || "Not provided")}
+        ${field("Compensation, budget, or notes", payload.budget || "Not provided")}
       </table>
       <div style="margin-top:24px;padding:16px;border-radius:12px;background:#f4efe7;">
-        <div style="font-weight:700;margin-bottom:8px;">Project description</div>
+        <div style="font-weight:700;margin-bottom:8px;">Context</div>
         <div>${escapeHtml(payload.project).replace(/\n/g, "<br />")}</div>
       </div>
     </div>

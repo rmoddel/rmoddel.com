@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "#services", label: "Services" },
   { href: "#work", label: "Work" },
+  { href: "#experience", label: "Experience" },
   { href: "#about", label: "About" },
   { href: "/resume", label: "Resume" },
   { href: "#contact", label: "Contact" }
@@ -46,7 +46,7 @@ export function SiteHeader() {
         <span className="brandMark">RM</span>
         <span className="brandText">
           <strong>Reuben Moddel</strong>
-          <span>Creative AI Operator for Real-World Business</span>
+          <span>Product operations. Technical judgment. Human understanding.</span>
         </span>
       </a>
 
@@ -73,10 +73,10 @@ export function SiteHeader() {
         </nav>
         <a
           className="button smallButton navCta"
-          href={isHomePage ? "#session" : "/#session"}
+          href={isHomePage ? "#contact" : "/#contact"}
           onClick={closeMenu}
         >
-          Book a Session
+          Get in Touch
         </a>
       </div>
     </header>

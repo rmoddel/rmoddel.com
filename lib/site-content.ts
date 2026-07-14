@@ -1,36 +1,36 @@
-export const services = [
+export const capabilities = [
   {
-    title: "Creative & Marketing",
+    title: "Clarifying Ambiguous Work",
     body:
-      "Websites, logos, journal ads, flyers, campaigns, labels, fundraising visuals, and community-facing materials.",
-    items: ["Websites", "Campaign visuals", "Logos", "Fundraising materials"]
+      "I help turn scattered goals, competing inputs, and half-formed ideas into clear priorities, next steps, and usable direction.",
+    items: ["Requirements", "Priorities", "Decision framing", "Plain-English structure"]
   },
   {
-    title: "Business Writing & Messaging",
+    title: "Translating Between People and Systems",
     body:
-      "Emails, proposals, donor appeals, letters, pitch copy, website copy, executive summaries, and plain-English business documents.",
-    items: ["Website copy", "Proposals", "Donor appeals", "Business documents"]
+      "My strongest work sits between business needs, human context, and technical execution, especially when different teams need the same thing explained differently.",
+    items: ["Stakeholder alignment", "Developer support", "Business translation", "Documentation"]
   },
   {
-    title: "AI Workflow Consulting",
+    title: "Building Practical Workflows",
     body:
-      "Workflow reviews, automation ideas, internal tools, SOPs, dashboards, data cleanup, and document processing strategy.",
-    items: ["Workflow reviews", "SOP direction", "Automation ideas", "Internal tools"]
+      "I look for the real operating problem first, then shape workflows, internal tools, automation ideas, and team habits around what people actually need to do.",
+    items: ["Process design", "Internal tools", "Automation ideas", "Team operating rhythm"]
   },
   {
-    title: "MVP & Product Blueprinting",
+    title: "Using AI With Human Judgment",
     body:
-      "Product specs, app planning, user flows, backend structure, feature lists, developer handoff docs, and AI-agent build instructions.",
-    items: ["User flows", "Feature scope", "Backend structure", "Developer handoff docs"]
+      "I use AI to move faster, explore options, and sharpen execution, but the real value is knowing what is useful, appropriate, and humanly coherent.",
+    items: ["AI workflows", "Quality control", "Human context", "Better questions"]
   }
 ] as const;
 
 export const projects = [
   {
     type: "Community Fundraising Campaign",
-    title: "Campaign identity and donor materials",
+    title: "Making a community effort easier to understand",
     summary:
-      "A community campaign needed messaging and materials that felt credible, organized, and reusable across events.",
+      "A community campaign needed messaging and materials that felt credible, organized, and reusable across conversations, events, and donor touchpoints.",
     deliverables: [
       "Campaign messaging",
       "Pledge card concept",
@@ -39,13 +39,13 @@ export const projects = [
       "Reusable event materials"
     ],
     result:
-      "Created a polished campaign identity with practical fundraising materials."
+      "Gave the effort a clearer story and practical materials people could actually use."
   },
   {
     type: "Dessert Brand Label & Packaging",
-    title: "Retail-ready product presentation",
+    title: "Turning a small product into something easier to trust",
     summary:
-      "A small food brand needed its packaging to look cleaner, more intentional, and more ready for real retail presentation.",
+      "A small food brand needed its packaging to feel cleaner, more intentional, and more ready for real retail presentation.",
     deliverables: [
       "Logo refinement",
       "Circular product label",
@@ -53,11 +53,11 @@ export const projects = [
       "Packaging copy refinement",
       "Typography cleanup"
     ],
-    result: "Created a sharper, cleaner look for a small food brand."
+    result: "Made the product feel more credible without losing its small-brand warmth."
   },
   {
     type: "Journal Ads & Event Materials",
-    title: "Fast community-facing design support",
+    title: "Fast support when the message needed to land",
     summary:
       "Community organizations needed polished materials quickly, without adding unnecessary process or agency overhead.",
     deliverables: [
@@ -68,11 +68,11 @@ export const projects = [
       "WhatsApp-ready versions"
     ],
     result:
-      "Produced polished event and advertising materials quickly and affordably."
+      "Produced clear, polished materials fast enough to be useful in the real world."
   },
   {
     type: "Business & Legal-Style Writing",
-    title: "Plain-English communication that still sounds serious",
+    title: "Plain-English communication for sensitive situations",
     summary:
       "People needed written communication that felt formal and clear without becoming robotic, bloated, or over-lawyered.",
     deliverables: [
@@ -83,103 +83,58 @@ export const projects = [
       "Negotiation wording"
     ],
     result:
-      "Helped people communicate clearly without robotic or over-lawyered language."
-  }
-] as const;
-
-export const packages = [
-  {
-    price: "$250+",
-    title: "Strategy Session",
-    body:
-      "A focused working session to clarify the idea, sharpen the message, and decide the right next deliverable.",
-    bestFor: "Best when the project is still undefined and you need direction first."
-  },
-  {
-    price: "$500-$2,500+",
-    title: "Creative & Messaging Buildout",
-    body:
-      "Hands-on help creating or refining copy, campaign materials, website messaging, and visual direction.",
-    bestFor: "Best when the direction is clear and the materials now need to be made."
-  },
-  {
-    price: "$500-$1,500+",
-    title: "AI Workflow Review",
-    body:
-      "A practical review of repetitive work, where AI may help, and what the best first implementation should be.",
-    bestFor: "Best when there is real operational friction and AI may remove repetitive work."
-  },
-  {
-    price: "$2,500-$7,500+",
-    title: "MVP Blueprint",
-    body:
-      "A structured product plan with scope, flows, features, and developer-ready direction.",
-    bestFor: "Best when an app or internal tool needs structure before development starts."
-  },
-  {
-    price: "$3,000-$10,000/month",
-    title: "Ongoing Strategic Partner",
-    body:
-      "Ongoing support to keep ideas, execution, creative direction, and technical planning moving in the same direction.",
-    bestFor: "Best when multiple priorities need the same judgment across time."
+      "Helped people communicate with more confidence, clarity, and emotional control."
   }
 ] as const;
 
 export const workingPrinciples = [
   {
-    title: "Start with the rough version",
+    title: "Start with the human reality",
     body:
-      "Notes, screenshots, voice notes, half-written copy, and unfinished drafts are enough to begin."
+      "Before tools, tasks, or outputs, I try to understand the people, pressure, context, incentives, and actual problem."
   },
   {
-    title: "Use AI where it creates leverage",
+    title: "Make the thinking visible",
     body:
-      "AI speeds up exploration, drafting, structure, and iteration, but it does not replace direction."
+      "Good work gets easier when assumptions, tradeoffs, next steps, and decision logic are written clearly enough for other people to act on."
   },
   {
-    title: "Aim for handoff-ready outputs",
+    title: "Turn insight into movement",
     body:
-      "The goal is not abstract advice. The goal is something you can use, publish, or hand to the next person."
+      "The end product should help someone decide, build, communicate, improve a workflow, or move a team forward."
   }
 ] as const;
 
 export const outcomePoints = [
-  "Clearer positioning and message",
-  "A practical next deliverable",
-  "Copy, design direction, or product structure",
-  "Something usable for you or your team"
+  "Clearer thinking",
+  "Better questions",
+  "Practical structure",
+  "Work people can act on"
 ] as const;
 
 export const websiteKnowledge = `
-Reuben Moddel is positioned as a creative AI operator for real-world business.
-Core message: turn rough ideas into polished results.
-Primary audiences: businesses, nonprofits, founders, and community organizations.
-Main deliverables: websites, logos, ads, campaigns, business writing, app plans, and AI-powered workflows.
+Reuben Moddel's site is a personal portfolio and about-me site, not a traditional company site.
+Core message: Reuben helps people make sense of messy work by combining technical judgment, operational experience, clear writing, and a strong foundation of human understanding.
+Primary audiences: prospective employers, hiring teams, collaborators, and people who may want to reach out about a project or service inquiry.
 
 How the work is framed:
-- Clients bring scattered thoughts, rough notes, screenshots, voice notes, half-written copy, unfinished designs, or half-built projects.
-- The work turns those into something clear, professional, practical, and usable.
-- AI is used as an amplifier, not a replacement for judgment.
-- Human judgment handles final direction, taste, messaging, business logic, and quality control.
+- Reuben is strongest where the work is ambiguous, cross-functional, and hard to explain.
+- He helps clarify goals, translate between people and systems, improve workflows, support developers, document requirements, and move work toward practical execution.
+- AI is used as an amplifier, not a replacement for judgment or human understanding.
+- Human judgment handles final direction, context, tone, business logic, quality control, and what is actually useful.
 
-Service categories:
-- Creative and Marketing: websites, logos, journal ads, flyers, campaigns, labels, fundraising visuals, and community-facing materials.
-- Business Writing and Messaging: emails, proposals, donor appeals, letters, pitch copy, website copy, executive summaries, and plain-English business documents.
-- AI Workflow Consulting: workflow reviews, automation ideas, internal tools, SOPs, dashboards, data cleanup, and document processing strategy.
-- MVP and Product Blueprinting: product specs, app planning, user flows, backend structure, feature lists, developer handoff docs, and AI-agent build instructions.
+Work themes:
+- Clarifying ambiguous work: requirements, priorities, decision framing, and plain-English structure.
+- Translating between people and systems: stakeholder alignment, developer support, business translation, and documentation.
+- Building practical workflows: process design, internal tools, automation ideas, and team operating rhythm.
+- Using AI with human judgment: AI workflows, quality control, human context, and better questions.
 
-Main offer:
-- Idea-to-Execution Session.
-- It is for people who have an idea but do not know how to package it, write it, design it, or build it.
-- The session clarifies what the client is trying to create, what matters most, and what the next practical deliverable should be.
-- Outcomes include a clearer version of the idea, recommended direction, suggested deliverables, practical next steps, messaging angles, and relevant AI opportunities.
-
-Service packages and price ranges:
-- Strategy Session: $250+.
-- Creative and Messaging Buildout: $500-$2,500+.
-- AI Workflow Review: $500-$1,500+.
-- MVP Blueprint: $2,500-$7,500+.
-- Ongoing Strategic Partner: $3,000-$10,000 per month.
+Professional background:
+- Director, Product Operations / Technical Lead at GPARENCY.
+- Technical Operations Manager at Eastern Union.
+- Software Analyst at CardCash.
+- Web Developer roles at Central Analysis Bureau and New York Guest Services.
+- Experience includes product operations, technical leadership, agile delivery, developer support, process improvement, internal systems, analytics, documentation, and cross-functional communication.
 
 Selected work examples:
 - Community Fundraising Campaign: campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.
@@ -188,11 +143,10 @@ Selected work examples:
 - Business and Legal-Style Writing: formal letters, dispute language, contract simplification, business communication, and negotiation wording.
 
 About:
-- Reuben Moddel is not presented as a traditional designer, copywriter, developer, or consultant.
-- He is described as the person people call when they have a rough idea and need help making it make sense.
-- The blend includes business understanding, writing, design taste, software thinking, AI tools, plain-English communication, and practical execution.
+- Reuben is presented as a practical technical and operations leader who helps people think clearly, explain work plainly, and turn ambiguity into usable direction.
+- The blend includes human understanding, business context, writing, technical literacy, software thinking, AI tools, plain-English communication, and practical execution.
 
 Contact:
-- Visitors are invited to start with a conversation and bring the rough version of what they want to create.
-- The contact form asks for name, email, phone, help type, project description, timeline, and budget range.
+- Hiring teams, collaborators, and people with relevant projects can reach out through the contact form.
+- For pricing or service scope questions, the site does not publish package pricing. Reuben invites people to contact him with context.
 `.trim();
