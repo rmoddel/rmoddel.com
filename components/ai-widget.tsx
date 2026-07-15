@@ -308,8 +308,13 @@ export function AiWidget() {
           setContactDraft({});
 
           return "Sent. Reuben will have your email and can reply directly.";
-        } catch {
-          return "I could not send that email right now. You can try again by typing “send email,” or use the contact form below.";
+        } catch (error) {
+          const message =
+            error instanceof Error
+              ? error.message
+              : "The email service could not send your message right now.";
+
+          return `${message} You can try again by typing “send email,” or use the contact form below.`;
         }
       }
 

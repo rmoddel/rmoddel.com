@@ -211,6 +211,10 @@ Without this role, the app will deploy but Bedrock calls from the server route w
 In Amplify, set:
 
 ```bash
+EMAIL_API_URL=
+EMAIL_API_SECRET=
+EMAIL_FROM=
+CONTACT_TO=
 ASSISTANT_PROVIDER=bedrock
 BEDROCK_REGION=us-east-1
 BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
@@ -218,6 +222,7 @@ BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
 
 Important:
 
+- The contact form and assistant email flow both use `/api/contact`, so production needs the four contact email variables as SSR environment variables.
 - Do not create your own env var with an `AWS_` prefix in Amplify. Amplify reserves that prefix.
 - This is why this project uses `BEDROCK_REGION` instead of telling you to define `AWS_REGION`.
 

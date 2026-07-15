@@ -7,6 +7,7 @@ import {
   capabilities,
   outcomePoints,
   projects,
+  technicalBackground,
   workingPrinciples
 } from "@/lib/site-content";
 
@@ -33,6 +34,8 @@ const experienceHighlights = [
   }
 ] as const;
 
+const technicalKnowsAbout = technicalBackground.flatMap((group) => group.items);
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -52,7 +55,8 @@ const jsonLd = {
         "Developer support",
         "Requirement gathering",
         "AI-enabled workflows",
-        "Plain-English communication"
+        "Plain-English communication",
+        ...technicalKnowsAbout
       ]
     },
     {

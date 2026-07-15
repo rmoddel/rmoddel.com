@@ -4,7 +4,19 @@ import { createContactEmail, type ContactPayload } from "@/lib/contact-email";
 type RelayResponse = {
   ok?: boolean;
   error?: string;
+  message?: string;
 };
+
+class ContactRouteError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly clientMessage: string
+  ) {
+    super(message);
+    this.name = "ContactRouteError";
+  }
+}
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -14,10 +26,60 @@ function requiredEnv(name: string) {
   const value = process.env[name];
 
   if (!value) {
-    throw new Error(`Missing required environment variable: ${name}`);
+    throw new ContactRouteError(
+      `Missing required contact environment variable: ${name}`,
+      500,
+      "Contact email is not configured right now."
+    );
   }
 
   return value;
+}
+
+function isProduction() {
+  return process.env.NODE_ENV === "production";
+}
+
+function contactErrorResponse(error: unknown) {
+  const routeError =
+    error instanceof ContactRouteError
+      ? error
+      : new ContactRouteError(
+          error instanceof Error ? error.message : "Unknown contact send failure.",
+          502,
+          "The email service could not send your message right now."
+        );
+
+  console.error("[contact] send failure", {
+    message: routeError.message,
+    status: routeError.status,
+    name: routeError.name
+  });
+
+  return NextResponse.json(
+    {
+      ok: false,
+      error: routeError.clientMessage,
+      ...(isProduction() ? {} : { detail: routeError.message })
+    },
+    { status: routeError.status }
+  );
+}
+
+async function readRelayResponse(response: Response) {
+  const body = await response.text();
+  let data: RelayResponse = {};
+
+  try {
+    data = body ? (JSON.parse(body) as RelayResponse) : {};
+  } catch {
+    data = {};
+  }
+
+  return {
+    data,
+    bodyPreview: body.slice(0, 500)
+  };
 }
 
 function normalizePayload(body: unknown): ContactPayload {
@@ -75,19 +137,25 @@ export async function POST(request: Request) {
       cache: "no-store"
     });
 
-    const relayData = (await relayResponse.json().catch(() => ({}))) as RelayResponse;
+    const { data: relayData, bodyPreview } = await readRelayResponse(relayResponse).catch(
+      (error) => ({
+        data: {} as RelayResponse,
+        bodyPreview: error instanceof Error ? error.message : "Could not read relay response."
+      })
+    );
 
-    if (!relayResponse.ok || !relayData.ok) {
-      throw new Error(relayData.error || "Email relay request failed.");
+    if (!relayResponse.ok || relayData.ok === false) {
+      throw new ContactRouteError(
+        `Email relay request failed with ${relayResponse.status}: ${
+          relayData.error || relayData.message || bodyPreview || "Relay did not return ok."
+        }`,
+        502,
+        "The email service could not send your message right now."
+      );
     }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
-    console.error("[contact] send failure", error);
-
-    return NextResponse.json(
-      { ok: false, error: "Could not send your message right now." },
-      { status: 500 }
-    );
+    return contactErrorResponse(error);
   }
 }

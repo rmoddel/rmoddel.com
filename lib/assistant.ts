@@ -2,6 +2,7 @@ import {
   capabilities,
   outcomePoints,
   projects,
+  technicalBackground,
   websiteKnowledge,
   workingPrinciples
 } from "@/lib/site-content";
@@ -11,8 +12,7 @@ import {
   leadershipSkills,
   professionalDevelopment,
   resumeIdentity,
-  resumeSummary,
-  technicalSkills
+  resumeSummary
 } from "@/lib/resume-content";
 
 export type AssistantMessage = {
@@ -99,6 +99,12 @@ function listSkills(items: readonly string[]) {
   return bulletList(items);
 }
 
+function listTechnicalBackground() {
+  return bulletList(
+    technicalBackground.map((group) => `${group.area}: ${group.items.join(", ")}`)
+  );
+}
+
 function getProjectByNeedle(...needles: string[]) {
   return projects.find((project) => {
     const haystack = normalizeForMatch(
@@ -177,6 +183,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
           "Reuben's background and resume",
           "Product operations and technical leadership experience",
           "Workflow, documentation, developer support, and cross-functional work",
+          "Languages, frameworks, and database background",
           "AI workflow perspective and OpenAI-related experience",
           "Selected work examples and contact path"
         ])
@@ -522,13 +529,34 @@ const fallbackTopics: readonly FallbackTopic[] = [
       "technical skills",
       "tools",
       "tech stack",
+      "technical background",
+      "languages",
+      "programming languages",
+      "framework",
+      "frameworks",
       "stack",
+      "php",
+      "javascript",
+      "js",
+      "es6",
+      "react",
+      "nextjs",
+      "next.js",
+      "nestjs",
+      "nestj",
+      "coldfusion",
+      "sql",
       "aws",
       "gcp",
       "database",
       "databases",
       "mysql",
       "postgres",
+      "postgresql",
+      "sql server",
+      "python",
+      "django",
+      "fastapi",
       "dynamodb",
       "firebase",
       "jira",
@@ -537,9 +565,11 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "The resume lists these technical and professional skills:",
+        "The site keeps the stack low-key, but it does list this technical background:",
         "",
-        listSkills(technicalSkills)
+        listTechnicalBackground(),
+        "",
+        "Related resume context includes AWS, GCP, OpenAI API integrations, web development across multiple languages, databases, and delivery tools like Jira, Trello, and ClickUp."
       ].join("\n")
   },
   {
@@ -742,6 +772,6 @@ export function buildFallbackReply(question: string, messages?: AssistantMessage
   return [
     "I do not see that specific detail in the site content, so I do not want to invent an answer.",
     "",
-    "The grounded areas I can answer well are Reuben's resume, work history, product and technical operations experience, workflow/design thinking, AI-with-judgment perspective, selected work examples, education, skills, and contact path."
+    "The grounded areas I can answer well are Reuben's resume, work history, product and technical operations experience, workflow/design thinking, technical background, AI-with-judgment perspective, selected work examples, education, skills, and contact path."
   ].join("\n");
 }

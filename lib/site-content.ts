@@ -112,6 +112,25 @@ export const outcomePoints = [
   "Work people can act on"
 ] as const;
 
+export const technicalBackground = [
+  {
+    area: "Languages",
+    items: ["PHP", "JavaScript", "ES6", "ColdFusion", "SQL", "Python"]
+  },
+  {
+    area: "Frontend",
+    items: ["React", "Next.js"]
+  },
+  {
+    area: "Backend",
+    items: ["NestJS", "Django", "FastAPI"]
+  },
+  {
+    area: "Databases",
+    items: ["MySQL", "Postgres", "SQL Server"]
+  }
+] as const;
+
 export const websiteKnowledge = `
 Reuben Moddel's site is a personal portfolio and about-me site, not a traditional company site.
 Core message: Reuben helps people make sense of messy work by combining technical judgment, operational experience, clear writing, and a strong foundation of human understanding.
@@ -144,6 +163,7 @@ Resume details:
 - Education: Master of Science, Management Information Systems, New Jersey Institute of Technology, completed January 2011.
 - Professional development: Dale Carnegie - Skills for Success, 2019.
 - Technical and professional skills include project planning and coordination, agile workflow, requirement gathering and documentation, developer support, cross-functional communication, AWS, GCP, OpenAI API integrations, web development across multiple languages, MySQL, Postgres, DynamoDB, Firebase, Jira, Trello, and ClickUp.
+- Additional technical background includes PHP, JavaScript, ES6, React, Next.js, NestJS, ColdFusion, SQL, MySQL, Postgres, SQL Server, Python, Django, and FastAPI.
 - Leadership and operations skills include operational strategy, process optimization, cross-functional leadership, vendor and stakeholder management, analytics and SEO integration, and team training and development.
 
 Resume role specifics:

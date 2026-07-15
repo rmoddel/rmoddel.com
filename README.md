@@ -104,6 +104,10 @@ ollama pull llama3.2:3b
 Use this env setup in Amplify:
 
 ```bash
+EMAIL_API_URL=
+EMAIL_API_SECRET=
+EMAIL_FROM=
+CONTACT_TO=
 ASSISTANT_PROVIDER=bedrock
 BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
 BEDROCK_REGION=us-east-1
@@ -111,6 +115,7 @@ BEDROCK_REGION=us-east-1
 
 Notes:
 
+- The four `EMAIL_*` / `CONTACT_TO` values are required for `/api/contact` in production
 - The assistant route switches providers from env only; no code change is needed between local and production
 - For local development, keep `ASSISTANT_PROVIDER=ollama`
 - In Amplify, the app needs an SSR Compute role with permission to call Bedrock runtime for the selected model
