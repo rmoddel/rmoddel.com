@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { assistantName, type AssistantMessage } from "@/lib/assistant";
 
 const starterMessage =
-  "Ask about Reuben's background, work themes, capabilities, or ask me to send him a note.";
+  "Ask about Reuben's background, work themes, capabilities, or ask me to send him an email.";
 
 const quickPrompts = [
   { label: "Background", prompt: "What is Reuben's professional background?" },
   { label: "Capabilities", prompt: "Where is Reuben most useful?" },
-  { label: "Send a note", prompt: "I want to send Reuben a message." }
+  { label: "Send email", prompt: "I want to send Reuben an email." }
 ] as const;
 
 type ContactDraft = {
@@ -38,6 +38,10 @@ function isContactRequest(text: string) {
     "get in touch",
     "send reuben",
     "send him",
+    "send email",
+    "send an email",
+    "send e-mail",
+    "email him",
     "send my info",
     "send my information",
     "send a note",
@@ -57,10 +61,32 @@ function isCancelRequest(text: string) {
   return /^(cancel|stop|never mind|nevermind|abort)$/i.test(text.trim());
 }
 
+const sendConfirmationPhrases = [
+  "send",
+  "submit",
+  "yes",
+  "yes send",
+  "send it",
+  "go ahead",
+  "looks good",
+  "please send",
+  "send email",
+  "send the email",
+  "send an email",
+  "send e-mail",
+  "send the e-mail",
+  "send a message",
+  "send message",
+  "send the message",
+  "send note",
+  "send the note",
+  "email it",
+  "submit email",
+  "submit message"
+] as const;
+
 function isSendConfirmation(text: string) {
-  return /^(send|submit|yes|yes send|send it|go ahead|looks good|please send)$/i.test(
-    text.trim()
-  );
+  return sendConfirmationPhrases.some((phrase) => normalizeText(text) === phrase);
 }
 
 function cleanName(text: string) {
@@ -77,13 +103,13 @@ function hasEnoughContext(text: string) {
 
 function buildContactSummary(draft: Required<ContactDraft>) {
   return [
-    "I have enough to send this to Reuben:",
+    "I have enough to email Reuben:",
     "",
     `- Name: ${draft.name}`,
     `- Email: ${draft.email}`,
     `- Context: ${draft.context}`,
     "",
-    "Type “send” to submit it, or tell me what to change."
+    "Use the Send Email button, type “send email”, or tell me what to change."
   ].join("\n");
 }
 
@@ -166,10 +192,10 @@ export function AiWidget() {
         name: draft.name,
         email: draft.email,
         phone: "",
-        helpType: "Chatbot inquiry",
+        helpType: "Assistant email",
         project: draft.context,
         timeline: "",
-        budget: "Submitted through chatbot"
+        budget: "Submitted through assistant email flow"
       })
     });
 
@@ -196,8 +222,8 @@ export function AiWidget() {
       setContactStep(email ? "name" : "name");
 
       return email
-        ? "I can send a note to Reuben after I collect the basics. What name should I include?"
-        : "I can collect a note here and send it to Reuben. What is your name?";
+        ? "I can send Reuben an email after I collect the basics. What name should I include?"
+        : "I can collect an email here and send it to Reuben. What is your name?";
     }
 
     if (contactStep === "name") {
@@ -281,9 +307,9 @@ export function AiWidget() {
           setContactStep("idle");
           setContactDraft({});
 
-          return "Sent. Reuben will have your note and can reply by email.";
+          return "Sent. Reuben will have your email and can reply directly.";
         } catch {
-          return "I could not send that right now. You can try again by typing “send,” or use the contact form below.";
+          return "I could not send that email right now. You can try again by typing “send email,” or use the contact form below.";
         }
       }
 
@@ -307,11 +333,12 @@ export function AiWidget() {
       return buildContactSummary(completeDraft);
     }
 
-    return "I can collect a note for Reuben. What is your name?";
+    return "I can collect an email for Reuben. What is your name?";
   }
 
   async function submitQuestion(question: string) {
-    const trimmed = question.trim();
+    const blankConfirmSubmit = contactStep === "confirm" && !question.trim();
+    const trimmed = blankConfirmSubmit ? "send email" : question.trim();
 
     if (!trimmed || busy) {
       return;
@@ -380,6 +407,15 @@ export function AiWidget() {
     await submitQuestion(input);
   }
 
+  const canSubmit = Boolean(input.trim()) || contactStep === "confirm";
+  const submitButtonLabel = busy
+    ? contactStep === "idle"
+      ? "Thinking..."
+      : "Sending..."
+    : contactStep === "confirm"
+      ? "Send Email"
+      : "Send";
+
   return (
     <div className={`aiWidget ${isOpen ? "open" : ""}`}>
       {!isOpen ? (
@@ -410,7 +446,7 @@ export function AiWidget() {
             </button>
           </div>
           <p className="aiWidgetNote">
-            Ask about background, work themes, capabilities, or send a note.
+            Ask about background, work themes, capabilities, or send an email.
           </p>
           <div className="aiPromptRow" aria-label="Suggested questions">
             {quickPrompts.map(({ label, prompt }) => (
@@ -436,12 +472,12 @@ export function AiWidget() {
             <textarea
               name="question"
               onChange={(event) => setInput(event.target.value)}
-              placeholder="Ask a question or type 'send Reuben a note'..."
+              placeholder="Ask a question or type 'send Reuben an email'..."
               rows={2}
               value={input}
             />
-            <button className="button" disabled={busy || !input.trim()} type="submit">
-              {busy ? "Thinking..." : "Send"}
+            <button className="button" disabled={busy || !canSubmit} type="submit">
+              {submitButtonLabel}
             </button>
           </form>
         </section>

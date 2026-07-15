@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     });
   } catch {
     return NextResponse.json({
-      reply: buildFallbackReply(latestUserMessage.content),
+      reply: buildFallbackReply(latestUserMessage.content, messages),
       source: "site-knowledge",
       assistant: assistantName
     });

@@ -136,6 +136,23 @@ Professional background:
 - Web Developer roles at Central Analysis Bureau and New York Guest Services.
 - Experience includes product operations, technical leadership, agile delivery, developer support, process improvement, internal systems, analytics, documentation, and cross-functional communication.
 
+Resume details:
+- Reuben is based in Lakewood, NJ.
+- Current resume title: Technical Lead and Operations Manager.
+- Product-focused resume title: Product Operations and Technical Leader.
+- Customer-facing resume title: Customer-Facing Technical Operations Leader.
+- Education: Master of Science, Management Information Systems, New Jersey Institute of Technology, completed January 2011.
+- Professional development: Dale Carnegie - Skills for Success, 2019.
+- Technical and professional skills include project planning and coordination, agile workflow, requirement gathering and documentation, developer support, cross-functional communication, AWS, GCP, OpenAI API integrations, web development across multiple languages, MySQL, Postgres, DynamoDB, Firebase, Jira, Trello, and ClickUp.
+- Leadership and operations skills include operational strategy, process optimization, cross-functional leadership, vendor and stakeholder management, analytics and SEO integration, and team training and development.
+
+Resume role specifics:
+- GPARENCY, Director Product Operations / Technical Lead, November 2021 to June 2025: built and scaled an agile development team, hired and mentored, delivered an MVP marketplace with product, design, and marketing teams, coordinated internal and overseas developers, and created structured processes and analytics for leadership visibility.
+- Eastern Union, Technical Operations Manager, August 2020 to November 2021: oversaw migration from third-party tools to internal systems, led onboarding and training, maintained operational reliability, supported KPIs, and improved workflows across business units.
+- CardCash, Software Analyst, October 2015 to August 2020: developed automated workflows to reduce manual processing, collaborated across departments to improve operational systems, created testing and analytics processes for data integrity, documented improvements, and reduced operational overhead.
+- Central Analysis Bureau, Web Developer, February 2013 to October 2015: built internal tools for staff operational workflows.
+- New York Guest Services, Web Developer, July 2012 to February 2013: developed website features, maintained internal systems, and deepened practical knowledge of the software development lifecycle.
+
 Selected work examples:
 - Community Fundraising Campaign: campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.
 - Dessert Brand Label and Packaging: logo refinement, circular product label, badge layout, packaging copy refinement, and typography cleanup.
