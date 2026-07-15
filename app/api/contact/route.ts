@@ -22,8 +22,21 @@ function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
-function requiredEnv(name: string) {
-  const value = process.env[name];
+type ContactEnvName = "EMAIL_API_URL" | "EMAIL_API_SECRET" | "EMAIL_FROM" | "CONTACT_TO";
+
+function getContactEnv(name: ContactEnvName) {
+  const values: Record<ContactEnvName, string | undefined> = {
+    EMAIL_API_URL: process.env.EMAIL_API_URL,
+    EMAIL_API_SECRET: process.env.EMAIL_API_SECRET,
+    EMAIL_FROM: process.env.EMAIL_FROM,
+    CONTACT_TO: process.env.CONTACT_TO
+  };
+
+  return values[name];
+}
+
+function requiredEnv(name: ContactEnvName) {
+  const value = getContactEnv(name);
 
   if (!value) {
     throw new ContactRouteError(
@@ -40,6 +53,29 @@ function isProduction() {
   return process.env.NODE_ENV === "production";
 }
 
+function getContactConfigSnapshot() {
+  let apiUrl = "missing";
+  const emailApiUrl = process.env.EMAIL_API_URL;
+  const emailApiSecret = process.env.EMAIL_API_SECRET;
+  const emailFrom = process.env.EMAIL_FROM;
+  const contactTo = process.env.CONTACT_TO;
+
+  try {
+    const url = emailApiUrl ? new URL(emailApiUrl) : undefined;
+    apiUrl = url ? `${url.origin}${url.pathname}` : "missing";
+  } catch {
+    apiUrl = "invalid-url";
+  }
+
+  return {
+    apiUrl,
+    hasSecret: Boolean(emailApiSecret),
+    secretLength: emailApiSecret?.length ?? 0,
+    from: emailFrom || "missing",
+    to: contactTo || "missing"
+  };
+}
+
 function contactErrorResponse(error: unknown) {
   const routeError =
     error instanceof ContactRouteError
@@ -53,7 +89,8 @@ function contactErrorResponse(error: unknown) {
   console.error("[contact] send failure", {
     message: routeError.message,
     status: routeError.status,
-    name: routeError.name
+    name: routeError.name,
+    config: getContactConfigSnapshot()
   });
 
   return NextResponse.json(
@@ -145,8 +182,13 @@ export async function POST(request: Request) {
     );
 
     if (!relayResponse.ok || relayData.ok === false) {
+      const relayRequestId =
+        relayResponse.headers.get("apigw-requestid") ??
+        relayResponse.headers.get("x-amzn-requestid") ??
+        "unknown-request-id";
+
       throw new ContactRouteError(
-        `Email relay request failed with ${relayResponse.status}: ${
+        `Email relay request failed with ${relayResponse.status} (${relayRequestId}): ${
           relayData.error || relayData.message || bodyPreview || "Relay did not return ok."
         }`,
         502,
