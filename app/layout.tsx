@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Sora } from "next/font/google";
+import { siteProfile } from "@/lib/site-profile";
 import "./globals.css";
 
 const sora = Sora({
@@ -17,11 +18,11 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rmoddel.com"),
   title: {
-    default: "Reuben Moddel | Product Operations and Technical Leadership",
+    default: "Reuben Moddel | Business Operations and Organizational Leader",
     template: "%s | Reuben Moddel"
   },
   description:
-    "Personal portfolio for Reuben Moddel, focused on product operations, technical leadership, workflow design, clear communication, and AI-enabled execution.",
+    "Personal portfolio for Reuben Moddel, focused on operations leadership, people management, process improvement, stakeholder alignment, and organized execution.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -42,39 +43,42 @@ export const metadata: Metadata = {
   },
   keywords: [
     "Reuben Moddel",
-    "product operations",
-    "technical operations",
-    "technical leadership",
-    "workflow design",
-    "AI-enabled workflows",
+    siteProfile.identity.primaryTitle,
+    "operations leadership",
+    "people leadership",
+    "operations and program management",
+    "process improvement",
+    "stakeholder alignment",
+    "cross-functional execution",
+    "organizational leadership",
+    "business systems",
     "requirements documentation",
-    "developer support",
     "business writing",
     "cross-functional communication",
-    "human-centered execution"
+    "human-centered management"
   ],
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://rmoddel.com",
     siteName: "rmoddel.com",
-    title: "Reuben Moddel | Product Operations and Technical Leadership",
+    title: "Reuben Moddel | Business Operations and Organizational Leader",
     description:
-      "Personal portfolio focused on product operations, technical leadership, workflow design, clear thinking, and practical execution.",
+      "Personal portfolio focused on operations leadership, people management, process improvement, stakeholder alignment, and practical execution.",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Reuben Moddel - Product Operations and Technical Leadership"
+        alt: "Reuben Moddel - Business Operations and Organizational Leader"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reuben Moddel | Product Operations and Technical Leadership",
+    title: "Reuben Moddel | Business Operations and Organizational Leader",
     description:
-      "Personal portfolio focused on product operations, technical leadership, workflow design, clear thinking, and practical execution.",
+      "Personal portfolio focused on operations leadership, people management, process improvement, stakeholder alignment, and practical execution.",
     images: ["/twitter-image"]
   },
   robots: {

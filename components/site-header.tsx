@@ -11,7 +11,13 @@ const navItems = [
   { href: "#contact", label: "Contact" }
 ];
 
-export function SiteHeader() {
+type SiteHeaderProps = {
+  brandLine?: string;
+};
+
+export function SiteHeader({
+  brandLine = "Business operations. People leadership. Organized execution."
+}: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const isHomePage = pathname === "/";
@@ -46,7 +52,7 @@ export function SiteHeader() {
         <span className="brandMark">RM</span>
         <span className="brandText">
           <strong>Reuben Moddel</strong>
-          <span>Product operations. Technical judgment. Human understanding.</span>
+          <span>{brandLine}</span>
         </span>
       </a>
 

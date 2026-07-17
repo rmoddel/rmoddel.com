@@ -1,23 +1,26 @@
+import { siteProfile } from "@/lib/site-profile";
+
 export const resumeIdentity = {
-  name: "Reuben Moddel",
-  title: "Technical Lead and Operations Manager",
-  location: "Lakewood, NJ",
-  phone: "732-552-4475",
+  name: siteProfile.identity.name,
+  title: siteProfile.identity.resumeTitle,
+  location: siteProfile.identity.location,
+  phone: siteProfile.identity.phone,
   phoneHref: "tel:7325524475",
-  email: "rmoddel@gmail.com",
-  emailHref: "mailto:rmoddel@gmail.com"
+  email: siteProfile.identity.email,
+  emailHref: `mailto:${siteProfile.identity.email}`
 } as const;
 
 export const resumeSummary = [
-  "Practical, reliable Technical Lead and Operations Manager with a strong technical foundation and a proven record in managing teams, systems, and processes.",
-  "Began as a web developer, expanded into software analysis and operations, and progressed into technical leadership roles overseeing cross-functional work. Known for supporting developers, translating business needs into actionable tasks, improving workflows, and keeping projects moving."
+  `${siteProfile.identity.resumeTitle} with ${siteProfile.positioning.credential.toLowerCase()}.`,
+  siteProfile.positioning.summary,
+  siteProfile.experience.body
 ] as const;
 
 export const technicalSkills = [
   "Project planning and coordination",
   "Agile workflow: standups, sprints, and ticketing",
   "Requirement gathering and documentation",
-  "Developer support and task clarification",
+  "Stakeholder reporting and task clarification",
   "Cross-functional communication",
   "Cloud platforms: AWS and GCP",
   "OpenAI API integrations",
@@ -27,11 +30,12 @@ export const technicalSkills = [
 ] as const;
 
 export const leadershipSkills = [
+  "People leadership and cross-functional alignment",
+  "Hiring, mentoring, onboarding, and training",
   "Operational strategy and process optimization",
-  "Cross-functional leadership",
   "Vendor and stakeholder management",
   "Analytics and SEO integration",
-  "Team training and development"
+  "Program execution and blocker removal"
 ] as const;
 
 export const education = {

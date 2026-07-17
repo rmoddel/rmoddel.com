@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { assistantName, type AssistantMessage } from "@/lib/assistant";
+import { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
 
 const starterMessage =
   "Ask about Reuben's background, work themes, capabilities, or ask me to send him an email.";

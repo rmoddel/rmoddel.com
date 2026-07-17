@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "28px", fontWeight: 700 }}>Reuben Moddel</div>
             <div style={{ fontSize: "20px", color: "#5c5550" }}>
-              Product Operations and Technical Leadership
+              Business Operations and Organizational Leader
             </div>
           </div>
         </div>
@@ -62,14 +62,14 @@ export default function OpenGraphImage() {
               color: "#82351d"
             }}
           >
-            Human understanding. Technical judgment. Practical execution.
+            People leadership. Process improvement. Organized execution.
           </div>
           <div style={{ fontSize: "74px", lineHeight: 0.96 }}>
-            I Help People Make Sense of Messy Work
+            Operations and People Leader
           </div>
           <div style={{ fontSize: "28px", color: "#5c5550", lineHeight: 1.35 }}>
-            Product operations, workflow design, clear communication, and AI-enabled work
-            grounded in real human context.
+            Aligning people, priorities, and processes so unclear objectives become
+            organized execution.
           </div>
         </div>
       </div>

@@ -11,7 +11,8 @@ Responsive Next.js personal portfolio site for Reuben Moddel.
 
 ## Features
 
-- One-page portfolio/about site aligned to product operations, technical leadership, workflow thinking, and human-centered execution
+- One-page portfolio/about site aligned to business operations, people leadership, process improvement, stakeholder alignment, and organized execution
+- Master narrative content in `content/site-profile.md`, consumed by homepage content, resume positioning, metadata, and assistant knowledge
 - Responsive layout for desktop and mobile
 - Contact form with client-side submission state
 - Server-side `/api/contact` route
@@ -33,6 +34,8 @@ components/
   contact-form.tsx       Interactive contact form
 lib/
   assistant.ts           Assistant prompt + fallback logic
+content/
+  site-profile.md        Master site narrative and structured section copy
   contact-email.ts       Contact email subject/body generation
 ```
 

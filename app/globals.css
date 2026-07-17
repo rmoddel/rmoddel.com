@@ -340,7 +340,7 @@ h3 {
 }
 
 h1 {
-  max-width: 9ch;
+  max-width: 12ch;
   margin-top: 18px;
   font-size: clamp(2.4rem, 5.5vw, 4.1rem);
   font-weight: 700;
@@ -656,6 +656,14 @@ h3 {
   display: inline-flex;
   margin-bottom: 18px;
   color: var(--accent-4);
+}
+
+.stepCard p {
+  margin: 0;
+}
+
+.experienceDetailList {
+  margin-top: 24px;
 }
 
 .faqCard h3 {

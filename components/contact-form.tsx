@@ -86,7 +86,7 @@ export function ContactForm() {
           <option>Recruiting conversation</option>
           <option>Consulting or service inquiry</option>
           <option>Collaboration</option>
-          <option>AI or workflow question</option>
+          <option>Operations or process question</option>
           <option>Other</option>
         </select>
       </label>
@@ -95,7 +95,7 @@ export function ContactForm() {
         <textarea
           name="project"
           rows={5}
-          placeholder="Role, project, workflow, team need, or reason for reaching out"
+          placeholder="Role, project, operational need, team context, or reason for reaching out"
           required
         />
       </label>

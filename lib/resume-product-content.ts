@@ -2,15 +2,15 @@ import type { ResumeJob } from "@/lib/resume-pdf";
 
 export const productResumeIdentity = {
   name: "Reuben Moddel",
-  title: "Product Operations and Technical Leader",
+  title: "Business Operations and Product Execution Leader",
   location: "Lakewood, NJ",
   phone: "732-552-4475",
   email: "rmoddel@gmail.com"
 } as const;
 
 export const productResumeSummary = [
-  "Product operations and technical leader with a background in software, workflow design, analytics, and cross-functional execution. Known for turning ambiguous business goals into clear priorities, operating rhythms, and measurable output.",
-  "Built a career from web development into software analysis, operations, and leadership roles, with repeated responsibility for aligning product, design, engineering, and business partners around practical delivery."
+  "Business operations and product execution leader with a background in software, workflow design, analytics, people leadership, and cross-functional execution. Known for turning ambiguous business goals into clear priorities, operating rhythms, and measurable output.",
+  "Built a career from web development into software analysis, operations, and leadership roles, with repeated responsibility for aligning product, design, engineering, operations, and business partners around practical delivery."
 ] as const;
 
 export const productSkillSections = [
@@ -28,10 +28,10 @@ export const productSkillSections = [
     heading: "Operations & Team Leadership",
     items: [
       "Agile workflow and launch coordination",
-      "Developer support and execution clarity",
+      "Stakeholder alignment and execution clarity",
       "Operational strategy and process optimization",
       "Team training and development",
-      "AI-enabled workflow design and integrations"
+      "Automation-enabled workflow design and integrations"
     ]
   }
 ] as const;

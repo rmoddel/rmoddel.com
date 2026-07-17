@@ -8,17 +8,23 @@ const footerLinks = [
   { href: "/privacy", label: "Privacy" }
 ];
 
-export function SiteFooter() {
+type SiteFooterProps = {
+  name?: string;
+  title?: string;
+  summary?: string;
+};
+
+export function SiteFooter({
+  name = "Reuben Moddel",
+  title = "Business Operations and Organizational Leader",
+  summary = "I help organizations turn unclear objectives into organized execution by aligning people, priorities, and processes."
+}: SiteFooterProps) {
   return (
     <footer className="siteFooter">
       <div className="footerLead">
-        <p className="eyebrow">Reuben Moddel</p>
-        <h2>Clear thinking, human context, and practical execution.</h2>
-        <p>
-          Personal portfolio for product operations, technical leadership,
-          workflow design, clear communication, and AI-enabled work grounded in
-          human understanding.
-        </p>
+        <p className="eyebrow">{name}</p>
+        <h2>People, priorities, process, and execution.</h2>
+        <p>{summary}</p>
       </div>
       <div className="footerMeta">
         <div>
@@ -35,7 +41,7 @@ export function SiteFooter() {
           <p className="footerLabel">For Hiring Teams</p>
           <p className="footerText">
             The resume has the formal role history; the homepage shows the
-            throughline in how I think and work.
+            throughline in how I lead and execute.
           </p>
           <a className="button" href="/resume">
             View Resume
@@ -45,7 +51,7 @@ export function SiteFooter() {
           <p className="footerLabel">For Conversations</p>
           <p className="footerText">
             Reach out about a role, collaboration, or service inquiry where
-            clear thinking and practical execution would help.
+            operations leadership and practical execution would help.
           </p>
           <a className="button" href="/#contact">
             Contact Me
@@ -53,9 +59,9 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="footerBar">
-        <p>Reuben Moddel</p>
-        <p>Product Operations and Technical Leadership</p>
-        <p>Human understanding. Clear thinking. Practical results.</p>
+        <p>{name}</p>
+        <p>{title}</p>
+        <p>Human understanding. Clear expectations. Practical accountability.</p>
       </div>
     </footer>
   );

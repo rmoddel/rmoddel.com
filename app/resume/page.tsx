@@ -10,18 +10,19 @@ import {
   resumeSummary,
   technicalSkills
 } from "@/lib/resume-content";
+import { siteProfile } from "@/lib/site-profile";
 
 export const metadata: Metadata = {
-  title: "Resume | Product Operations and Technical Leadership",
+  title: "Resume | Business Operations and Organizational Leadership",
   description:
-    "Resume for Reuben Moddel, a product operations and technical leader with experience across software, operations, workflow design, analytics, and cross-functional execution.",
+    "Resume for Reuben Moddel, a business operations and organizational leader with experience across people leadership, process improvement, business systems, and cross-functional execution.",
   alternates: {
     canonical: "/resume"
   },
   openGraph: {
     title: "Reuben Moddel Resume",
     description:
-      "Product operations and technical leadership resume for Reuben Moddel.",
+      "Business operations and organizational leadership resume for Reuben Moddel.",
     url: "/resume",
     siteName: "rmoddel.com",
     locale: "en_US",
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reuben Moddel Resume",
     description:
-      "Product operations and technical leadership resume for Reuben Moddel.",
+      "Business operations and organizational leadership resume for Reuben Moddel.",
     images: ["/twitter-image"]
   }
 };
@@ -49,13 +50,13 @@ export const metadata: Metadata = {
 export default function ResumePage() {
   return (
     <main className="pageShell">
-      <SiteHeader />
+      <SiteHeader brandLine={siteProfile.identity.primaryTitle} />
 
       <section className="heroSection resumeHero">
         <div className="heroCopy">
           <div className="heroRibbon">
             <p className="eyebrow">Resume</p>
-            <span className="heroSpark">Technical leadership and operations</span>
+            <span className="heroSpark">{siteProfile.positioning.credential}</span>
           </div>
           <h1>{resumeIdentity.name}</h1>
           <p className="heroText resumeHeadline">{resumeIdentity.title}</p>
@@ -79,16 +80,16 @@ export default function ResumePage() {
           <div>
             <div className="heroPanelBadge">Profile</div>
             <p className="panelResult">
-              Practical, reliable technical leader with a strong foundation in software,
-              operations, and cross-functional execution.
+              Practical operations and organizational leader with a strong foundation
+              in people leadership, business systems, process improvement, and execution.
             </p>
           </div>
           <div className="heroOutcomeList">
             <span>Team leadership</span>
-            <span>Developer support</span>
+            <span>Stakeholder alignment</span>
             <span>Process improvement</span>
             <span>Operations management</span>
-            <span>AI integration</span>
+            <span>Automation fluency</span>
           </div>
         </aside>
       </section>
@@ -96,7 +97,7 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Summary</p>
-          <h2>Technical judgment with operational follow-through.</h2>
+          <h2>Operations leadership with practical follow-through.</h2>
         </div>
         <div className="twoColumn">
           {resumeSummary.map((paragraph) => (
@@ -108,11 +109,11 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Core Skills</p>
-          <h2>Technical and professional range built around execution.</h2>
+          <h2>Management, operations, and systems range built around execution.</h2>
         </div>
         <div className="grid twoGrid">
           <article className="contentCard serviceCard">
-            <p className="microLabel">Technical & Professional Skills</p>
+            <p className="microLabel">Operations, Systems & Execution</p>
             <ul className="resumeList">
               {technicalSkills.map((skill) => (
                 <li key={skill}>{skill}</li>
@@ -155,7 +156,7 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Employment History</p>
-          <h2>Leadership, operations, and software experience across multiple roles.</h2>
+          <h2>A deliberate progression into operations and organizational leadership.</h2>
         </div>
         <div className="grid">
           {employmentHistory.map((role, index) => (
@@ -180,7 +181,11 @@ export default function ResumePage() {
         </div>
       </section>
 
-      <SiteFooter />
+      <SiteFooter
+        name={siteProfile.identity.name}
+        summary={siteProfile.positioning.summary}
+        title={siteProfile.identity.primaryTitle}
+      />
     </main>
   );
 }

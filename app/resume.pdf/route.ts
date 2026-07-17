@@ -19,7 +19,7 @@ export function GET() {
     summary: [...resumeSummary],
     skillSections: [
       {
-        heading: "Technical & Professional",
+        heading: "Operations, Systems & Execution",
         items: [...technicalSkills]
       },
       {

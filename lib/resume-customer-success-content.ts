@@ -2,14 +2,14 @@ import type { ResumeJob } from "@/lib/resume-pdf";
 
 export const customerSuccessResumeIdentity = {
   name: "Reuben Moddel",
-  title: "Customer-Facing Technical Operations Leader",
+  title: "Customer-Facing Operations and Process Improvement Leader",
   location: "Lakewood, NJ",
   phone: "732-552-4475",
   email: "rmoddel@gmail.com"
 } as const;
 
 export const customerSuccessResumeSummary = [
-  "Customer-facing technical operations leader with 13+ years of experience driving complex software and operational initiatives from problem definition through execution.",
+  "Customer-facing operations and process improvement leader with 13+ years of experience driving complex business systems and operational initiatives from problem definition through execution.",
   "Partners with executives, stakeholders, product, engineering, and operations teams to resolve issues, improve processes, deliver reporting, and translate business needs into clear priorities.",
   "Known for building trust quickly, staying organized in ambiguous environments, and helping teams deliver practical outcomes that support customers and end users."
 ] as const;
@@ -22,7 +22,7 @@ export const customerSuccessSkillSections = [
       "Stakeholder communication",
       "Cross-functional collaboration",
       "Issue resolution",
-      "Technical translation"
+      "Business systems fluency"
     ]
   },
   {
@@ -34,7 +34,7 @@ export const customerSuccessSkillSections = [
       "Product feedback",
       "Data/reporting literacy",
       "Workflow automation",
-      "AI-enabled operations"
+      "Automation-enabled operations"
     ]
   }
 ] as const;

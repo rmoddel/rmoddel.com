@@ -1,116 +1,24 @@
-export const capabilities = [
-  {
-    title: "Clarifying Ambiguous Work",
-    body:
-      "I help turn scattered goals, competing inputs, and half-formed ideas into clear priorities, next steps, and usable direction.",
-    items: ["Requirements", "Priorities", "Decision framing", "Plain-English structure"]
-  },
-  {
-    title: "Translating Between People and Systems",
-    body:
-      "My strongest work sits between business needs, human context, and technical execution, especially when different teams need the same thing explained differently.",
-    items: ["Stakeholder alignment", "Developer support", "Business translation", "Documentation"]
-  },
-  {
-    title: "Building Practical Workflows",
-    body:
-      "I look for the real operating problem first, then shape workflows, internal tools, automation ideas, and team habits around what people actually need to do.",
-    items: ["Process design", "Internal tools", "Automation ideas", "Team operating rhythm"]
-  },
-  {
-    title: "Using AI With Human Judgment",
-    body:
-      "I use AI to move faster, explore options, and sharpen execution, but the real value is knowing what is useful, appropriate, and humanly coherent.",
-    items: ["AI workflows", "Quality control", "Human context", "Better questions"]
-  }
-] as const;
+import { siteProfile, siteProfileMarkdown } from "@/lib/site-profile";
 
-export const projects = [
-  {
-    type: "Community Fundraising Campaign",
-    title: "Making a community effort easier to understand",
-    summary:
-      "A community campaign needed messaging and materials that felt credible, organized, and reusable across conversations, events, and donor touchpoints.",
-    deliverables: [
-      "Campaign messaging",
-      "Pledge card concept",
-      "Poster direction",
-      "Parlor meeting signage",
-      "Reusable event materials"
-    ],
-    result:
-      "Gave the effort a clearer story and practical materials people could actually use."
-  },
-  {
-    type: "Dessert Brand Label & Packaging",
-    title: "Turning a small product into something easier to trust",
-    summary:
-      "A small food brand needed its packaging to feel cleaner, more intentional, and more ready for real retail presentation.",
-    deliverables: [
-      "Logo refinement",
-      "Circular product label",
-      "Badge layout",
-      "Packaging copy refinement",
-      "Typography cleanup"
-    ],
-    result: "Made the product feel more credible without losing its small-brand warmth."
-  },
-  {
-    type: "Journal Ads & Event Materials",
-    title: "Fast support when the message needed to land",
-    summary:
-      "Community organizations needed polished materials quickly, without adding unnecessary process or agency overhead.",
-    deliverables: [
-      "Ad copy",
-      "Layout direction",
-      "Headline concepts",
-      "Typography cleanup",
-      "WhatsApp-ready versions"
-    ],
-    result:
-      "Produced clear, polished materials fast enough to be useful in the real world."
-  },
-  {
-    type: "Business & Legal-Style Writing",
-    title: "Plain-English communication for sensitive situations",
-    summary:
-      "People needed written communication that felt formal and clear without becoming robotic, bloated, or over-lawyered.",
-    deliverables: [
-      "Formal letters",
-      "Dispute language",
-      "Contract simplification",
-      "Business communication",
-      "Negotiation wording"
-    ],
-    result:
-      "Helped people communicate with more confidence, clarity, and emotional control."
-  }
-] as const;
+export const capabilities = siteProfile.capabilities;
 
-export const workingPrinciples = [
-  {
-    title: "Start with the human reality",
-    body:
-      "Before tools, tasks, or outputs, I try to understand the people, pressure, context, incentives, and actual problem."
-  },
-  {
-    title: "Make the thinking visible",
-    body:
-      "Good work gets easier when assumptions, tradeoffs, next steps, and decision logic are written clearly enough for other people to act on."
-  },
-  {
-    title: "Turn insight into movement",
-    body:
-      "The end product should help someone decide, build, communicate, improve a workflow, or move a team forward."
-  }
-] as const;
+export const projects = siteProfile.caseStudies;
 
-export const outcomePoints = [
-  "Clearer thinking",
-  "Better questions",
-  "Practical structure",
-  "Work people can act on"
-] as const;
+export const workingPrinciples = siteProfile.howIWork.map((body, index) => {
+  const titles = [
+    "Understand the objective",
+    "Identify the constraint",
+    "Structure the work",
+    "Support execution"
+  ];
+
+  return {
+    title: titles[index] ?? `Step ${index + 1}`,
+    body
+  };
+});
+
+export const outcomePoints = siteProfile.about.outcomes;
 
 export const technicalBackground = [
   {
@@ -132,58 +40,13 @@ export const technicalBackground = [
 ] as const;
 
 export const websiteKnowledge = `
-Reuben Moddel's site is a personal portfolio and about-me site, not a traditional company site.
-Core message: Reuben helps people make sense of messy work by combining technical judgment, operational experience, clear writing, and a strong foundation of human understanding.
-Primary audiences: prospective employers, hiring teams, collaborators, and people who may want to reach out about a project or service inquiry.
+Source of truth: content/site-profile.md
 
-How the work is framed:
-- Reuben is strongest where the work is ambiguous, cross-functional, and hard to explain.
-- He helps clarify goals, translate between people and systems, improve workflows, support developers, document requirements, and move work toward practical execution.
-- AI is used as an amplifier, not a replacement for judgment or human understanding.
-- Human judgment handles final direction, context, tone, business logic, quality control, and what is actually useful.
+${siteProfileMarkdown}
 
-Work themes:
-- Clarifying ambiguous work: requirements, priorities, decision framing, and plain-English structure.
-- Translating between people and systems: stakeholder alignment, developer support, business translation, and documentation.
-- Building practical workflows: process design, internal tools, automation ideas, and team operating rhythm.
-- Using AI with human judgment: AI workflows, quality control, human context, and better questions.
-
-Professional background:
-- Director, Product Operations / Technical Lead at GPARENCY.
-- Technical Operations Manager at Eastern Union.
-- Software Analyst at CardCash.
-- Web Developer roles at Central Analysis Bureau and New York Guest Services.
-- Experience includes product operations, technical leadership, agile delivery, developer support, process improvement, internal systems, analytics, documentation, and cross-functional communication.
-
-Resume details:
-- Reuben is based in Lakewood, NJ.
-- Current resume title: Technical Lead and Operations Manager.
-- Product-focused resume title: Product Operations and Technical Leader.
-- Customer-facing resume title: Customer-Facing Technical Operations Leader.
+Additional public resume facts:
 - Education: Master of Science, Management Information Systems, New Jersey Institute of Technology, completed January 2011.
 - Professional development: Dale Carnegie - Skills for Success, 2019.
-- Technical and professional skills include project planning and coordination, agile workflow, requirement gathering and documentation, developer support, cross-functional communication, AWS, GCP, OpenAI API integrations, web development across multiple languages, MySQL, Postgres, DynamoDB, Firebase, Jira, Trello, and ClickUp.
-- Additional technical background includes PHP, JavaScript, ES6, React, Next.js, NestJS, ColdFusion, SQL, MySQL, Postgres, SQL Server, Python, Django, and FastAPI.
-- Leadership and operations skills include operational strategy, process optimization, cross-functional leadership, vendor and stakeholder management, analytics and SEO integration, and team training and development.
-
-Resume role specifics:
-- GPARENCY, Director Product Operations / Technical Lead, November 2021 to June 2025: built and scaled an agile development team, hired and mentored, delivered an MVP marketplace with product, design, and marketing teams, coordinated internal and overseas developers, and created structured processes and analytics for leadership visibility.
-- Eastern Union, Technical Operations Manager, August 2020 to November 2021: oversaw migration from third-party tools to internal systems, led onboarding and training, maintained operational reliability, supported KPIs, and improved workflows across business units.
-- CardCash, Software Analyst, October 2015 to August 2020: developed automated workflows to reduce manual processing, collaborated across departments to improve operational systems, created testing and analytics processes for data integrity, documented improvements, and reduced operational overhead.
-- Central Analysis Bureau, Web Developer, February 2013 to October 2015: built internal tools for staff operational workflows.
-- New York Guest Services, Web Developer, July 2012 to February 2013: developed website features, maintained internal systems, and deepened practical knowledge of the software development lifecycle.
-
-Selected work examples:
-- Community Fundraising Campaign: campaign messaging, pledge card concept, poster direction, parlor meeting signage, and reusable event materials.
-- Dessert Brand Label and Packaging: logo refinement, circular product label, badge layout, packaging copy refinement, and typography cleanup.
-- Journal Ads and Event Materials: ad copy, layout direction, headline concepts, typography cleanup, and WhatsApp-ready versions.
-- Business and Legal-Style Writing: formal letters, dispute language, contract simplification, business communication, and negotiation wording.
-
-About:
-- Reuben is presented as a practical technical and operations leader who helps people think clearly, explain work plainly, and turn ambiguity into usable direction.
-- The blend includes human understanding, business context, writing, technical literacy, software thinking, AI tools, plain-English communication, and practical execution.
-
-Contact:
-- Hiring teams, collaborators, and people with relevant projects can reach out through the contact form.
-- For pricing or service scope questions, the site does not publish package pricing. Reuben invites people to contact him with context.
+- Current public resume roles include GPARENCY, Eastern Union, CardCash, Central Analysis Bureau, and New York Guest Services.
+- Technical fluency includes PHP, JavaScript, ES6, ColdFusion, SQL, Python, React, Next.js, NestJS, Django, FastAPI, MySQL, Postgres, SQL Server, AWS, GCP, OpenAI API integrations, DynamoDB, Firebase, Jira, Trello, and ClickUp.
 `.trim();

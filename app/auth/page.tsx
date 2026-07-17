@@ -401,7 +401,7 @@ export default function GmailTrashPurgePage() {
 
         <div className="contentCard">
           <p>
-            This is the tailored product operations and technical leadership resume.
+            This is the tailored business operations and product execution resume.
             It stays behind this protected page instead of being shown publicly.
           </p>
           <a className="button buttonGhost smallButton resumeDownloadButton" href="/resume-product.pdf">
@@ -418,8 +418,8 @@ export default function GmailTrashPurgePage() {
 
         <div className="contentCard">
           <p>
-            This version is tailored for customer success, healthcare workflow, and technical
-            operations roles while staying grounded in the experience shown in the current resume.
+            This version is tailored for customer success, healthcare workflow, and operations
+            leadership roles while staying grounded in the experience shown in the current resume.
           </p>
           <a
             className="button buttonGhost smallButton resumeDownloadButton"
