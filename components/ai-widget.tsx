@@ -412,6 +412,15 @@ export function AiWidget() {
     await submitQuestion(input);
   }
 
+  function handleQuestionKeyDown(event: React.KeyboardEvent<HTMLTextAreaElement>) {
+    if (event.key !== "Enter" || event.shiftKey || busy || !canSubmit) {
+      return;
+    }
+
+    event.preventDefault();
+    void submitQuestion(input);
+  }
+
   const canSubmit = Boolean(input.trim()) || contactStep === "confirm";
   const submitButtonLabel = busy
     ? contactStep === "idle"
@@ -477,6 +486,7 @@ export function AiWidget() {
             <textarea
               name="question"
               onChange={(event) => setInput(event.target.value)}
+              onKeyDown={handleQuestionKeyDown}
               placeholder="Ask a question or type 'send Reuben an email'..."
               rows={2}
               value={input}
