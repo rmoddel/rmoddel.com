@@ -223,6 +223,7 @@ BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
 Important:
 
 - The contact form and assistant email flow both use `/api/contact`, so production needs the four contact email variables as SSR environment variables.
+- Contact email variables are captured during `next build`; redeploy the branch after changing them in Amplify.
 - Do not create your own env var with an `AWS_` prefix in Amplify. Amplify reserves that prefix.
 - This is why this project uses `BEDROCK_REGION` instead of telling you to define `AWS_REGION`.
 

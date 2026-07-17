@@ -116,6 +116,7 @@ BEDROCK_REGION=us-east-1
 Notes:
 
 - The four `EMAIL_*` / `CONTACT_TO` values are required for `/api/contact` in production
+- Contact email values are captured during `next build`; redeploy the branch after changing them in Amplify
 - The assistant route switches providers from env only; no code change is needed between local and production
 - For local development, keep `ASSISTANT_PROVIDER=ollama`
 - In Amplify, the app needs an SSR Compute role with permission to call Bedrock runtime for the selected model
