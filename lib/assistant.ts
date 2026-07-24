@@ -28,6 +28,8 @@ export const assistantSystemPrompt = `
 You are ${assistantName}, a plainspoken ${assistantTitle.toLowerCase()} for rmoddel.com.
 Your job is to answer questions about Reuben Moddel's background, positioning, capabilities, work themes, resume, project examples, and contact path.
 Use the website knowledge below as the source of truth.
+If someone refers to Reuben as Reuvain, treat that as the same person.
+Answer naturally about Reuben. Avoid meta phrasing about how the site presents him unless you are explaining what public information is or is not available.
 Do not invent credentials, timelines, deliverables, pricing, client names, or portfolio claims.
 If a question is partially supported, answer the supported part first and name the boundary clearly.
 Do not give a generic topic list unless the user asks what you can answer.
@@ -59,6 +61,7 @@ function normalizeForMatch(text: string) {
   return text
     .toLowerCase()
     .replace(/[’']/g, "'")
+    .replace(/\breuvain\b/g, "reuben")
     .replace(/&/g, " and ")
     .replace(/[^a-z0-9+#.\s/-]/g, " ")
     .replace(/\s+/g, " ")
@@ -205,7 +208,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "Reuben is presented as a business operations and organizational leader who turns unclear objectives into organized execution.",
+        "Reuben is a business operations and organizational leader who turns unclear objectives into organized execution.",
         "",
         resumeSummary.join(" "),
         "",
@@ -317,7 +320,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
             .map((role) => `${role.company} (${role.dates}): ${role.points.join(" ")}`)
         ),
         "",
-        "The site frames that technical base as a management advantage: it helps him navigate complex systems, evaluate solutions, use automation, and coordinate with technical teams."
+        "That technical base is part of his management advantage: it helps him navigate complex systems, evaluate solutions, use automation, and coordinate with technical teams."
       ].join("\n")
   },
   {
@@ -343,7 +346,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "The site frames Reuben's usefulness in three commercially recognizable pillars:",
+        "Reuben tends to be most useful in three areas:",
         "",
         listCapabilities(),
         "",
@@ -365,7 +368,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "For ambiguous work, the site emphasizes turning scattered goals, competing inputs, and half-formed ideas into usable direction.",
+        "For ambiguous work, Reuben focuses on turning scattered goals, competing inputs, and half-formed ideas into usable direction.",
         "",
         "That usually means requirements, priorities, decision framing, and plain-English structure. The goal is not just a document; it is helping someone decide, build, explain, or move."
       ].join("\n")
@@ -386,7 +389,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
       [
         "A recurring theme is aligning people, priorities, and processes.",
         "",
-        "The site says Reuben is strongest when business goals, human context, operating constraints, and technical realities need to line up. That includes stakeholder alignment, clearer expectations, requirements structure, documentation, and better handoffs."
+        "He is strongest when business goals, human context, operating constraints, and technical realities need to line up. That includes stakeholder alignment, clearer expectations, requirements structure, documentation, and better handoffs."
       ].join("\n")
   },
   {
@@ -425,7 +428,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "The site presents AI and automation as management accelerators, not the main story.",
+        "For Reuben, AI and automation are management accelerators, not the main story.",
         "",
         "Reuben uses AI to speed up planning, communication, analysis, documentation, and repetitive work so more attention can go to coaching, judgment, relationships, and decisions that require human context.",
         "",
@@ -469,7 +472,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     priority: -4,
     answer: () =>
       [
-        "The site lists selected work themes rather than deep case studies:",
+        "The public profile includes selected work themes rather than deep case studies:",
         "",
         listProjects()
       ].join("\n")
@@ -566,7 +569,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "The site keeps the stack low-key, but it does list this technical background:",
+        "His technical background is part of the picture, but it is not the main positioning:",
         "",
         listTechnicalBackground(),
         "",
@@ -674,7 +677,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
       "client"
     ],
     answer: () =>
-      "The site is mainly for prospective employers, hiring teams, collaborators, and people with relevant projects or service inquiries. The strongest fit is work involving operations leadership, people management, program execution, process improvement, stakeholder alignment, business systems, and cross-functional clarity."
+      "This profile is mainly for prospective employers, hiring teams, collaborators, and people with relevant projects or service inquiries. The strongest fit is work involving operations leadership, people management, program execution, process improvement, stakeholder alignment, business systems, and cross-functional clarity."
   },
   {
     triggers: [
@@ -688,7 +691,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "The site's strongest hiring argument is the blend: operations leadership, people-centered management, process improvement, business systems fluency, clear communication, and practical automation use.",
+        "Reuben's strongest hiring argument is the blend: operations leadership, people-centered management, process improvement, business systems fluency, clear communication, and practical automation use.",
         "",
         "That matters most when the work is ambiguous, cross-functional, and hard to execute. Reuben's value is helping teams turn that kind of mess into clear priorities, realistic expectations, better workflows, and forward movement."
       ].join("\n")
