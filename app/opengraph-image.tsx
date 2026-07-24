@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "28px", fontWeight: 700 }}>Reuben Moddel</div>
             <div style={{ fontSize: "20px", color: "#5c5550" }}>
-              Business Operations and Organizational Leader
+              Business Operations and Technical Solutions Leader
             </div>
           </div>
         </div>
@@ -62,14 +62,14 @@ export default function OpenGraphImage() {
               color: "#82351d"
             }}
           >
-            People leadership. Process improvement. Organized execution.
+            Clear communication. Technical judgment. AI-enabled execution.
           </div>
           <div style={{ fontSize: "74px", lineHeight: 0.96 }}>
-            Operations and People Leader
+            Operations, Technology, and People Leader
           </div>
           <div style={{ fontSize: "28px", color: "#5c5550", lineHeight: 1.35 }}>
-            Aligning people, priorities, and processes so unclear objectives become
-            organized execution.
+            Understanding the real issue first, then applying people, process, systems,
+            automation, or advanced AI when they fit.
           </div>
         </div>
       </div>

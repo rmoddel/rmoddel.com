@@ -35,7 +35,15 @@ export const technicalBackground = [
   },
   {
     area: "Databases",
-    items: ["MySQL", "Postgres", "SQL Server"]
+    items: ["MySQL", "Postgres", "SQL Server", "DynamoDB", "Firebase"]
+  },
+  {
+    area: "Cloud and AI",
+    items: ["AWS", "GCP", "OpenAI API integrations", "AI-enabled automation"]
+  },
+  {
+    area: "Delivery tools",
+    items: ["Jira", "Trello", "ClickUp"]
   }
 ] as const;
 

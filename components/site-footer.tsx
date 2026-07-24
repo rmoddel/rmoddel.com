@@ -16,14 +16,14 @@ type SiteFooterProps = {
 
 export function SiteFooter({
   name = "Reuben Moddel",
-  title = "Business Operations and Organizational Leader",
-  summary = "I help organizations turn unclear objectives into organized execution by aligning people, priorities, and processes."
+  title = "Business Operations and Technical Solutions Leader",
+  summary = "I help organizations understand the real issue and turn unclear objectives into organized execution using people, process, technology, and advanced AI when it fits."
 }: SiteFooterProps) {
   return (
     <footer className="siteFooter">
       <div className="footerLead">
         <p className="eyebrow">{name}</p>
-        <h2>People, priorities, process, and execution.</h2>
+        <h2>People, process, technology, and execution.</h2>
         <p>{summary}</p>
       </div>
       <div className="footerMeta">
@@ -51,7 +51,8 @@ export function SiteFooter({
           <p className="footerLabel">For Conversations</p>
           <p className="footerText">
             Reach out about a role, collaboration, or service inquiry where
-            operations leadership and practical execution would help.
+            operations leadership, technical judgment, and practical execution
+            would help.
           </p>
           <a className="button" href="/#contact">
             Contact Me
@@ -61,7 +62,7 @@ export function SiteFooter({
       <div className="footerBar">
         <p>{name}</p>
         <p>{title}</p>
-        <p>Human understanding. Clear expectations. Practical accountability.</p>
+        <p>Clear communication. Technical judgment. Practical accountability.</p>
       </div>
     </footer>
   );

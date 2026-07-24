@@ -184,9 +184,9 @@ const fallbackTopics: readonly FallbackTopic[] = [
         bulletList([
           "Reuben's background and resume",
           "Operations, people leadership, and cross-functional execution experience",
-          "Process improvement, stakeholder alignment, and business systems work",
-          "Languages, frameworks, and database background",
-          "Automation and AI as operational tools",
+          "Clear communication, process improvement, stakeholder alignment, and business systems work",
+          "Technical problem-solving, software, cloud, database, and systems background",
+          "Advanced AI, OpenAI API integrations, and automation used with judgment",
           "Selected work examples and contact path"
         ])
       ].join("\n")
@@ -208,11 +208,11 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "Reuben is a business operations and organizational leader who turns unclear objectives into organized execution.",
+        "Reuben is a strong communicator and business operations leader with deep technical fluency and practical AI judgment.",
         "",
         resumeSummary.join(" "),
         "",
-        "The short arc: hands-on web development, software and business systems analysis, technical operations, product operations, people leadership, and organizational execution."
+        "The short arc: hands-on web development, software and business systems analysis, technical operations, product operations, AI-enabled workflow thinking, people leadership, and organizational execution."
       ].join("\n")
   },
   {
@@ -234,7 +234,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
         "",
         listRoleHistory(),
         "",
-        "The throughline is moving from hands-on web development into software and business systems analysis, then into operations, people leadership, and organizational execution."
+        "The throughline is moving from hands-on web development into software and business systems analysis, then into technical operations, product operations, AI-enabled workflow thinking, people leadership, and organizational execution."
       ].join("\n")
   },
   {
@@ -312,7 +312,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "Reuben started in web developer roles before moving into software analysis and operations leadership.",
+        "Reuben started in web developer roles before moving into software analysis, technical operations, product operations, and operations leadership.",
         "",
         bulletList(
           employmentHistory
@@ -320,7 +320,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
             .map((role) => `${role.company} (${role.dates}): ${role.points.join(" ")}`)
         ),
         "",
-        "That technical base is part of his management advantage: it helps him navigate complex systems, evaluate solutions, use automation, and coordinate with technical teams."
+        "That technical base is a core part of his advantage: it helps him understand the real issue, evaluate systems and AI options, use automation where it fits, and communicate clearly with technical and non-technical teams."
       ].join("\n")
   },
   {
@@ -387,7 +387,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "A recurring theme is aligning people, priorities, and processes.",
+        "A recurring theme is aligning people, priorities, processes, and technical realities.",
         "",
         "He is strongest when business goals, human context, operating constraints, and technical realities need to line up. That includes stakeholder alignment, clearer expectations, requirements structure, documentation, and better handoffs."
       ].join("\n")
@@ -408,7 +408,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "For workflows, Reuben's approach is to understand the real operating problem first, then shape the tool, process, automation idea, or team habit around what people actually need to do.",
+        "For workflows, Reuben's approach is to understand the real operating problem first, then choose the right mix of communication, process, systems, automation, AI, or team habits around what people actually need to do.",
         "",
         "The resume backs that up with internal systems work, automated workflows, migration from third-party tools to internal systems, process improvement, KPI visibility, and structured operating routines."
       ].join("\n")
@@ -422,17 +422,21 @@ const fallbackTopics: readonly FallbackTopic[] = [
       "ai workflow",
       "ai workflows",
       "ai tools",
+      "advanced ai",
+      "openai api",
+      "hammer",
+      "ai for ai",
       "human judgment",
       "quality control",
       "automation ideas"
     ],
     answer: () =>
       [
-        "For Reuben, AI and automation are management accelerators, not the main story.",
+        "For Reuben, AI and automation are real strengths, but he applies them with judgment.",
         "",
-        "Reuben uses AI to speed up planning, communication, analysis, documentation, and repetitive work so more attention can go to coaching, judgment, relationships, and decisions that require human context.",
+        "He starts by understanding the issue, the people involved, and the outcome that matters. When AI is the right fit, he can use it for planning, communication, analysis, documentation, workflow design, repetitive work, and OpenAI API integrations.",
         "",
-        "The resume also lists OpenAI API integrations and automation-related workflow experience."
+        "The important point is that he is not trying to force AI onto every problem. Sometimes the better answer is clearer communication, a simpler process, a better system handoff, or a non-AI automation."
       ].join("\n")
   },
   {
@@ -534,6 +538,9 @@ const fallbackTopics: readonly FallbackTopic[] = [
       "tools",
       "tech stack",
       "technical background",
+      "technical fluency",
+      "technical problem",
+      "technical problem solving",
       "languages",
       "programming languages",
       "framework",
@@ -569,11 +576,11 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "His technical background is part of the picture, but it is not the main positioning:",
+        "His technical background is a core differentiator, especially because he combines it with clear communication and practical judgment:",
         "",
         listTechnicalBackground(),
         "",
-        "Related resume context includes AWS, GCP, OpenAI API integrations, web development across multiple languages, databases, and delivery tools like Jira, Trello, and ClickUp."
+        "Related resume context includes web development across multiple languages, databases, AWS, GCP, OpenAI API integrations, workflow automation, and delivery tools like Jira, Trello, and ClickUp."
       ].join("\n")
   },
   {
@@ -625,7 +632,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     priority: 1,
     answer: () =>
-        "The site has a resume page at /resume and a downloadable PDF at /resume.pdf. The resume positions Reuben as a Business Operations and Organizational Leader with experience across people leadership, process improvement, business systems, and cross-functional execution."
+        "The site has a resume page at /resume and a downloadable PDF at /resume.pdf. The resume positions Reuben as a Business Operations and Technical Solutions Leader with experience across clear communication, technical problem-solving, AI-enabled automation, process improvement, business systems, and cross-functional execution."
   },
   {
     triggers: [
@@ -677,7 +684,7 @@ const fallbackTopics: readonly FallbackTopic[] = [
       "client"
     ],
     answer: () =>
-      "This profile is mainly for prospective employers, hiring teams, collaborators, and people with relevant projects or service inquiries. The strongest fit is work involving operations leadership, people management, program execution, process improvement, stakeholder alignment, business systems, and cross-functional clarity."
+      "This profile is mainly for prospective employers, hiring teams, collaborators, clients, and people with relevant projects or service inquiries. The strongest fit is work involving clear communication, operations leadership, technical problem-solving, AI-enabled automation, program execution, process improvement, stakeholder alignment, business systems, and cross-functional clarity."
   },
   {
     triggers: [
@@ -691,9 +698,9 @@ const fallbackTopics: readonly FallbackTopic[] = [
     ],
     answer: () =>
       [
-        "Reuben's strongest hiring argument is the blend: operations leadership, people-centered management, process improvement, business systems fluency, clear communication, and practical automation use.",
+        "Reuben's strongest hiring argument is the blend: clear communication, operations leadership, people-centered management, strong technical fluency, AI and automation judgment, process improvement, and business systems experience.",
         "",
-        "That matters most when the work is ambiguous, cross-functional, and hard to execute. Reuben's value is helping teams turn that kind of mess into clear priorities, realistic expectations, better workflows, and forward movement."
+        "That matters most when the work is ambiguous, cross-functional, technical, or hard to execute. Reuben's value is understanding the real issue, choosing the right mix of people, process, systems, or AI, and helping teams turn that into forward movement."
       ].join("\n")
   }
 ];
@@ -751,7 +758,7 @@ export function buildFallbackReply(question: string, messages?: AssistantMessage
   const normalized = normalizeForMatch(contextualQuestion);
 
   if (!normalized) {
-    return "Ask me about Reuben's background, resume, operations leadership experience, management style, automation perspective, selected work, or contact path.";
+    return "Ask me about Reuben's background, resume, operations leadership experience, technical fluency, AI and automation judgment, selected work, or contact path.";
   }
 
   const isGreetingOnly =
@@ -760,14 +767,14 @@ export function buildFallbackReply(question: string, messages?: AssistantMessage
       normalized.split(" ").length <= 3);
 
   if (isGreetingOnly) {
-    return "Hi. Ask me about Reuben's background, work history, strengths, management style, automation perspective, selected projects, resume, or how to contact him.";
+    return "Hi. Ask me about Reuben's background, work history, strengths, technical fluency, AI and automation judgment, selected projects, resume, or how to contact him.";
   }
 
   if (
     includesAny(normalized, ["one sentence", "in one sentence"]) &&
     includesAny(normalized, ["reuben", "who is", "who's", "what is", "what's"])
   ) {
-    return "Reuben is a business operations and organizational leader who aligns people, priorities, and processes so unclear objectives become organized execution.";
+    return "Reuben is a strong communicator and business operations leader with deep technical fluency, able to understand the real issue and apply people, process, systems, automation, or advanced AI when they fit.";
   }
 
   if (includesAny(normalized, ["price", "pricing", "cost", "budget", "package", "packages"])) {
@@ -783,6 +790,6 @@ export function buildFallbackReply(question: string, messages?: AssistantMessage
   return [
     "I do not see that specific detail in the site content, so I do not want to invent an answer.",
     "",
-    "The grounded areas I can answer well are Reuben's resume, work history, operations and people leadership experience, process improvement, business systems, automation perspective, selected work examples, education, skills, and contact path."
+    "The grounded areas I can answer well are Reuben's resume, work history, operations and people leadership experience, clear communication, technical problem-solving, business systems, AI and automation judgment, selected work examples, education, skills, and contact path."
   ].join("\n");
 }

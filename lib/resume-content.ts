@@ -17,22 +17,27 @@ export const resumeSummary = [
 ] as const;
 
 export const technicalSkills = [
+  "Problem diagnosis and technical solution translation",
+  "Advanced AI solution evaluation and workflow design",
+  "OpenAI API integrations and AI-enabled automation",
+  "Workflow automation and internal systems improvement",
   "Project planning and coordination",
   "Agile workflow: standups, sprints, and ticketing",
   "Requirement gathering and documentation",
   "Stakeholder reporting and task clarification",
   "Cross-functional communication",
   "Cloud platforms: AWS and GCP",
-  "OpenAI API integrations",
   "Web development background across multiple languages",
-  "Databases: MySQL, Postgres, DynamoDB, and Firebase",
+  "Databases: MySQL, Postgres, SQL Server, DynamoDB, and Firebase",
   "Tools: Jira, Trello, and ClickUp"
 ] as const;
 
 export const leadershipSkills = [
+  "Clear client and stakeholder communication",
   "People leadership and cross-functional alignment",
   "Hiring, mentoring, onboarding, and training",
   "Operational strategy and process optimization",
+  "Technical and non-technical team coordination",
   "Vendor and stakeholder management",
   "Analytics and SEO integration",
   "Program execution and blocker removal"
@@ -57,9 +62,9 @@ export const employmentHistory = [
     dates: "November 2021 - June 2025",
     points: [
       "Built and scaled an agile development team, including hiring and mentoring.",
-      "Delivered an MVP marketplace with product, design, and marketing teams.",
+      "Translated product, design, marketing, and leadership priorities into executable technical work for an MVP marketplace.",
       "Coordinated work across internal and overseas developers.",
-      "Created structured processes and analytics for leadership visibility."
+      "Created structured systems, processes, and analytics for leadership visibility."
     ]
   },
   {
@@ -70,7 +75,7 @@ export const employmentHistory = [
     points: [
       "Oversaw migration from third-party tools to internal systems.",
       "Led onboarding and training for junior team members.",
-      "Maintained operational reliability and supported KPIs.",
+      "Maintained operational reliability, system adoption, and KPI visibility.",
       "Improved workflows across business units."
     ]
   },
@@ -80,7 +85,7 @@ export const employmentHistory = [
     location: "Lakewood, NJ",
     dates: "October 2015 - August 2020",
     points: [
-      "Developed automated workflows to reduce manual processing.",
+      "Developed automated workflows to reduce manual processing and operational friction.",
       "Collaborated across departments to improve operational systems.",
       "Created testing and analytics processes for data integrity.",
       "Documented improvements and reduced operational overhead."

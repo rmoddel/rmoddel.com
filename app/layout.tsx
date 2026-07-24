@@ -18,11 +18,11 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rmoddel.com"),
   title: {
-    default: "Reuben Moddel | Business Operations and Organizational Leader",
+    default: "Reuben Moddel | Business Operations and Technical Solutions Leader",
     template: "%s | Reuben Moddel"
   },
   description:
-    "Personal portfolio for Reuben Moddel, focused on operations leadership, people management, process improvement, stakeholder alignment, and organized execution.",
+    "Personal portfolio for Reuben Moddel, focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and organized execution.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -50,6 +50,10 @@ export const metadata: Metadata = {
     "process improvement",
     "stakeholder alignment",
     "cross-functional execution",
+    "technical problem solving",
+    "advanced AI solutions",
+    "AI-enabled automation",
+    "OpenAI API integrations",
     "organizational leadership",
     "business systems",
     "requirements documentation",
@@ -62,23 +66,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://rmoddel.com",
     siteName: "rmoddel.com",
-    title: "Reuben Moddel | Business Operations and Organizational Leader",
+    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
     description:
-      "Personal portfolio focused on operations leadership, people management, process improvement, stakeholder alignment, and practical execution.",
+      "Personal portfolio focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and practical execution.",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Reuben Moddel - Business Operations and Organizational Leader"
+        alt: "Reuben Moddel - Business Operations and Technical Solutions Leader"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reuben Moddel | Business Operations and Organizational Leader",
+    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
     description:
-      "Personal portfolio focused on operations leadership, people management, process improvement, stakeholder alignment, and practical execution.",
+      "Personal portfolio focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and practical execution.",
     images: ["/twitter-image"]
   },
   robots: {

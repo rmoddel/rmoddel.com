@@ -13,16 +13,16 @@ import {
 import { siteProfile } from "@/lib/site-profile";
 
 export const metadata: Metadata = {
-  title: "Resume | Business Operations and Organizational Leadership",
+  title: "Resume | Business Operations and Technical Solutions Leadership",
   description:
-    "Resume for Reuben Moddel, a business operations and organizational leader with experience across people leadership, process improvement, business systems, and cross-functional execution.",
+    "Resume for Reuben Moddel, a business operations and technical solutions leader with experience across clear communication, AI-enabled automation, process improvement, business systems, and cross-functional execution.",
   alternates: {
     canonical: "/resume"
   },
   openGraph: {
     title: "Reuben Moddel Resume",
     description:
-      "Business operations and organizational leadership resume for Reuben Moddel.",
+      "Business operations, technical solutions, and AI-enabled automation resume for Reuben Moddel.",
     url: "/resume",
     siteName: "rmoddel.com",
     locale: "en_US",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Reuben Moddel Resume",
     description:
-      "Business operations and organizational leadership resume for Reuben Moddel.",
+      "Business operations, technical solutions, and AI-enabled automation resume for Reuben Moddel.",
     images: ["/twitter-image"]
   }
 };
@@ -80,16 +80,17 @@ export default function ResumePage() {
           <div>
             <div className="heroPanelBadge">Profile</div>
             <p className="panelResult">
-              Practical operations and organizational leader with a strong foundation
-              in people leadership, business systems, process improvement, and execution.
+              Strong communicator and technical operations leader with practical
+              judgment across people, systems, process improvement, automation,
+              and advanced AI.
             </p>
           </div>
           <div className="heroOutcomeList">
-            <span>Team leadership</span>
-            <span>Stakeholder alignment</span>
+            <span>Clear communication</span>
+            <span>Technical fluency</span>
+            <span>AI judgment</span>
             <span>Process improvement</span>
-            <span>Operations management</span>
-            <span>Automation fluency</span>
+            <span>Cross-functional execution</span>
           </div>
         </aside>
       </section>
@@ -97,7 +98,7 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Summary</p>
-          <h2>Operations leadership with practical follow-through.</h2>
+          <h2>Clear communication, technical judgment, and practical follow-through.</h2>
         </div>
         <div className="twoColumn">
           {resumeSummary.map((paragraph) => (
@@ -109,11 +110,11 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Core Skills</p>
-          <h2>Management, operations, and systems range built around execution.</h2>
+          <h2>Communication, operations, systems, and AI range built around execution.</h2>
         </div>
         <div className="grid twoGrid">
           <article className="contentCard serviceCard">
-            <p className="microLabel">Operations, Systems & Execution</p>
+            <p className="microLabel">Technical, AI & Systems Execution</p>
             <ul className="resumeList">
               {technicalSkills.map((skill) => (
                 <li key={skill}>{skill}</li>
@@ -156,7 +157,7 @@ export default function ResumePage() {
       <section className="sectionCard">
         <div className="sectionHeading">
           <p className="eyebrow">Employment History</p>
-          <h2>A deliberate progression into operations and organizational leadership.</h2>
+          <h2>A deliberate progression from technical builder to operations leader.</h2>
         </div>
         <div className="grid">
           {employmentHistory.map((role, index) => (

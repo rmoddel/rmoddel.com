@@ -31,7 +31,11 @@ const jsonLd = {
         "Process improvement",
         "Cross-functional execution",
         "Stakeholder alignment",
+        "Client communication",
+        "Technical problem solving",
         "Business systems",
+        "Advanced AI solutions",
+        "OpenAI API integrations",
         "Automation-enabled operations",
         ...technicalKnowsAbout
       ]
@@ -43,7 +47,7 @@ const jsonLd = {
       url: "https://rmoddel.com",
       inLanguage: "en-US",
       description:
-        "Personal portfolio for Reuben Moddel, focused on business operations, people leadership, process improvement, and organized execution.",
+        "Personal portfolio for Reuben Moddel, focused on business operations, clear communication, technical problem-solving, AI-enabled automation, and organized execution.",
       author: {
         "@id": "https://rmoddel.com/#person"
       }
@@ -66,16 +70,16 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
-  title: "Reuben Moddel | Business Operations and Organizational Leader",
+  title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
   description:
-    "Personal portfolio for Reuben Moddel, focused on operations leadership, people management, process improvement, stakeholder alignment, and organized execution.",
+    "Personal portfolio for Reuben Moddel, focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and organized execution.",
   alternates: {
     canonical: "/"
   },
   openGraph: {
-    title: "Reuben Moddel | Business Operations and Organizational Leader",
+    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
     description:
-      "Operations and people leadership grounded in process improvement, stakeholder alignment, business systems, and practical execution.",
+      "Operations and people leadership grounded in clear communication, technical fluency, AI-enabled automation, business systems, and practical execution.",
     url: "/",
     siteName: "rmoddel.com",
     locale: "en_US",
@@ -87,15 +91,15 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Reuben Moddel - Operations and People Leader"
+        alt: "Reuben Moddel - Operations, Technology, and People Leader"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reuben Moddel | Business Operations and Organizational Leader",
+    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
     description:
-      "Operations leadership, people management, process improvement, stakeholder alignment, and organized execution.",
+      "Operations leadership, clear communication, technical problem-solving, AI-enabled automation, and organized execution.",
     images: ["/twitter-image"]
   }
 };
