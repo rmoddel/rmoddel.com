@@ -1,10 +1,9 @@
 const footerLinks = [
   { href: "/", label: "Home" },
-  { href: "/#work", label: "Work" },
-  { href: "/#experience", label: "Experience" },
-  { href: "/#about", label: "About" },
-  { href: "/resume", label: "Resume" },
-  { href: "/#contact", label: "Contact" },
+  { href: "/resume", label: "Résumé" },
+  { href: "/chat", label: "Interactive Résumé" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" }
 ];
 
@@ -16,14 +15,14 @@ type SiteFooterProps = {
 
 export function SiteFooter({
   name = "Reuben Moddel",
-  title = "Business Operations and Technical Solutions Leader",
-  summary = "I help organizations understand the real issue and turn unclear objectives into organized execution using people, process, technology, and advanced AI when it fits."
+  title = "AI Solutions, Operations, and People Leadership",
+  summary = "I combine operations, people leadership, systems experience, and AI-enabled software delivery to improve cumbersome real-world processes."
 }: SiteFooterProps) {
   return (
     <footer className="siteFooter">
       <div className="footerLead">
         <p className="eyebrow">{name}</p>
-        <h2>People, process, technology, and execution.</h2>
+        <h2>You know the process. I’ll help build the better path.</h2>
         <p>{summary}</p>
       </div>
       <div className="footerMeta">
@@ -38,23 +37,22 @@ export function SiteFooter({
           </nav>
         </div>
         <div>
-          <p className="footerLabel">For Hiring Teams</p>
+          <p className="footerLabel">Explore</p>
           <p className="footerText">
-            The resume has the formal role history; the homepage shows the
-            throughline in how I lead and execute.
+            Ask about my experience, leadership, skills, AI-enabled software,
+            GPS, selected projects, or fit for an opportunity.
           </p>
-          <a className="button" href="/resume">
-            View Resume
+          <a className="button buttonSecondary smallButton" href="/chat">
+            Ask About Me
           </a>
         </div>
         <div>
-          <p className="footerLabel">For Conversations</p>
+          <p className="footerLabel">Connect</p>
           <p className="footerText">
-            Reach out about a role, collaboration, or service inquiry where
-            operations leadership, technical judgment, and practical execution
-            would help.
+            Reach out about a role, collaboration, personalized software
+            solution, or process that should work better.
           </p>
-          <a className="button" href="/#contact">
+          <a className="button smallButton" href="/contact">
             Contact Me
           </a>
         </div>
@@ -62,7 +60,7 @@ export function SiteFooter({
       <div className="footerBar">
         <p>{name}</p>
         <p>{title}</p>
-        <p>Clear communication. Technical judgment. Practical accountability.</p>
+        <p>Genuine problems. Personalized software. Practical results.</p>
       </div>
     </footer>
   );

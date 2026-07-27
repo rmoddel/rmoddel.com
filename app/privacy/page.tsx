@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   }
 };
 
-const lastUpdated = "June 17, 2026";
+const lastUpdated = "July 27, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -49,11 +49,11 @@ export default function PrivacyPage() {
         </div>
 
         <p className="sectionIntro">
-          This Privacy Policy applies to rmoddel.com, its contact forms, and
-          related software projects, tools, and browser extensions published by
-          Reuben Moddel. It is written to function as a general site policy
-          while also preserving the current disclosures for the Breaze Commerce
-          Importer Chrome extension.
+          This Privacy Policy applies to rmoddel.com, the interactive résumé,
+          contact forms, and related software projects, tools, and browser
+          extensions published by Reuben Moddel. It is written to function as a
+          general site policy while also preserving the current disclosures for
+          the Breaze Commerce Importer Chrome extension.
         </p>
 
         <div className="twoColumn">
@@ -64,7 +64,7 @@ export default function PrivacyPage() {
               Reuben Moddel owns and operates this website and may also publish
               related software tools, internal systems, client-facing utilities,
               and browser extensions. If you have privacy questions, use the
-              contact form on <a href="/#contact">rmoddel.com</a>.
+              contact form on <a href="/contact">rmoddel.com</a>.
             </p>
           </div>
 
@@ -88,9 +88,11 @@ export default function PrivacyPage() {
         <p className="sectionIntro">
           If you contact Reuben Moddel through this website, the site may
           collect the information you choose to submit, such as your name,
-          email address, phone number, role or project context, timing,
-          compensation, budget, or related notes. That information is used only
-          to review inquiries, respond to requests, and discuss potential work.
+          email address, phone number, organization, role or project context,
+          process details, timing, compensation, budget, or related notes. If
+          you use the interactive résumé, your questions may be processed by an
+          AI service to generate a response. Please avoid confidential or
+          sensitive details.
         </p>
       </section>
 
@@ -115,6 +117,16 @@ export default function PrivacyPage() {
               Hosting, email, analytics, form delivery, and security providers
               may process limited technical data such as IP address, browser
               information, timestamps, or request metadata as part of normal site operation.
+            </p>
+          </article>
+
+          <article className="contentCard">
+            <h3>Interactive résumé questions</h3>
+            <p>
+              Questions submitted to the interactive résumé may be processed by
+              an AI provider so the site can generate a relevant answer about
+              Reuben&apos;s public professional background. Standard analytics
+              should not include full message text.
             </p>
           </article>
 
@@ -193,9 +205,8 @@ export default function PrivacyPage() {
           <h2>Breaze Commerce Importer</h2>
         </div>
         <p className="sectionIntro">
-          The following section preserves the current disclosures for the
-          Breaze Commerce Importer Chrome extension so this page remains
-          sufficient if that extension is re-released.
+          I’m keeping the current Breaze Commerce Importer disclosures here so
+          they remain available if that extension is re-released.
         </p>
         <div className="grid twoGrid">
           <article className="contentCard">
@@ -260,7 +271,7 @@ export default function PrivacyPage() {
         <p className="sectionIntro">
           For privacy questions about this website or any related tool,
           extension, or project published by Reuben Moddel, use the contact
-          form at <a href="/#contact">rmoddel.com</a>.
+          form at <a href="/contact">rmoddel.com</a>.
         </p>
       </section>
 

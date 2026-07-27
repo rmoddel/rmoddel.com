@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
 
 const starterMessage =
-  "Ask about Reuben's background, work themes, capabilities, or ask me to send him an email.";
+  "Ask about my background, work themes, capabilities, or send me a note.";
 
 const quickPrompts = [
-  { label: "Background", prompt: "What is Reuben's professional background?" },
-  { label: "Capabilities", prompt: "Where is Reuben most useful?" },
-  { label: "Send email", prompt: "I want to send Reuben an email." }
+  { label: "Background", prompt: "What is your professional background?" },
+  { label: "Capabilities", prompt: "Where are you most useful?" },
+  { label: "Send email", prompt: "I want to send you an email." }
 ] as const;
 
 type ContactDraft = {
@@ -37,6 +37,7 @@ function isContactRequest(text: string) {
     "contact",
     "get in touch",
     "send reuben",
+    "send me",
     "send him",
     "send email",
     "send an email",
@@ -47,10 +48,12 @@ function isContactRequest(text: string) {
     "send a note",
     "send a message",
     "message reuben",
+    "message me",
     "reach out",
     "submit form",
     "contact form",
     "email reuben",
+    "email me",
     "hire",
     "recruit",
     "job opportunity"
@@ -103,13 +106,13 @@ function hasEnoughContext(text: string) {
 
 function buildContactSummary(draft: Required<ContactDraft>) {
   return [
-    "I have enough to email Reuben:",
+    "Ready to send this:",
     "",
     `- Name: ${draft.name}`,
     `- Email: ${draft.email}`,
     `- Context: ${draft.context}`,
     "",
-    "Use the Send Email button, type “send email”, or tell me what to change."
+    "Use the Send Email button, type \"send email\", or tell me what to change."
   ].join("\n");
 }
 
@@ -222,8 +225,8 @@ export function AiWidget() {
       setContactStep(email ? "name" : "name");
 
       return email
-        ? "I can send Reuben an email after I collect the basics. What name should I include?"
-        : "I can collect an email here and send it to Reuben. What is your name?";
+        ? "Sure. What name should I include?"
+        : "Sure. What is your name?";
     }
 
     if (contactStep === "name") {
@@ -243,18 +246,18 @@ export function AiWidget() {
 
       if (nextDraft.email) {
         setContactStep("context");
-        return "Thanks. Briefly, what should I tell Reuben this is about?";
+        return "Thanks. What should I include in the message?";
       }
 
       setContactStep("email");
-      return `Thanks, ${nextDraft.name}. What email should Reuben use to reply?`;
+      return `Thanks, ${nextDraft.name}. What email should I use to reply?`;
     }
 
     if (contactStep === "email") {
       const email = extractEmail(text);
 
       if (!email) {
-        return "Please send a valid email address so Reuben can reply.";
+        return "Send a valid email address so I can reply.";
       }
 
       const nextDraft = {
@@ -265,12 +268,12 @@ export function AiWidget() {
       setContactDraft(nextDraft);
       setContactStep("context");
 
-      return "Got it. Briefly, what should I tell Reuben this is about?";
+      return "Got it. What should I include in the message?";
     }
 
     if (contactStep === "context") {
       if (!hasEnoughContext(text)) {
-        return "Please add a little more context: role, project, workflow, team need, or reason for reaching out.";
+        return "Add a little more context: role, project, workflow, team need, or reason for reaching out.";
       }
 
       const nextDraft = {
@@ -282,7 +285,7 @@ export function AiWidget() {
         setContactDraft(nextDraft);
         setContactStep(!nextDraft.name ? "name" : !nextDraft.email ? "email" : "context");
 
-        return "I am missing one required detail before I can send it.";
+        return "I still need one detail before I can send it.";
       }
 
       const completeDraft = nextDraft as Required<ContactDraft>;
@@ -299,7 +302,7 @@ export function AiWidget() {
 
         if (!completeDraft.name || !completeDraft.email || !completeDraft.context) {
           setContactStep(!completeDraft.name ? "name" : !completeDraft.email ? "email" : "context");
-          return "I am missing one required detail before I can send it.";
+          return "I still need one detail before I can send it.";
         }
 
         try {
@@ -307,14 +310,14 @@ export function AiWidget() {
           setContactStep("idle");
           setContactDraft({});
 
-          return "Sent. Reuben will have your email and can reply directly.";
+          return "Sent. I have your note and can reply directly.";
         } catch (error) {
           const message =
             error instanceof Error
               ? error.message
               : "The email service could not send your message right now.";
 
-          return `${message} You can try again by typing “send email,” or use the contact form below.`;
+          return `${message} Try again by typing "send email," or use the contact page.`;
         }
       }
 
@@ -328,7 +331,7 @@ export function AiWidget() {
         setContactDraft(nextDraft);
         setContactStep(!nextDraft.name ? "name" : !nextDraft.email ? "email" : "context");
 
-        return "I updated the draft, but I am missing one required detail.";
+        return "I updated the draft, but I still need one detail.";
       }
 
       const completeDraft = nextDraft as Required<ContactDraft>;
@@ -338,7 +341,7 @@ export function AiWidget() {
       return buildContactSummary(completeDraft);
     }
 
-    return "I can collect an email for Reuben. What is your name?";
+    return "Sure. What is your name?";
   }
 
   async function submitQuestion(question: string) {
@@ -391,7 +394,7 @@ export function AiWidget() {
         ...current,
         {
           role: "assistant",
-          content: data.reply?.trim() || "The assistant could not answer right now."
+          content: data.reply?.trim() || "I can't answer right now."
         }
       ]);
     } catch {
@@ -399,7 +402,7 @@ export function AiWidget() {
         ...current,
         {
           role: "assistant",
-          content: "The assistant is unavailable right now. Try again in a moment."
+          content: "I can't answer right now. Try again in a moment."
         }
       ]);
     } finally {
@@ -444,7 +447,7 @@ export function AiWidget() {
         </button>
       ) : null}
       {isOpen ? (
-        <section aria-label="Chat with Reuben's Assistant" className="aiWidgetPanel">
+        <section aria-label="Chat with the interactive resume agent" className="aiWidgetPanel">
           <div className="aiWidgetHeader">
             <div>
               <p className="footerLabel">Site assistant</p>
@@ -460,7 +463,7 @@ export function AiWidget() {
             </button>
           </div>
           <p className="aiWidgetNote">
-            Ask about background, work themes, capabilities, or send an email.
+            Ask about background, work themes, capabilities, or send a note.
           </p>
           <div className="aiPromptRow" aria-label="Suggested questions">
             {quickPrompts.map(({ label, prompt }) => (
@@ -487,7 +490,7 @@ export function AiWidget() {
               name="question"
               onChange={(event) => setInput(event.target.value)}
               onKeyDown={handleQuestionKeyDown}
-              placeholder="Ask a question or type 'send Reuben an email'..."
+              placeholder="Ask a question or type 'send an email'..."
               rows={2}
               value={input}
             />

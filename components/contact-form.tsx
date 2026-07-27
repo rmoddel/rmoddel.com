@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { TurnstileWidget } from "@/components/turnstile";
 
 type FormState = {
   status: "idle" | "submitting" | "success" | "error";
@@ -12,14 +13,40 @@ const initialState: FormState = {
   message: ""
 };
 
+const inquiryTypes = [
+  "Role or leadership opportunity",
+  "AI or software solution",
+  "Process improvement",
+  "Collaboration",
+  "General inquiry"
+] as const;
+
+function getText(formData: FormData, name: string) {
+  return String(formData.get(name) || "").trim();
+}
+
 export function ContactForm() {
+  const startedAt = useRef(Date.now());
   const [formState, setFormState] = useState<FormState>(initialState);
+  const [inquiryType, setInquiryType] = useState<(typeof inquiryTypes)[number]>(
+    inquiryTypes[0]
+  );
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.currentTarget;
     const formData = new FormData(form);
+    const turnstileToken = getText(formData, "cf-turnstile-response");
+
+    if (!turnstileToken) {
+      setFormState({
+        status: "error",
+        message: "Please complete the security verification."
+      });
+      window.turnstile?.reset();
+      return;
+    }
 
     setFormState({
       status: "submitting",
@@ -29,93 +56,137 @@ export function ContactForm() {
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: formData.get("name"),
-          email: formData.get("email"),
-          phone: formData.get("phone"),
-          helpType: formData.get("helpType"),
-          project: formData.get("project"),
-          timeline: formData.get("timeline"),
-          budget: formData.get("budget")
-        })
+        body: formData
       });
 
-      const data = (await response.json()) as { ok?: boolean; error?: string };
+      const data = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        message?: string;
+      };
 
       if (!response.ok || !data.ok) {
-        throw new Error(data.error || "Failed to send your message.");
+        throw new Error(
+          data.message ||
+            data.error ||
+            "Your message could not be sent. Your information has been preserved—please try again."
+        );
       }
 
       form.reset();
+      setInquiryType(inquiryTypes[0]);
       setFormState({
         status: "success",
-        message: "Message sent. I’ll follow up by email."
+        message: "Message sent. I can reply directly."
       });
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : "Failed to send your message.";
+        error instanceof Error
+          ? error.message
+          : "Your message could not be sent. Your information has been preserved—please try again.";
 
       setFormState({
         status: "error",
         message
       });
+      window.turnstile?.reset();
     }
   }
 
+  const showProcessQuestions =
+    inquiryType === "Process improvement" || inquiryType === "AI or software solution";
+
   return (
     <form className="contactForm" onSubmit={handleSubmit}>
+      <input type="hidden" name="startedAt" value={startedAt.current} />
+
+      <div className="hiddenField" aria-hidden="true">
+        <label htmlFor="companyWebsite">Company website</label>
+        <input
+          autoComplete="off"
+          id="companyWebsite"
+          name="companyWebsite"
+          tabIndex={-1}
+          type="text"
+        />
+      </div>
+
       <label>
         Name
-        <input name="name" type="text" placeholder="Your name" required />
+        <input autoComplete="name" name="name" type="text" required />
       </label>
+
       <label>
         Email
-        <input name="email" type="email" placeholder="you@example.com" required />
+        <input autoComplete="email" name="email" type="email" required />
       </label>
+
       <label>
-        Phone
-        <input name="phone" type="tel" placeholder="Optional" />
+        Phone <span>optional</span>
+        <input autoComplete="tel" name="phone" type="tel" />
       </label>
+
       <label>
-        Reason for reaching out
-        <select name="helpType" defaultValue="Job opportunity">
-          <option>Job opportunity</option>
-          <option>Recruiting conversation</option>
-          <option>Consulting or service inquiry</option>
-          <option>Collaboration</option>
-          <option>Operations or process question</option>
-          <option>Other</option>
+        Organization <span>optional</span>
+        <input autoComplete="organization" name="organization" type="text" />
+      </label>
+
+      <label>
+        Inquiry type
+        <select
+          name="inquiryType"
+          onChange={(event) =>
+            setInquiryType(event.target.value as (typeof inquiryTypes)[number])
+          }
+          value={inquiryType}
+        >
+          {inquiryTypes.map((type) => (
+            <option key={type}>{type}</option>
+          ))}
         </select>
       </label>
+
       <label>
-        Briefly describe the context
+        Message
         <textarea
-          name="project"
+          name="message"
           rows={5}
-          placeholder="Role, project, operational need, team context, or reason for reaching out"
           required
+          placeholder="Role, project, collaboration, process, or reason for reaching out"
         />
       </label>
+
+      {showProcessQuestions ? (
+        <div className="processFields">
+          <label>
+            What are you trying to accomplish?
+            <textarea name="goal" rows={3} />
+          </label>
+          <label>
+            What is difficult or inefficient today?
+            <textarea name="difficulty" rows={3} />
+          </label>
+          <label>
+            Who needs to use the solution?
+            <textarea name="users" rows={3} />
+          </label>
+        </div>
+      ) : null}
+
       <label>
-        Timing
-        <input name="timeline" type="text" placeholder="e.g. This month, this quarter, flexible" />
+        Notes <span>optional</span>
+        <input name="notes" type="text" />
       </label>
-      <label>
-        Compensation, budget, or notes
-        <input name="budget" type="text" placeholder="Optional context" />
-      </label>
+
+      <TurnstileWidget action="contact" />
+
       <button className="button" type="submit" disabled={formState.status === "submitting"}>
         {formState.status === "submitting" ? "Sending..." : "Send Message"}
       </button>
-      <p
-        className={`formNotice ${formState.status}`}
-        aria-live="polite"
-        role="status"
-      >
-        {formState.message || "Share enough context for me to understand the fit."}
+
+      <p className={`formNotice ${formState.status}`} aria-live="polite" role="status">
+        {formState.message ||
+          "Please avoid confidential or sensitive details. The privacy page has the full policy."}
       </p>
     </form>
   );

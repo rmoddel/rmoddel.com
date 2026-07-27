@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { professionalDescriptor } from "@/lib/interactive-resume-content";
 import {
   education,
   employmentHistory,
@@ -13,16 +14,16 @@ import {
 import { siteProfile } from "@/lib/site-profile";
 
 export const metadata: Metadata = {
-  title: "Resume | Business Operations and Technical Solutions Leadership",
+  title: "Résumé",
   description:
-    "Resume for Reuben Moddel, a business operations and technical solutions leader with experience across clear communication, AI-enabled automation, process improvement, business systems, and cross-functional execution.",
+    "A clean résumé view with employment history, education, skills, a PDF download, and a way to ask follow-up questions.",
   alternates: {
     canonical: "/resume"
   },
   openGraph: {
-    title: "Reuben Moddel Resume",
+    title: "Résumé | Reuben Moddel",
     description:
-      "Business operations, technical solutions, and AI-enabled automation resume for Reuben Moddel.",
+      "Employment history, education, skills, and downloadable résumé for Reuben Moddel.",
     url: "/resume",
     siteName: "rmoddel.com",
     locale: "en_US",
@@ -40,9 +41,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reuben Moddel Resume",
+    title: "Résumé | Reuben Moddel",
     description:
-      "Business operations, technical solutions, and AI-enabled automation resume for Reuben Moddel.",
+      "Employment history, education, skills, and downloadable résumé for Reuben Moddel.",
     images: ["/twitter-image"]
   }
 };
@@ -50,16 +51,25 @@ export const metadata: Metadata = {
 export default function ResumePage() {
   return (
     <main className="pageShell">
-      <SiteHeader brandLine={siteProfile.identity.primaryTitle} />
+      <SiteHeader brandLine={professionalDescriptor} />
 
       <section className="heroSection resumeHero">
         <div className="heroCopy">
           <div className="heroRibbon">
-            <p className="eyebrow">Resume</p>
-            <span className="heroSpark">{siteProfile.positioning.credential}</span>
+            <p className="eyebrow">Résumé</p>
+            <span className="heroSpark">Clean, scannable, shareable</span>
           </div>
           <h1>{resumeIdentity.name}</h1>
           <p className="heroText resumeHeadline">{resumeIdentity.title}</p>
+          <p className="sectionIntro resumeIntro">
+            I bring more than 13 years of experience across software,
+            business systems, operations, process improvement, product delivery,
+            and team leadership. My strongest value is understanding complex
+            situations, aligning the people involved, and turning organizational
+            needs into practical execution. I also use AI and personalized
+            software to improve cumbersome processes and create simpler ways for
+            teams to work.
+          </p>
           <div className="heroTags" aria-label="Contact details">
             <span>{resumeIdentity.location}</span>
             <span>
@@ -70,8 +80,14 @@ export default function ResumePage() {
             </span>
           </div>
           <div className="resumeActions">
-            <a className="button buttonGhost smallButton resumeDownloadButton" href="/resume.pdf">
-              Download PDF Resume
+            <a className="button smallButton" href="/resume.pdf">
+              Download PDF
+            </a>
+            <a className="button buttonSecondary smallButton" href="/chat?topic=experience">
+              Ask About This Résumé
+            </a>
+            <a className="button buttonSecondary smallButton" href="/contact">
+              Contact Me
             </a>
           </div>
         </div>
@@ -80,17 +96,15 @@ export default function ResumePage() {
           <div>
             <div className="heroPanelBadge">Profile</div>
             <p className="panelResult">
-              Strong communicator and technical operations leader with practical
-              judgment across people, systems, process improvement, automation,
-              and advanced AI.
+              This is the straight résumé: roles, education, skills, and a PDF.
+              If you want to dig into a topic, ask the interactive résumé.
             </p>
           </div>
           <div className="heroOutcomeList">
-            <span>Clear communication</span>
-            <span>Technical fluency</span>
-            <span>AI judgment</span>
-            <span>Process improvement</span>
-            <span>Cross-functional execution</span>
+            <span>Employment history</span>
+            <span>Education</span>
+            <span>Skills</span>
+            <span>PDF download</span>
           </div>
         </aside>
       </section>
@@ -185,7 +199,7 @@ export default function ResumePage() {
       <SiteFooter
         name={siteProfile.identity.name}
         summary={siteProfile.positioning.summary}
-        title={siteProfile.identity.primaryTitle}
+        title={professionalDescriptor}
       />
     </main>
   );

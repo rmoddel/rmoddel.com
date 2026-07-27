@@ -12,6 +12,7 @@ type ListCard = TextCard & {
 
 type CaseStudy = {
   type: string;
+  status: string;
   title: string;
   summary: string;
   deliverables: string[];
@@ -212,6 +213,7 @@ export const siteProfile = {
   caseStudies: getSubsections(caseStudiesSection).map<CaseStudy>((study) => ({
     title: study.title,
     type: required(getField(study.body, "Type"), `Case Studies.${study.title}.Type`),
+    status: required(getField(study.body, "Status"), `Case Studies.${study.title}.Status`),
     summary: required(getBlock(study.body, "Summary"), `Case Studies.${study.title}.Summary`),
     deliverables: getList(study.body, "Deliverables"),
     result: required(getBlock(study.body, "Result"), `Case Studies.${study.title}.Result`)

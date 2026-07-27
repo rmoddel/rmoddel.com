@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { href: "#work", label: "Work" },
-  { href: "#experience", label: "Experience" },
-  { href: "#about", label: "About" },
-  { href: "/resume", label: "Resume" },
-  { href: "#contact", label: "Contact" }
+  { href: "/", label: "Home" },
+  { href: "/resume", label: "Résumé" },
+  { href: "/chat", label: "Interactive Résumé" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" }
 ];
 
 type SiteHeaderProps = {
@@ -16,11 +16,10 @@ type SiteHeaderProps = {
 };
 
 export function SiteHeader({
-  brandLine = "Business operations. People leadership. Organized execution."
+  brandLine = "AI Solutions, Operations, and People Leadership"
 }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-  const isHomePage = pathname === "/";
 
   useEffect(() => {
     function handleResize() {
@@ -38,17 +37,9 @@ export function SiteHeader({
     setIsOpen(false);
   }
 
-  function resolveHref(href: string) {
-    if (href.startsWith("#")) {
-      return isHomePage ? href : `/${href}`;
-    }
-
-    return href;
-  }
-
   return (
     <header className="siteHeader">
-      <a className="brand" href={isHomePage ? "#top" : "/"} onClick={closeMenu}>
+      <a className="brand" href="/" onClick={closeMenu}>
         <span className="brandMark">RM</span>
         <span className="brandText">
           <strong>Reuben Moddel</strong>
@@ -71,19 +62,35 @@ export function SiteHeader({
 
       <div className={`navShell ${isOpen ? "open" : ""}`}>
         <nav className="siteNav" id="site-nav">
-          {navItems.map((item) => (
-            <a href={resolveHref(item.href)} key={item.href} onClick={closeMenu}>
-              {item.label}
-            </a>
-          ))}
+          {navItems.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname?.startsWith(`${item.href}/`));
+
+            return (
+              <a
+                aria-current={isActive ? "page" : undefined}
+                href={item.href}
+                key={item.href}
+                onClick={closeMenu}
+              >
+                {item.label}
+              </a>
+            );
+          })}
         </nav>
-        <a
-          className="button smallButton navCta"
-          href={isHomePage ? "#contact" : "/#contact"}
-          onClick={closeMenu}
-        >
-          Get in Touch
-        </a>
+        <div className="headerActions">
+          <a className="button smallButton" href="/chat" onClick={closeMenu}>
+            Ask About Me
+          </a>
+          <a
+            className="button buttonSecondary smallButton"
+            href="/contact"
+            onClick={closeMenu}
+          >
+            Contact Me
+          </a>
+        </div>
       </div>
     </header>
   );

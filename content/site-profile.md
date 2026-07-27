@@ -2,205 +2,167 @@
 
 ## Identity
 Name: Reuben Moddel
-Primary Title: Business Operations and Technical Solutions Leader
-Hero Title: Operations, Technology, and People Leader
-Resume Title: Business Operations and Technical Solutions Leader
+Primary Title: AI Solutions, Operations, and People Leadership
+Hero Title: AI Solutions, Operations, and People Leadership
+Resume Title: AI Solutions and Operations Leader
 Location: Lakewood, NJ
 Phone: 732-552-4475
 Email: rmoddel@gmail.com
 
 ## Positioning
-Credential: 13+ years across communication, technical problem-solving, AI-enabled automation, process improvement, and complex project execution.
+Credential: 13+ years across operations, systems, software delivery, process improvement, and team leadership.
 
 Summary:
-I help organizations and clients understand the real issue, communicate it clearly, and turn unclear objectives into organized execution using people, process, technology, and advanced AI when it fits.
+I combine 13+ years across business systems, operations, software delivery, process improvement, and team leadership with the ability to use AI and personalized software to improve cumbersome real-world processes.
 
 Narrative:
-My background spans hands-on development, business systems, AI-enabled automation, and operations leadership. The value I bring is diagnosing problems clearly, communicating across technical and non-technical groups, and applying the right mix of people, process, systems, and AI to move work forward.
+I help organizations understand the real process, the people affected, and the outcome that matters. I then lead the right mix of process improvement, software, automation, AI, communication, and operational execution so the solution is practical and usable.
 
 People Principle:
-I believe strong management and client work begin with understanding people: their responsibilities, pressures, strengths, and concerns. Good solutions combine that understanding with clear communication, practical accountability, and the judgment to use technology only where it helps.
+Strong management begins with understanding people: their responsibilities, pressures, strengths, and concerns. Good solutions combine that understanding with clear expectations, practical accountability, and technology only where it helps.
 
 ## Hero
-Eyebrow: Personal portfolio and working profile
-Spark: 13+ years across communication, technical problem-solving, AI-enabled automation, and execution
-Headline: Operations, Technology, and People Leader
+Eyebrow: 13+ Years Across Operations, Systems, and Team Leadership
+Spark: Genuine problems. Personalized software. Practical results.
+Headline: I understand cumbersome processes and build better ways to run them.
 
 Body:
-I am Reuben Moddel, a strong communicator and technically fluent operations leader who understands the real issue first, then uses people, process, systems, automation, and advanced AI when they fit.
+I combine human understanding, operational leadership, and AI-enabled software delivery to turn unclear or inefficient work into practical solutions that are simpler, faster, and easier to manage.
 
 Tags:
-- Clear Communication
-- Technical Problem Solving
-- AI and Automation Fluency
-- Cross-Functional Execution
-- People Leadership
+- Human understanding
+- Operational leadership
+- AI-enabled software
+- Process improvement
+- Practical execution
 
 Mini Cards:
-- Understand the Issue: Listen, ask better questions, and translate messy inputs into the real problem.
-- Communicate Clearly: Align clients, teams, technical contributors, and leaders around what matters next.
-- Apply Technology Judiciously: Use systems, automation, and advanced AI when they fit, without forcing a tool onto the wrong problem.
+- Human Understanding: I listen to the people living with the process before deciding what should change.
+- Operational Leadership: I turn unclear objectives into priorities, ownership, practical plans, and coordinated execution.
+- AI and Personalized Software: I use AI, automation, and software around actual organizational needs instead of forcing a generic system.
 
-Panel Badge: Technical Judgment
-Panel Label: What useful technology work requires
+Panel Badge: GPS Approach
+Panel Label: Genuine, Personalized Solutions
 Panel Items:
-- Understand the problem before proposing tools
-- Translate between business needs and technical options
-- Know when AI or automation helps and when it adds noise
-- Build realistic expectations around people, systems, and delivery
-Panel Result: The outcome is clearer decisions, better adoption, smoother handoffs, and technology work that supports the real goal.
+- Solve a real operational problem
+- Design around the actual workflow and people
+- Deliver software, automation, or process improvements people can use
+- Keep routine controls understandable
+Panel Result: Powerful technology behind the scenes. Simple control in your hands.
 
 Credential Strip:
-- Clear Communication
-- Technical Problem Solving
-- AI and Automation
-- Business Systems
-- Process Improvement
-- Stakeholder Alignment
-- People Leadership
+- 13+ years of professional experience
+- Leadership across people, projects, systems, and operations
+- AI-enabled tools built around real workflows
 
 ## Capabilities
-### Team and Cross-Functional Leadership
-Lead, mentor, align, and coordinate people across departments, priorities, and levels of technical fluency.
+### Human Understanding
+Listen to the people living with the process: their pressures, frustrations, workarounds, and goals.
 
 Items:
-- Team leadership
-- Hiring and mentoring
-- Onboarding and training
-- Stakeholder reporting
-- Cross-functional alignment
+- Problem discovery
+- Stakeholder communication
+- Adoption awareness
+- Practical expectations
+- Usability judgment
 
-### Operational and Process Improvement
-Improve workflows, handoffs, reporting, and internal systems so teams can work with less friction and better visibility.
+### Operational Leadership
+Turn unclear objectives into priorities, ownership, practical plans, and coordinated execution.
 
 Items:
-- Process design
+- Process improvement
 - Operating rhythm
-- KPI visibility
-- Internal systems
-- Change adoption
-
-### Technical Problem Solving and AI Enablement
-Translate business problems into practical systems, automation, or advanced AI solutions when the fit is real.
-
-Items:
-- AI solution evaluation
-- OpenAI API integrations
-- Workflow automation
-- Systems thinking
-- Technical and non-technical translation
-
-### Project and Program Execution
-Turn messy goals into organized plans, clear ownership, practical timelines, and delivered outcomes.
-
-Items:
-- Program coordination
+- Cross-functional coordination
 - Requirements structure
-- Timeline management
 - Blocker removal
-- Delivery follow-through
+
+### AI and Personalized Software
+Use AI, automation, and software to build or improve tools around the organization’s actual needs.
+
+Items:
+- AI fit assessment
+- Personalized software
+- Workflow automation
+- Document intelligence
+- Simple user controls
 
 ## How I Work
-1. Understand the objective, the people affected, and the real issue behind the request.
-2. Decide whether the answer is communication, process, system design, automation, AI, or a practical mix.
-3. Structure the work into owners, priorities, decisions, tools, and next steps.
-4. Support execution with clear communication, accountability, and adjustment when reality changes.
+1. Understand the current process, the objective, and the people affected.
+2. Identify the true constraint and decide whether the answer is process, software, automation, AI, communication, or a practical mix.
+3. Structure the work into priorities, owners, decisions, tools, controls, and next steps.
+4. Test the result in real use, adjust what does not work, and hand over clear controls and documentation.
 
 ## Case Studies
-### Marketplace MVP Delivery
-Type: Product Operations and Program Execution
+### Self-Service Flyer Generator
+Type: Personalized Software
+Status: Delivered
 Summary:
-A complex marketplace initiative needed enough communication, technical translation, and execution structure for product, design, marketing, leadership, internal developers, and overseas contributors to move in the same direction.
+Built a self-service flyer generator that allows a nontechnical client to enter event details and instantly download a professionally formatted, print-ready PDF.
 Deliverables:
-- Priority clarification
-- Cross-functional coordination
-- Technical solution translation
-- Internal and overseas developer alignment
-- Delivery cadence
-- Leadership visibility
+- Event detail form
+- Approved design preservation
+- Print-ready PDF generation
+- Simple client controls
+- Faster repeated flyer creation
 Result:
-Helped deliver a usable MVP while creating clearer planning, reporting, and execution routines around the work.
+New flyers can be created in minutes while preserving the approved design and print quality.
 
-### Internal Systems Migration
-Type: Operations and Change Management
+### Community Announcement Broadcast System
+Type: AI-Ready Operations Tooling
+Status: Delivered
 Summary:
-A business needed to move from third-party tools toward internal systems without losing operational reliability or user adoption.
+Built a guided interface that simplified community-wide announcement broadcasts while giving the organization greater control over messages, recipients, delivery settings, and costs.
 Deliverables:
-- Migration coordination
-- Workflow improvement
-- Onboarding and training
-- KPI support
-- Business-unit handoffs
+- Message composer
+- Recipient selection
+- Delivery settings
+- Review and cost visibility
+- Simplified admin workflow
 Result:
-Improved operational control while helping people adapt to new systems and expectations.
-
-### Community Fundraising Campaign
-Type: Multi-Stakeholder Communication
-Summary:
-A community effort needed messaging and materials that could work across donors, organizers, conversations, events, and follow-up touchpoints.
-Deliverables:
-- Campaign messaging
-- Pledge card concept
-- Poster direction
-- Parlor meeting signage
-- Reusable event materials
-Result:
-Gave organizers a clearer story and practical materials they could use consistently across sensitive, relationship-driven conversations.
-
-### Business and Sensitive Communication
-Type: Stakeholder Communication
-Summary:
-People needed formal communication that stayed clear, emotionally controlled, and practical in situations where tone and precision mattered.
-Deliverables:
-- Formal letters
-- Dispute language
-- Contract simplification
-- Business communication
-- Negotiation wording
-Result:
-Helped people communicate with more confidence, clarity, and control when the stakes were personal, financial, or operational.
+The broadcast process became easier to manage and more transparent for nontechnical administrators.
 
 ## AI and Automation
-Headline: Advanced AI and automation, applied with judgment.
+Headline: AI and personalized software, applied with judgment.
 
 Body:
-I use AI, automation, and technical systems after the problem is understood, not as a default answer. When applicable, I can use advanced AI solutions to speed planning, communication, analysis, documentation, workflow design, and repetitive work while keeping human context, judgment, and adoption at the center.
+AI is useful when it helps solve the real problem. I use AI, automation, forms, dashboards, document intelligence, integrations, and workflow tools where they reduce friction, improve clarity, or make a cumbersome process easier to manage.
 
 Items:
 - AI fit assessment
 - OpenAI API integrations
-- Faster planning and drafts
-- Better summaries and analysis
 - Workflow automation
+- Personalized internal tools
 - Human review and quality control
+- Practical user controls
 
 ## Experience Arc
-Headline: A deliberate progression from technical builder to operations and AI-enabled solutions leader.
+Headline: From hands-on contributor to operations, systems, and AI-solutions leadership.
 
 Body:
-I started as a hands-on web developer, expanded into software and business systems analysis, and moved into technical operations, product operations, AI-enabled workflow thinking, project coordination, team leadership, and organizational execution.
+My background spans hands-on software work, systems analysis, operations, team leadership, and practical problem-solving. Over time, my greatest value became less about personally completing every technical task and more about understanding the people, process, and objective well enough to lead the right solution from idea to execution.
 
 Threads:
-- Hands-on technical contributor: Built practical web and internal systems experience, with direct understanding of how software work gets delivered.
-- Business and systems analyst: Improved workflows, automation, data integrity, reporting, and cross-department handoffs.
-- Operations and AI-enabled solutions leader: Understands client and team problems, coordinates stakeholders, improves processes, and applies technology or AI when it fits.
+- Hands-On Contributor: Built practical web and internal systems experience, with direct understanding of how software work gets delivered.
+- Business and Systems Analyst: Improved workflows, automation, data integrity, reporting, and cross-department handoffs.
+- Operations and Team Leadership: Coordinated people, priorities, systems, and delivery across technical and nontechnical groups.
+- AI Solutions Builder: Applies AI and personalized software to real processes where they create useful leverage.
 
 Highlights:
-- Led cross-functional delivery across product, design, marketing, leadership, operations, and development.
 - Built and scaled an agile delivery team, including hiring and mentoring.
 - Coordinated internal and overseas developers while keeping priorities, handoffs, and expectations clear.
-- Applied automation and AI fluency to planning, documentation, analysis, and operational workflows.
-- Led onboarding, training, workflow improvement, KPI visibility, and internal systems adoption.
+- Led migration from third-party tools to internal systems.
+- Improved workflows, KPI visibility, onboarding, training, and leadership reporting.
+- Uses AI and software as delivery capabilities, not decoration.
 
 ## About
-Headline: I am most useful when unclear work needs clear communication and technical judgment.
+Headline: Useful work starts with understanding the people and the process.
 
 Paragraphs:
-- This site is a portfolio and working profile for management, operations, technical problem-solving, AI-enabled automation, people leadership, and cross-functional execution roles.
-- I am a strong communicator who starts by understanding the issue, the people involved, and the outcome that actually matters.
-- My technical background is a core differentiator: it helps me evaluate systems, automation opportunities, and advanced AI solutions without forcing technology where it does not belong.
-- My value is bringing people, process, technology, and judgment together so clients, teams, and stakeholders can make decisions and execute.
-- I believe strong management begins with understanding people: their responsibilities, pressures, strengths, and concerns, then combining that understanding with clear expectations and practical accountability.
+- I focus on roles and projects involving AI solutions, operations, people leadership, process improvement, business systems, and practical execution.
+- I start by understanding the issue, the people involved, and the outcome that actually matters.
+- My technical background helps me evaluate systems, automation opportunities, and AI solutions without forcing technology where it does not belong.
+- I value honest, direct, ethical work without pretense or overselling.
+- I want to do work that genuinely helps people and organizations, not create activity that merely looks impressive.
 
 Outcomes:
 - Clearer problem definition
@@ -211,27 +173,31 @@ Outcomes:
 - Aligned people and priorities
 
 ## Contact
-Headline: Reach out about an operations, technology, AI, or execution-focused role.
+Headline: Contact Me
 
 Body:
-I am using this site as a portfolio for prospective job opportunities, especially roles involving operations leadership, technical problem-solving, AI-enabled automation, people management, program execution, process improvement, stakeholder alignment, and business systems.
+Reach out regarding a role, collaboration, personalized AI or software solution, or a cumbersome process that should work better.
 
 Secondary:
-I am also open to relevant project or service inquiries when the fit makes sense. Send the context and I will respond directly.
+Send enough context for me to understand the opportunity, project, process, or collaboration. I’ll reply directly when the fit makes sense.
 
 ## Chatbot Knowledge
-Primary audience: hiring teams, recruiters, collaborators, clients, and people considering Reuben for operations, technical problem-solving, AI-enabled automation, people leadership, program management, process improvement, stakeholder coordination, business systems, or execution-focused work.
+Primary audience: hiring teams, recruiters, collaborators, clients, and people considering me for operations, AI solutions, personalized software, people leadership, process improvement, business systems, or execution-focused work.
 
-Core instruction: Frame Reuben as a business operations and technical solutions leader. Do not present him as only a programmer, senior engineer, or standalone AI specialist. Do present technical fluency, advanced AI judgment, and clear communication as core differentiators.
+Core instruction: Frame me as an AI solutions, operations, and people leadership professional. Do not present me as only a programmer, traditional developer, generic manager, AI agency, or standalone chatbot specialist. Do present software fluency, AI judgment, human understanding, and practical operational leadership as core differentiators.
 
-Technical background: Reuben has strong software, systems, database, cloud, automation, and advanced AI fluency. Treat that as a premium management and client-facing advantage because it helps him understand problems, evaluate technical options, use AI or automation when appropriate, and coordinate clearly with technical and non-technical teams.
+GPS: GPS means Genuine, Personalized Solutions. Genuine means solving a real problem and producing a real, usable result. Personalized means the client’s workflow, terminology, people, rules, priorities, existing systems, and comfort level shape the solution. Solutions means the outcome may include software, automation, process changes, dashboards, document intelligence, intake flows, messaging systems, or a combination.
 
-AI judgment: Reuben is not "AI for AI's sake." He understands the issue first, then decides whether the answer is communication, process, system design, automation, AI, or a practical mix.
+GPS mashal: A GPS contains sophisticated technology, but the driver only needs to enter a destination and control the options that matter. I approach software the same way: handling complexity behind the scenes and giving users simple, understandable controls.
 
-Human-centered management: Reuben's compassion and emotional intelligence are management assets. Tie them to concrete outcomes: trust, realistic expectations, smoother adoption of change, better alignment, earlier blocker discovery, and stronger team performance.
+Technology philosophy: Technology should reduce friction, not create another system people struggle to maintain. AI is a delivery capability, not decoration.
 
-Career arc: Reuben deliberately progressed from hands-on web development into software and business systems analysis, then into technical operations, product operations, AI-enabled workflow thinking, project coordination, people leadership, and organizational execution.
+Technical background: I have strong software, systems, database, cloud, automation, and OpenAI API fluency. Treat that as a management and client-facing advantage because it helps me understand problems, evaluate technical options, use AI or automation when appropriate, and coordinate clearly with technical and non-technical teams.
 
-Proof points: Existing public claims include building and scaling an agile delivery team, hiring and mentoring, delivering an MVP marketplace with product/design/marketing/development partners, coordinating internal and overseas developers, creating structured processes and analytics for leadership visibility, leading onboarding and training, improving KPI visibility, migrating third-party tools to internal systems, improving workflows, reducing manual processing through automation, and OpenAI API integration fluency.
+Human-centered management: Compassion and emotional intelligence are management assets. Tie them to concrete outcomes: trust, realistic expectations, smoother adoption of change, better alignment, earlier blocker discovery, and stronger team performance.
 
-Boundaries: Do not invent team sizes, budget numbers, client names, revenue results, or private project metrics. If asked for those details, say the public site does not list them and recommend contacting Reuben directly.
+Career arc: I progressed from hands-on web development into software and business systems analysis, then into technical operations, product operations, team leadership, AI-enabled workflow thinking, and organizational execution.
+
+Public proof points: Existing résumé materials include building and scaling an agile delivery team, hiring and mentoring, delivering an MVP marketplace with product/design/marketing/development partners, coordinating internal and overseas developers, creating structured processes and analytics for leadership visibility, leading onboarding and training, improving KPI visibility, migrating third-party tools to internal systems, improving workflows, reducing manual processing through automation, OpenAI API integration fluency, building a self-service flyer generator, and building a community announcement broadcast interface.
+
+Boundaries: Do not invent team sizes, budget numbers, client names, revenue results, private project metrics, salary expectations, or production status for unverified concepts. If asked for those details, say the detail is not in my résumé materials yet and recommend contacting me directly.

@@ -18,11 +18,11 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rmoddel.com"),
   title: {
-    default: "Reuben Moddel | Business Operations and Technical Solutions Leader",
+    default: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
     template: "%s | Reuben Moddel"
   },
   description:
-    "Personal portfolio for Reuben Moddel, focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and organized execution.",
+    "Reuben Moddel combines 13+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },
@@ -44,6 +44,10 @@ export const metadata: Metadata = {
   keywords: [
     "Reuben Moddel",
     siteProfile.identity.primaryTitle,
+    "AI solutions",
+    "personalized software",
+    "interactive resume",
+    "Genuine Personalized Solutions",
     "operations leadership",
     "people leadership",
     "operations and program management",
@@ -66,23 +70,23 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://rmoddel.com",
     siteName: "rmoddel.com",
-    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
+    title: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
     description:
-      "Personal portfolio focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and practical execution.",
+      "Personal career site focused on AI solutions, operations leadership, people leadership, personalized software, and process improvement.",
     images: [
       {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Reuben Moddel - Business Operations and Technical Solutions Leader"
+        alt: "Reuben Moddel - AI Solutions, Operations, and People Leadership"
       }
     ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reuben Moddel | Business Operations and Technical Solutions Leader",
+    title: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
     description:
-      "Personal portfolio focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, stakeholder alignment, and practical execution.",
+      "AI solutions, operations leadership, people leadership, personalized software, and process improvement.",
     images: ["/twitter-image"]
   },
   robots: {

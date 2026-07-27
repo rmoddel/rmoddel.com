@@ -11,6 +11,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1
     },
     {
+      url: "https://rmoddel.com/work",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8
+    },
+    {
+      url: "https://rmoddel.com/chat",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.9
+    },
+    {
+      url: "https://rmoddel.com/experience",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.8
+    },
+    {
+      url: "https://rmoddel.com/about",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7
+    },
+    {
+      url: "https://rmoddel.com/contact",
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.7
+    },
+    {
       url: "https://rmoddel.com/resume",
       lastModified,
       changeFrequency: "monthly",

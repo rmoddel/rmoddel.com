@@ -3,7 +3,7 @@ import {
   ConverseCommand,
   type Message
 } from "@aws-sdk/client-bedrock-runtime";
-import { assistantSystemPrompt, type AssistantMessage } from "@/lib/assistant";
+import { buildAssistantSystemPrompt, type AssistantMessage } from "@/lib/assistant";
 
 export type AssistantProvider = "ollama" | "bedrock";
 
@@ -35,7 +35,7 @@ function getBedrockRegion() {
   );
 }
 
-export async function askLocalModel(messages: AssistantMessage[]) {
+export async function askLocalModel(messages: AssistantMessage[], context?: string) {
   const baseUrl = process.env.OLLAMA_BASE_URL ?? "http://127.0.0.1:11434";
   const model = process.env.OLLAMA_MODEL ?? "llama3.2:3b";
 
@@ -48,7 +48,7 @@ export async function askLocalModel(messages: AssistantMessage[]) {
       model,
       stream: false,
       messages: [
-        { role: "system", content: assistantSystemPrompt },
+        { role: "system", content: buildAssistantSystemPrompt(context) },
         ...messages.map((message) => ({
           role: message.role,
           content: message.content
@@ -76,7 +76,7 @@ export async function askLocalModel(messages: AssistantMessage[]) {
   return { content, model, source: "local-llm" as const };
 }
 
-export async function askBedrock(messages: AssistantMessage[]) {
+export async function askBedrock(messages: AssistantMessage[], context?: string) {
   const modelId = process.env.BEDROCK_MODEL_ID;
 
   if (!modelId) {
@@ -93,7 +93,7 @@ export async function askBedrock(messages: AssistantMessage[]) {
   const response = await client.send(
     new ConverseCommand({
       modelId,
-      system: [{ text: assistantSystemPrompt }],
+      system: [{ text: buildAssistantSystemPrompt(context) }],
       messages: conversation,
       inferenceConfig: {
         maxTokens: 500,
@@ -114,9 +114,12 @@ export async function askBedrock(messages: AssistantMessage[]) {
   return { content, model: modelId, source: "bedrock" as const };
 }
 
-export async function askAssistantProvider(messages: AssistantMessage[]): Promise<AssistantProviderResult> {
+export async function askAssistantProvider(
+  messages: AssistantMessage[],
+  context?: string
+): Promise<AssistantProviderResult> {
   const provider = getAssistantProvider();
-  return provider === "bedrock" ? askBedrock(messages) : askLocalModel(messages);
+  return provider === "bedrock" ? askBedrock(messages, context) : askLocalModel(messages, context);
 }
 
 export async function getAssistantHealth(): Promise<AssistantHealth> {

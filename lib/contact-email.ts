@@ -2,6 +2,7 @@ export type ContactPayload = {
   name: string;
   email: string;
   phone?: string;
+  organization?: string;
   helpType: string;
   project: string;
   timeline?: string;
@@ -32,6 +33,7 @@ export function createContactEmail(payload: ContactPayload) {
     `Name: ${payload.name}`,
     `Email: ${payload.email}`,
     `Phone: ${payload.phone || "Not provided"}`,
+    `Organization: ${payload.organization || "Not provided"}`,
     `Reason for reaching out: ${payload.helpType}`,
     `Timing: ${payload.timeline || "Not provided"}`,
     `Compensation, budget, or notes: ${payload.budget || "Not provided"}`,
@@ -48,6 +50,7 @@ export function createContactEmail(payload: ContactPayload) {
         ${field("Name", payload.name)}
         ${field("Email", payload.email)}
         ${field("Phone", payload.phone || "Not provided")}
+        ${field("Organization", payload.organization || "Not provided")}
         ${field("Reason for reaching out", payload.helpType)}
         ${field("Timing", payload.timeline || "Not provided")}
         ${field("Compensation, budget, or notes", payload.budget || "Not provided")}

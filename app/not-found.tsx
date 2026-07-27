@@ -28,7 +28,7 @@ export default function NotFound() {
           <div>
             <div className="heroPanelBadge">Navigation</div>
             <p className="panelResult">
-              Use the header or the button below to get back to the main page.
+              Head back home or use the main navigation to keep looking around.
             </p>
           </div>
           <div className="heroOutcomeList">

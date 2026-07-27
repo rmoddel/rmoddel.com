@@ -5,11 +5,11 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "rmoddel.com",
     short_name: "rmoddel.com",
     description:
-      "Personal portfolio for Reuben Moddel, focused on operations leadership, clear communication, technical problem-solving, AI-enabled automation, and practical execution.",
+      "Personal career site for Reuben Moddel, focused on AI solutions, operations, people leadership, personalized software, and practical execution.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f4efe7",
-    theme_color: "#b14b2b",
+    background_color: "#f6f7f4",
+    theme_color: "#0f615c",
     categories: ["business", "productivity"],
     icons: [
       {

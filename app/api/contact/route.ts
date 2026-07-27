@@ -1,10 +1,26 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { createContactEmail, type ContactPayload } from "@/lib/contact-email";
+import {
+  checkContactEmailSuccessLimit,
+  checkContactIpAttemptLimit,
+  getContactClientIp,
+  recordContactEmailSuccess
+} from "@/lib/security/contact-rate-limit";
+import { verifyTurnstile } from "@/lib/security/verify-turnstile";
+
+export const runtime = "nodejs";
 
 type RelayResponse = {
   ok?: boolean;
   error?: string;
   message?: string;
+};
+
+type ContactSubmission = {
+  payload: ContactPayload;
+  honeypot: string;
+  startedAtRaw: string;
+  token: string;
 };
 
 class ContactRouteError extends Error {
@@ -16,10 +32,6 @@ class ContactRouteError extends Error {
     super(message);
     this.name = "ContactRouteError";
   }
-}
-
-function isValidEmail(value: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 type ContactEnvName = "EMAIL_API_URL" | "EMAIL_API_SECRET" | "EMAIL_FROM" | "CONTACT_TO";
@@ -42,15 +54,11 @@ function requiredEnv(name: ContactEnvName) {
     throw new ContactRouteError(
       `Missing required contact environment variable: ${name}`,
       500,
-      "Contact email is not configured right now."
+      "Your message could not be sent. Your information has been preserved—please try again."
     );
   }
 
   return value;
-}
-
-function isProduction() {
-  return process.env.NODE_ENV === "production";
 }
 
 function getContactConfigSnapshot() {
@@ -76,6 +84,41 @@ function getContactConfigSnapshot() {
   };
 }
 
+function contactJson(
+  body: Record<string, unknown>,
+  init?: ResponseInit
+) {
+  return NextResponse.json(body, init);
+}
+
+function clientError(message: string, status = 400, code?: string) {
+  return contactJson(
+    {
+      ok: false,
+      error: message,
+      message,
+      ...(code ? { code } : {})
+    },
+    { status }
+  );
+}
+
+function rateLimitResponse(retryAfter: number) {
+  return contactJson(
+    {
+      ok: false,
+      error: "Too many submission attempts. Please wait a few minutes and try again.",
+      message: "Too many submission attempts. Please wait a few minutes and try again."
+    },
+    {
+      status: 429,
+      headers: {
+        "Retry-After": String(retryAfter)
+      }
+    }
+  );
+}
+
 function contactErrorResponse(error: unknown) {
   const routeError =
     error instanceof ContactRouteError
@@ -83,7 +126,7 @@ function contactErrorResponse(error: unknown) {
       : new ContactRouteError(
           error instanceof Error ? error.message : "Unknown contact send failure.",
           502,
-          "The email service could not send your message right now."
+          "Your message could not be sent. Your information has been preserved—please try again."
         );
 
   console.error("[contact] send failure", {
@@ -93,14 +136,7 @@ function contactErrorResponse(error: unknown) {
     config: getContactConfigSnapshot()
   });
 
-  return NextResponse.json(
-    {
-      ok: false,
-      error: routeError.clientMessage,
-      ...(isProduction() ? {} : { detail: routeError.message })
-    },
-    { status: routeError.status }
-  );
+  return clientError(routeError.clientMessage, routeError.status);
 }
 
 async function readRelayResponse(response: Response) {
@@ -119,84 +155,267 @@ async function readRelayResponse(response: Response) {
   };
 }
 
-function normalizePayload(body: unknown): ContactPayload {
-  const input = body as Record<string, unknown>;
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function clean(value: unknown, maxLength: number) {
+  return String(value || "").trim().slice(0, maxLength);
+}
+
+function getFormString(formData: FormData, field: string, maxLength = 6_000) {
+  const value = formData.get(field);
+
+  return typeof value === "string" ? clean(value, maxLength) : "";
+}
+
+function buildProjectMessage(input: {
+  message: string;
+  goal?: string;
+  difficulty?: string;
+  users?: string;
+}) {
+  return [
+    input.message,
+    input.goal ? `\nGoal:\n${input.goal}` : "",
+    input.difficulty ? `\nCurrent friction:\n${input.difficulty}` : "",
+    input.users ? `\nUsers:\n${input.users}` : ""
+  ]
+    .filter(Boolean)
+    .join("\n")
+    .trim()
+    .slice(0, 6_000);
+}
+
+function normalizeFromFormData(formData: FormData): ContactSubmission {
+  const message = getFormString(formData, "message", 5_000);
+  const project =
+    getFormString(formData, "project", 6_000) ||
+    buildProjectMessage({
+      message,
+      goal: getFormString(formData, "goal", 1_500),
+      difficulty: getFormString(formData, "difficulty", 1_500),
+      users: getFormString(formData, "users", 1_500)
+    });
+  const inquiryType =
+    getFormString(formData, "inquiryType", 120) ||
+    getFormString(formData, "helpType", 120) ||
+    "General inquiry";
 
   return {
-    name: String(input.name || "").trim(),
-    email: String(input.email || "").trim(),
-    phone: String(input.phone || "").trim(),
-    helpType: String(input.helpType || "").trim(),
-    project: String(input.project || "").trim(),
-    timeline: String(input.timeline || "").trim(),
-    budget: String(input.budget || "").trim()
+    payload: {
+      name: getFormString(formData, "name", 120),
+      email: getFormString(formData, "email", 160),
+      phone: getFormString(formData, "phone", 80),
+      organization: getFormString(formData, "organization", 160),
+      helpType: inquiryType,
+      project,
+      timeline: getFormString(formData, "timeline", 200),
+      budget:
+        getFormString(formData, "budget", 500) ||
+        getFormString(formData, "notes", 500)
+    },
+    honeypot:
+      getFormString(formData, "companyWebsite", 300) ||
+      getFormString(formData, "website", 300),
+    startedAtRaw: getFormString(formData, "startedAt", 40),
+    token: getFormString(formData, "cf-turnstile-response", 2_048)
   };
 }
 
-export async function POST(request: Request) {
-  try {
-    const payload = normalizePayload(await request.json());
-
-    if (!payload.name || !payload.email || !payload.helpType || !payload.project) {
-      return NextResponse.json(
-        { ok: false, error: "Please fill in the required fields." },
-        { status: 400 }
-      );
-    }
-
-    if (!isValidEmail(payload.email)) {
-      return NextResponse.json(
-        { ok: false, error: "Please enter a valid email address." },
-        { status: 400 }
-      );
-    }
-
-    const apiUrl = requiredEnv("EMAIL_API_URL");
-    const apiSecret = requiredEnv("EMAIL_API_SECRET");
-    const from = requiredEnv("EMAIL_FROM");
-    const to = requiredEnv("CONTACT_TO");
-    const { subject, text, html } = createContactEmail(payload);
-
-    const relayResponse = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiSecret}`
-      },
-      body: JSON.stringify({
-        from,
-        to,
-        subject,
-        text,
-        html,
-        replyTo: payload.email
-      }),
-      cache: "no-store"
+function normalizeFromJson(body: Record<string, unknown>): ContactSubmission {
+  const message = clean(body.message, 5_000);
+  const project =
+    clean(body.project, 6_000) ||
+    buildProjectMessage({
+      message,
+      goal: clean(body.goal, 1_500),
+      difficulty: clean(body.difficulty, 1_500),
+      users: clean(body.users, 1_500)
     });
 
-    const { data: relayData, bodyPreview } = await readRelayResponse(relayResponse).catch(
-      (error) => ({
-        data: {} as RelayResponse,
-        bodyPreview: error instanceof Error ? error.message : "Could not read relay response."
-      })
+  return {
+    payload: {
+      name: clean(body.name, 120),
+      email: clean(body.email, 160),
+      phone: clean(body.phone, 80),
+      organization: clean(body.organization, 160),
+      helpType:
+        clean(body.inquiryType, 120) ||
+        clean(body.helpType, 120) ||
+        "General inquiry",
+      project,
+      timeline: clean(body.timeline, 200),
+      budget: clean(body.budget, 500) || clean(body.notes, 500)
+    },
+    honeypot: clean(body.companyWebsite, 300) || clean(body.website, 300),
+    startedAtRaw: clean(body.startedAt, 40),
+    token:
+      clean(body["cf-turnstile-response"], 2_048) ||
+      clean(body.turnstileToken, 2_048)
+  };
+}
+
+async function readSubmission(request: NextRequest) {
+  const contentType = request.headers.get("content-type") || "";
+
+  if (
+    contentType.includes("multipart/form-data") ||
+    contentType.includes("application/x-www-form-urlencoded")
+  ) {
+    return normalizeFromFormData(await request.formData());
+  }
+
+  const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
+  return normalizeFromJson(body);
+}
+
+function validatePayload(payload: ContactPayload) {
+  const normalizedEmail = payload.email.toLowerCase();
+
+  if (
+    payload.name.length < 2 ||
+    payload.name.length > 100 ||
+    payload.project.length < 10 ||
+    payload.project.length > 5_000
+  ) {
+    return {
+      ok: false as const,
+      response: clientError("Please check the form and try again.")
+    };
+  }
+
+  if (!payload.helpType) {
+    return {
+      ok: false as const,
+      response: clientError("Please check the form and try again.")
+    };
+  }
+
+  if (!isValidEmail(normalizedEmail)) {
+    return {
+      ok: false as const,
+      response: clientError("Please enter a valid email address.")
+    };
+  }
+
+  return {
+    ok: true as const,
+    payload: {
+      ...payload,
+      email: normalizedEmail
+    }
+  };
+}
+
+async function sendContactMessage(payload: ContactPayload) {
+  const apiUrl = requiredEnv("EMAIL_API_URL");
+  const apiSecret = requiredEnv("EMAIL_API_SECRET");
+  const from = requiredEnv("EMAIL_FROM");
+  const to = requiredEnv("CONTACT_TO");
+  const { subject, text, html } = createContactEmail(payload);
+
+  const relayResponse = await fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiSecret}`
+    },
+    body: JSON.stringify({
+      from,
+      to,
+      subject,
+      text,
+      html,
+      replyTo: payload.email
+    }),
+    cache: "no-store",
+    signal: AbortSignal.timeout(10_000)
+  });
+
+  const { data: relayData, bodyPreview } = await readRelayResponse(relayResponse).catch(
+    (error) => ({
+      data: {} as RelayResponse,
+      bodyPreview: error instanceof Error ? error.message : "Could not read relay response."
+    })
+  );
+
+  if (!relayResponse.ok || relayData.ok === false) {
+    const relayRequestId =
+      relayResponse.headers.get("apigw-requestid") ??
+      relayResponse.headers.get("x-amzn-requestid") ??
+      "unknown-request-id";
+
+    throw new ContactRouteError(
+      `Email relay request failed with ${relayResponse.status} (${relayRequestId}): ${
+        relayData.error || relayData.message || bodyPreview || "Relay did not return ok."
+      }`,
+      502,
+      "Your message could not be sent. Your information has been preserved—please try again."
     );
+  }
+}
 
-    if (!relayResponse.ok || relayData.ok === false) {
-      const relayRequestId =
-        relayResponse.headers.get("apigw-requestid") ??
-        relayResponse.headers.get("x-amzn-requestid") ??
-        "unknown-request-id";
+export async function POST(request: NextRequest) {
+  try {
+    const submission = await readSubmission(request);
 
-      throw new ContactRouteError(
-        `Email relay request failed with ${relayResponse.status} (${relayRequestId}): ${
-          relayData.error || relayData.message || bodyPreview || "Relay did not return ok."
-        }`,
-        502,
-        "The email service could not send your message right now."
+    if (submission.honeypot) {
+      return contactJson({ ok: true });
+    }
+
+    const startedAt = Number(submission.startedAtRaw);
+    const elapsed = Date.now() - startedAt;
+
+    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
+      return contactJson({ ok: true });
+    }
+
+    const ip = getContactClientIp(request);
+    const ipLimit = await checkContactIpAttemptLimit(ip);
+
+    if (!ipLimit.allowed) {
+      return rateLimitResponse(ipLimit.retryAfter);
+    }
+
+    const validation = validatePayload(submission.payload);
+
+    if (!validation.ok) {
+      return validation.response;
+    }
+
+    if (!submission.token) {
+      return clientError(
+        "Please complete the security verification.",
+        400,
+        "BOT_TOKEN_MISSING"
       );
     }
 
-    return NextResponse.json({ ok: true });
+    const emailLimit = await checkContactEmailSuccessLimit(validation.payload.email);
+
+    if (!emailLimit.allowed) {
+      return rateLimitResponse(emailLimit.retryAfter);
+    }
+
+    const verified = await verifyTurnstile({
+      token: submission.token,
+      ip,
+      expectedAction: "contact"
+    });
+
+    if (!verified) {
+      return clientError(
+        "We couldn’t verify the submission. Please try again.",
+        400,
+        "BOT_VERIFICATION_FAILED"
+      );
+    }
+
+    await sendContactMessage(validation.payload);
+    await recordContactEmailSuccess(validation.payload.email);
+
+    return contactJson({ ok: true });
   } catch (error) {
     return contactErrorResponse(error);
   }

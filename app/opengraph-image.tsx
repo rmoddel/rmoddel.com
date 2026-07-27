@@ -19,8 +19,8 @@ export default function OpenGraphImage() {
           justifyContent: "space-between",
           padding: "56px",
           background:
-            "linear-gradient(180deg, rgba(248,242,234,1) 0%, rgba(244,239,231,1) 56%, rgba(237,223,209,1) 100%)",
-          color: "#1f1a17"
+            "linear-gradient(180deg, rgba(246,247,244,1) 0%, rgba(232,239,235,1) 58%, rgba(216,226,224,1) 100%)",
+          color: "#16201f"
         }}
       >
         <div
@@ -34,8 +34,8 @@ export default function OpenGraphImage() {
             style={{
               width: "78px",
               height: "78px",
-              borderRadius: "20px",
-              background: "linear-gradient(135deg, #b14b2b, #d27d56)",
+              borderRadius: "10px",
+              background: "linear-gradient(135deg, #0f615c, #b75b39)",
               color: "white",
               display: "flex",
               alignItems: "center",
@@ -49,7 +49,7 @@ export default function OpenGraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: "28px", fontWeight: 700 }}>Reuben Moddel</div>
             <div style={{ fontSize: "20px", color: "#5c5550" }}>
-              Business Operations and Technical Solutions Leader
+              AI Solutions, Operations, and People Leadership
             </div>
           </div>
         </div>
@@ -59,17 +59,17 @@ export default function OpenGraphImage() {
               fontSize: "22px",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
-              color: "#82351d"
+              color: "#0f615c"
             }}
           >
-            Clear communication. Technical judgment. AI-enabled execution.
+            Genuine problems. Personalized software. Practical results.
           </div>
           <div style={{ fontSize: "74px", lineHeight: 0.96 }}>
-            Operations, Technology, and People Leader
+            AI Solutions, Operations, and People Leadership
           </div>
           <div style={{ fontSize: "28px", color: "#5c5550", lineHeight: 1.35 }}>
-            Understanding the real issue first, then applying people, process, systems,
-            automation, or advanced AI when they fit.
+            Improving cumbersome real-world processes through human understanding,
+            practical judgment, and personalized software.
           </div>
         </div>
       </div>
