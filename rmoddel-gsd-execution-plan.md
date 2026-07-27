@@ -331,7 +331,7 @@ Do not:
 
 Use a short 2–3 sentence pitch:
 
-> Reuben brings more than 13 years of experience across software, business systems, operations, process improvement, product delivery, and team leadership. His strongest value is understanding complex situations, aligning the people involved, and turning organizational needs into practical execution. He also uses AI and personalized software to improve cumbersome processes and create simpler ways for teams to work.
+> Reuben brings more than 15 years of experience across software, business systems, operations, process improvement, product delivery, and team leadership. His strongest value is understanding complex situations, aligning the people involved, and turning organizational needs into practical execution. He also uses AI and personalized software to improve cumbersome processes and create simpler ways for teams to work.
 
 Buttons:
 

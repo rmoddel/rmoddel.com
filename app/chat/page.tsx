@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { InteractiveResume } from "@/components/interactive-resume";
 import { TurnstileScript } from "@/components/turnstile";
 import { chatTopics, starterQuestions } from "@/lib/interactive-resume-content";
+import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Interactive Résumé | Ask About Reuben Moddel",
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
     lastName: "Moddel",
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImagePath,
         width: 1200,
         height: 630,
         alt: "Interactive résumé for Reuben Moddel"
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     title: "Interactive Résumé | Ask About Reuben Moddel",
     description:
       "Ask about Reuben Moddel’s experience, leadership, AI work, projects, and GPS approach.",
-    images: ["/twitter-image"]
+    images: [twitterImagePath]
   }
 };
 

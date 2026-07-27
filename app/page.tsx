@@ -10,6 +10,7 @@ import {
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { professionalDescriptor } from "@/lib/interactive-resume-content";
+import { absoluteOpenGraphImageUrl, openGraphImagePath, twitterImagePath } from "@/lib/seo";
 import { technicalBackground } from "@/lib/site-content";
 import { siteProfile } from "@/lib/site-profile";
 
@@ -23,7 +24,7 @@ const jsonLd = {
       "@id": "https://rmoddel.com/#person",
       name: siteProfile.identity.name,
       url: "https://rmoddel.com",
-      image: "https://rmoddel.com/opengraph-image",
+      image: absoluteOpenGraphImageUrl,
       jobTitle: siteProfile.identity.primaryTitle,
       description: siteProfile.positioning.summary,
       knowsAbout: [
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
     lastName: "Moddel",
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImagePath,
         width: 1200,
         height: 630,
         alt: "Reuben Moddel - AI Solutions, Operations, and People Leadership"
@@ -103,7 +104,7 @@ export const metadata: Metadata = {
     title: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
     description:
       "AI-enabled solutions, operations leadership, people leadership, and personalized software for cumbersome processes.",
-    images: ["/twitter-image"]
+    images: [twitterImagePath]
   }
 };
 

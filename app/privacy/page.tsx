@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
@@ -19,7 +20,7 @@ export const metadata: Metadata = {
     type: "article",
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImagePath,
         width: 1200,
         height: 630,
         alt: "rmoddel.com privacy policy"
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
     title: "Privacy Policy | Reuben Moddel",
     description:
       "Privacy policy for rmoddel.com and related projects published by Reuben Moddel.",
-    images: ["/twitter-image"]
+    images: [twitterImagePath]
   }
 };
 

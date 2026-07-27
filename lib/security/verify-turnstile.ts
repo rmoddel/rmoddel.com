@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 type TurnstileVerification = {
   success: boolean;
   challenge_ts?: string;
@@ -32,19 +34,24 @@ export async function verifyTurnstile({
   }
 
   try {
+    const body = new URLSearchParams({
+      secret,
+      response: token,
+      idempotency_key: randomUUID()
+    });
+
+    if (ip) {
+      body.set("remoteip", ip);
+    }
+
     const response = await fetch(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({
-          secret,
-          response: token,
-          remoteip: ip,
-          idempotency_key: crypto.randomUUID()
-        }),
+        body,
         cache: "no-store",
         signal: AbortSignal.timeout(8_000)
       }

@@ -364,24 +364,11 @@ export async function POST(request: NextRequest) {
       return contactJson({ ok: true });
     }
 
-    const startedAt = Number(submission.startedAtRaw);
-    const elapsed = Date.now() - startedAt;
-
-    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
-      return contactJson({ ok: true });
-    }
-
     const ip = getContactClientIp(request);
     const ipLimit = await checkContactIpAttemptLimit(ip);
 
     if (!ipLimit.allowed) {
       return rateLimitResponse(ipLimit.retryAfter);
-    }
-
-    const validation = validatePayload(submission.payload);
-
-    if (!validation.ok) {
-      return validation.response;
     }
 
     if (!submission.token) {
@@ -390,12 +377,6 @@ export async function POST(request: NextRequest) {
         400,
         "BOT_TOKEN_MISSING"
       );
-    }
-
-    const emailLimit = await checkContactEmailSuccessLimit(validation.payload.email);
-
-    if (!emailLimit.allowed) {
-      return rateLimitResponse(emailLimit.retryAfter);
     }
 
     const verified = await verifyTurnstile({
@@ -410,6 +391,25 @@ export async function POST(request: NextRequest) {
         400,
         "BOT_VERIFICATION_FAILED"
       );
+    }
+
+    const startedAt = Number(submission.startedAtRaw);
+    const elapsed = Date.now() - startedAt;
+
+    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
+      return contactJson({ ok: true });
+    }
+
+    const validation = validatePayload(submission.payload);
+
+    if (!validation.ok) {
+      return validation.response;
+    }
+
+    const emailLimit = await checkContactEmailSuccessLimit(validation.payload.email);
+
+    if (!emailLimit.allowed) {
+      return rateLimitResponse(emailLimit.retryAfter);
     }
 
     await sendContactMessage(validation.payload);

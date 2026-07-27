@@ -94,7 +94,7 @@ export const chatTopics: ChatTopic[] = [
     id: "experience",
     label: "My Experience",
     openingAnswer:
-      "I bring 13+ years across business systems, operations, software delivery, process improvement, and team leadership. My career moved from hands-on web development into software and systems analysis, technical operations, product operations, and leadership roles where I coordinated people, process, and delivery.\n\nMy public resume includes roles at GPARENCY, Eastern Union, CardCash, Central Analysis Bureau, and New York Guest Services. The throughline is practical execution: understanding the real problem, aligning technical and nontechnical contributors, and moving useful work forward.",
+      "I bring 15+ years across business systems, operations, software delivery, process improvement, and team leadership. My career moved from hands-on web development into software and systems analysis, technical operations, product operations, and leadership roles where I coordinated people, process, and delivery.\n\nMy public resume includes roles at GPARENCY, Eastern Union, CardCash, Central Analysis Bureau, and New York Guest Services. The throughline is practical execution: understanding the real problem, aligning technical and nontechnical contributors, and moving useful work forward.",
     followUps: [
       "What did you do at GPARENCY?",
       "What management experience do you have?",

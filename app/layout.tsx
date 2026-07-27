@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Fraunces, Sora } from "next/font/google";
+import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 import { siteProfile } from "@/lib/site-profile";
 import "./globals.css";
 
@@ -75,7 +76,7 @@ export const metadata: Metadata = {
       "Personal career site focused on AI solutions, operations leadership, people leadership, personalized software, and process improvement.",
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImagePath,
         width: 1200,
         height: 630,
         alt: "Reuben Moddel - AI Solutions, Operations, and People Leadership"
@@ -87,7 +88,7 @@ export const metadata: Metadata = {
     title: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
     description:
       "AI solutions, operations leadership, people leadership, personalized software, and process improvement.",
-    images: ["/twitter-image"]
+    images: [twitterImagePath]
   },
   robots: {
     index: true,

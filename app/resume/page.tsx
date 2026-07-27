@@ -11,6 +11,7 @@ import {
   resumeSummary,
   technicalSkills
 } from "@/lib/resume-content";
+import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 import { siteProfile } from "@/lib/site-profile";
 
 export const metadata: Metadata = {
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     lastName: "Moddel",
     images: [
       {
-        url: "/opengraph-image",
+        url: openGraphImagePath,
         width: 1200,
         height: 630,
         alt: "Reuben Moddel resume"
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     title: "Résumé | Reuben Moddel",
     description:
       "Employment history, education, skills, and downloadable résumé for Reuben Moddel.",
-    images: ["/twitter-image"]
+    images: [twitterImagePath]
   }
 };
 
@@ -62,7 +63,7 @@ export default function ResumePage() {
           <h1>{resumeIdentity.name}</h1>
           <p className="heroText resumeHeadline">{resumeIdentity.title}</p>
           <p className="sectionIntro resumeIntro">
-            I bring more than 13 years of experience across software,
+            I bring more than 15 years of experience across software,
             business systems, operations, process improvement, product delivery,
             and team leadership. My strongest value is understanding complex
             situations, aligning the people involved, and turning organizational
