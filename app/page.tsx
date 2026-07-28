@@ -76,7 +76,7 @@ const jsonLd = {
 export const metadata: Metadata = {
   title: "Reuben Moddel | AI Solutions, Operations, and People Leadership",
   description:
-    "Reuben Moddel combines 13+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.",
+    "Reuben Moddel combines 15+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.",
   alternates: {
     canonical: "/"
   },

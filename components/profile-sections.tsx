@@ -25,7 +25,7 @@ export function HeroSection() {
         <p className="heroSupport">{siteProfile.hero.spark}</p>
         <div className="heroActions">
           <a className="button" href="/chat">
-            Ask My Interactive Resume
+            Chat With My Resume
           </a>
           <a className="button buttonSecondary" href="/resume">
             View My Resume

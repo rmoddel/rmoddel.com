@@ -9,7 +9,7 @@ export const customerSuccessResumeIdentity = {
 } as const;
 
 export const customerSuccessResumeSummary = [
-  "Customer-facing operations and process improvement leader with 13+ years of experience driving complex business systems and operational initiatives from problem definition through execution.",
+  "Customer-facing operations and process improvement leader with 15+ years of experience driving complex business systems and operational initiatives from problem definition through execution.",
   "Partners with executives, stakeholders, product, engineering, and operations teams to resolve issues, improve processes, deliver reporting, and translate business needs into clear priorities.",
   "Known for building trust quickly, staying organized in ambiguous environments, and helping teams deliver practical outcomes that support customers and end users."
 ] as const;

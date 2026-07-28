@@ -98,7 +98,7 @@ export default function ResumePage() {
             <div className="heroPanelBadge">Profile</div>
             <p className="panelResult">
               This is the straight résumé: roles, education, skills, and a PDF.
-              If you want to dig into a topic, ask the interactive résumé.
+              If you want to dig into a topic, chat with my résumé.
             </p>
           </div>
           <div className="heroOutcomeList">

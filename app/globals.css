@@ -357,7 +357,7 @@ a:focus-visible {
 
 .resumeHero .eyebrow,
 .notFoundHero .eyebrow {
-  color: var(--accent);
+  color: #f1c77a;
 }
 
 .resumeHero .heroSpark,

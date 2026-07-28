@@ -506,7 +506,7 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
               </p>
               <article className="introCard">
                 <p>
-                  I bring 13+ years across business systems,
+                  I bring 15+ years across business systems,
                   operations, software delivery, process improvement, and team
                   leadership. I combine human understanding and practical
                   execution with AI-enabled software to improve cumbersome

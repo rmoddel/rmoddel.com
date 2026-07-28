@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: "%s | Reuben Moddel"
   },
   description:
-    "Reuben Moddel combines 13+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.",
+    "Reuben Moddel combines 15+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.",
   icons: {
     icon: [
       { url: "/favicon.svg", type: "image/svg+xml" },

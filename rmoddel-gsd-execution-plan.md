@@ -34,7 +34,7 @@ Do not alternate among unrelated identities such as Product Operations Leader, T
 
 ### Governing Positioning Statement
 
-> Reuben combines 13+ years across business systems, operations, software delivery, process improvement, and team leadership with the ability to use AI and personalized software to improve cumbersome real-world processes.
+> Reuben combines 15+ years across business systems, operations, software delivery, process improvement, and team leadership with the ability to use AI and personalized software to improve cumbersome real-world processes.
 
 ### Core Client-Facing Promise
 
@@ -190,7 +190,7 @@ The landing page should orient visitors quickly and send them to the experience 
 
 #### Eyebrow
 
-> **13+ Years Across Operations, Systems, and Team Leadership**
+> **15+ Years Across Operations, Systems, and Team Leadership**
 
 #### Headline
 
@@ -222,7 +222,7 @@ Text link:
 
 Use three short items:
 
-- **13+ years of professional experience**
+- **15+ years of professional experience**
 - **Leadership across people, projects, systems, and operations**
 - **AI-enabled tools built around real workflows**
 
@@ -272,7 +272,7 @@ Include this line once:
 
 CTA: **View Résumé**
 
-#### Ask the Interactive Résumé
+#### Chat With My Résumé
 
 > Ask about Reuben’s experience, leadership style, AI work, skills, projects, or fit for an opportunity.
 
@@ -494,7 +494,7 @@ Do not open with a blank chat box.
 
 ### Fixed Intro Card
 
-> Reuben Moddel brings 13+ years across business systems, operations, software delivery, process improvement, and team leadership. He combines human understanding and practical execution with AI-enabled software to improve cumbersome real-world processes.
+> Reuben Moddel brings 15+ years across business systems, operations, software delivery, process improvement, and team leadership. He combines human understanding and practical execution with AI-enabled software to improve cumbersome real-world processes.
 
 ### Starter Questions
 
@@ -543,7 +543,7 @@ Each sidebar item should load:
 
 Summarize:
 
-- 13+ years
+- 15+ years
 - Progression from web development to analysis, operations, product delivery, and leadership
 - Experience coordinating internal and distributed contributors
 - Link to `/resume`
@@ -1116,7 +1116,7 @@ Title:
 
 Description:
 
-> Reuben Moddel combines 13+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.
+> Reuben Moddel combines 15+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.
 
 ### Résumé
 

@@ -10,10 +10,10 @@ Phone: 732-552-4475
 Email: rmoddel@gmail.com
 
 ## Positioning
-Credential: 13+ years across operations, systems, software delivery, process improvement, and team leadership.
+Credential: 15+ years across operations, systems, software delivery, process improvement, and team leadership.
 
 Summary:
-I combine 13+ years across business systems, operations, software delivery, process improvement, and team leadership with the ability to use AI and personalized software to improve cumbersome real-world processes.
+I combine 15+ years across business systems, operations, software delivery, process improvement, and team leadership with the ability to use AI and personalized software to improve cumbersome real-world processes.
 
 Narrative:
 I help organizations understand the real process, the people affected, and the outcome that matters. I then lead the right mix of process improvement, software, automation, AI, communication, and operational execution so the solution is practical and usable.
@@ -22,7 +22,7 @@ People Principle:
 Strong management begins with understanding people: their responsibilities, pressures, strengths, and concerns. Good solutions combine that understanding with clear expectations, practical accountability, and technology only where it helps.
 
 ## Hero
-Eyebrow: 13+ Years Across Operations, Systems, and Team Leadership
+Eyebrow: 15+ Years Across Operations, Systems, and Team Leadership
 Spark: Genuine problems. Personalized software. Practical results.
 Headline: I understand cumbersome processes and build better ways to run them.
 
@@ -51,7 +51,7 @@ Panel Items:
 Panel Result: Powerful technology behind the scenes. Simple control in your hands.
 
 Credential Strip:
-- 13+ years of professional experience
+- 15+ years of professional experience
 - Leadership across people, projects, systems, and operations
 - AI-enabled tools built around real workflows
 

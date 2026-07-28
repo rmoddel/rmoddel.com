@@ -447,7 +447,7 @@ export function AiWidget() {
         </button>
       ) : null}
       {isOpen ? (
-        <section aria-label="Chat with the interactive resume agent" className="aiWidgetPanel">
+        <section aria-label="Chat with my resume agent" className="aiWidgetPanel">
           <div className="aiWidgetHeader">
             <div>
               <p className="footerLabel">Site assistant</p>

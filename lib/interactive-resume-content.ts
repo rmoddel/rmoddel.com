@@ -31,7 +31,7 @@ export const landingNavigation = [
     cta: "View Resume"
   },
   {
-    title: "Ask the Interactive Resume",
+    title: "Chat With My Resume",
     body: "Ask about my experience, leadership style, AI work, skills, projects, or fit for an opportunity.",
     href: "/chat",
     cta: "Start a Conversation"
