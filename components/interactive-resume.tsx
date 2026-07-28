@@ -102,28 +102,40 @@ function buildContactMessage(draft: ContactDraft) {
 }
 
 type InteractiveResumeProps = {
+  initialTopicId?: string;
   topics: ChatTopic[];
   starterQuestions: readonly string[];
 };
 
-export function InteractiveResume({ topics, starterQuestions }: InteractiveResumeProps) {
+export function InteractiveResume({
+  initialTopicId,
+  topics,
+  starterQuestions
+}: InteractiveResumeProps) {
+  const initialTopic = initialTopicId
+    ? topics.find((topic) => topic.id === initialTopicId)
+    : undefined;
   const router = useRouter();
   const searchParams = useSearchParams();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [activeTopicId, setActiveTopicId] = useState<string | null>(null);
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [activeTopicId, setActiveTopicId] = useState<string | null>(
+    initialTopic?.id ?? null
+  );
+  const [messages, setMessages] = useState<ChatMessage[]>(
+    initialTopic ? [{ role: "assistant", content: initialTopic.openingAnswer }] : []
+  );
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [recentTopicIds, setRecentTopicIds] = useState<string[]>([]);
   const [contactDraft, setContactDraft] = useState<ContactDraft>(initialContactDraft);
   const [contactStatus, setContactStatus] = useState<ContactStatus>({
-    state: "idle",
+    state: initialTopic?.id === "contact" ? "editing" : "idle",
     message: ""
   });
   const messagesRef = useRef<HTMLDivElement>(null);
   const contactFormRef = useRef<HTMLFormElement>(null);
   const contactStartedAt = useRef(Date.now());
-  const loadedTopicRef = useRef<string | null>(null);
+  const loadedTopicRef = useRef<string | null>(initialTopic?.id ?? null);
 
   const topicMap = useMemo(
     () => new Map(topics.map((topic) => [topic.id, topic])),
@@ -171,6 +183,10 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
     window.localStorage.setItem("rmoddel-chat-recents", JSON.stringify(next));
   }
 
+  function getTopicHref(topicId: string) {
+    return `/chat/${topicId}`;
+  }
+
   function loadTopic(topic: ChatTopic, updateUrl = true) {
     loadedTopicRef.current = topic.id;
     setActiveTopicId(topic.id);
@@ -184,7 +200,7 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
     storeRecentTopic(topic.id);
 
     if (updateUrl) {
-      router.push(`/chat?topic=${topic.id}`, { scroll: false });
+      router.push(getTopicHref(topic.id), { scroll: false });
     }
   }
 
@@ -256,7 +272,7 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
           role: "assistant",
           content:
             data.reply?.trim() ||
-            "That detail is not in my résumé materials yet. You can contact me directly for the specifics."
+            "I don't have that published here yet. Contact me if you need the specifics."
         }
       ]);
     } catch (error) {
@@ -266,8 +282,8 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
           role: "assistant",
           content:
             error instanceof Error
-              ? `${error.message} You can still view my résumé, learn about my background, or contact me directly.`
-              : "I cannot answer from the résumé right now. You can still view my résumé, learn about my background, or contact me directly."
+              ? `${error.message} Try again in a moment, or contact me directly.`
+              : "I can't answer from the resume right now. Try again in a moment, or contact me directly."
         }
       ]);
     } finally {
@@ -452,14 +468,17 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
 
         <nav className="topicNav" aria-label="Interactive résumé topics">
           {topics.map((topic) => (
-            <button
+            <a
               aria-current={activeTopicId === topic.id ? "page" : undefined}
+              href={getTopicHref(topic.id)}
               key={topic.id}
-              onClick={() => loadTopic(topic)}
-              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                loadTopic(topic);
+              }}
             >
               {topic.label}
-            </button>
+            </a>
           ))}
         </nav>
 
@@ -467,9 +486,16 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
           <div className="recentTopics">
             <p className="footerLabel">Recent</p>
             {visibleRecentTopics.map((topic) => (
-              <button key={topic.id} onClick={() => loadTopic(topic)} type="button">
+              <a
+                href={getTopicHref(topic.id)}
+                key={topic.id}
+                onClick={(event) => {
+                  event.preventDefault();
+                  loadTopic(topic);
+                }}
+              >
                 {topic.label}
-              </button>
+              </a>
             ))}
           </div>
         ) : null}
@@ -701,7 +727,7 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
                   >
                     {contactStatus.message || "Review the details before sending."}
                   </p>
-                  {canSendContact ? <TurnstileWidget action="contact" /> : null}
+                  {canSendContact ? <TurnstileWidget /> : null}
                   <div className="contactReviewActions">
                     <button className="button buttonSecondary smallButton" type="submit">
                       Review Message

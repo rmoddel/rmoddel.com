@@ -1,5 +1,3 @@
-import { randomUUID } from "crypto";
-
 type TurnstileVerification = {
   success: boolean;
   challenge_ts?: string;
@@ -36,8 +34,7 @@ export async function verifyTurnstile({
   try {
     const body = new URLSearchParams({
       secret,
-      response: token,
-      idempotency_key: randomUUID()
+      response: token
     });
 
     if (ip) {

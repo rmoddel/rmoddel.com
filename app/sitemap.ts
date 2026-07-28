@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { chatTopics } from "@/lib/interactive-resume-content";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
@@ -22,6 +23,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.9
     },
+    ...chatTopics.map((topic) => ({
+      url: `https://rmoddel.com/chat/${topic.id}`,
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.75
+    })),
     {
       url: "https://rmoddel.com/experience",
       lastModified,

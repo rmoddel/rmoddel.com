@@ -224,7 +224,7 @@ export function ExperienceSection() {
         <a className="button" href="/resume">
           View Resume
         </a>
-        <a className="button buttonSecondary" href="/chat?topic=experience">
+        <a className="button buttonSecondary" href="/chat/experience">
           Ask About Experience
         </a>
       </div>

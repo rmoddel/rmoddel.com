@@ -84,7 +84,7 @@ export default function ResumePage() {
             <a className="button smallButton" href="/resume.pdf">
               Download PDF
             </a>
-            <a className="button buttonSecondary smallButton" href="/chat?topic=experience">
+            <a className="button buttonSecondary smallButton" href="/chat/experience">
               Ask About This Résumé
             </a>
             <a className="button buttonSecondary smallButton" href="/contact">

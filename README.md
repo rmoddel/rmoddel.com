@@ -84,7 +84,7 @@ Notes:
 - `EMAIL_API_SECRET` stays server-side and should not be exposed as a public browser env var
 - `EMAIL_FROM` must match a sender recognized by the relay
 - `CONTACT_TO` is the inbox that should receive website inquiries
-- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is the public Cloudflare Turnstile site key
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is the public Cloudflare Turnstile site key. Production uses the existing `rmoddel-contact` widget: `0x4AAAAAAD_YHJOD4zhGoAs1`
 - `TURNSTILE_SECRET_KEY` stays server-side and is used by `/api/contact` for Siteverify
 - `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` enable persistent contact rate limiting
 - `ASSISTANT_PROVIDER` selects the assistant backend: `ollama` for local development or `bedrock` for Amplify production

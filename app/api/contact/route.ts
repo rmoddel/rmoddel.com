@@ -6,6 +6,7 @@ import {
   getContactClientIp,
   recordContactEmailSuccess
 } from "@/lib/security/contact-rate-limit";
+import { TURNSTILE_ACTION } from "@/lib/security/turnstile-config";
 import { verifyTurnstile } from "@/lib/security/verify-turnstile";
 
 export const runtime = "nodejs";
@@ -122,6 +123,22 @@ function rateLimitResponse(retryAfter: number) {
 function silentDiscard(reason: "honeypot" | "completion_time") {
   console.warn("[contact] silently discarded submission", { reason });
   return contactJson({ ok: true, sent: false });
+}
+
+function reportCompletionTiming(startedAtRaw: string) {
+  const startedAt = Number(startedAtRaw);
+  const elapsed = Date.now() - startedAt;
+
+  if (!startedAtRaw || !Number.isFinite(elapsed)) {
+    console.warn("[contact] completion timer missing or invalid");
+    return;
+  }
+
+  if (elapsed < 2_000) {
+    console.warn("[contact] fast completion after Turnstile verification", {
+      elapsed
+    });
+  }
 }
 
 function contactErrorResponse(error: unknown) {
@@ -369,13 +386,6 @@ export async function POST(request: NextRequest) {
       return silentDiscard("honeypot");
     }
 
-    const startedAt = Number(submission.startedAtRaw);
-    const elapsed = Date.now() - startedAt;
-
-    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
-      return silentDiscard("completion_time");
-    }
-
     const ip = getContactClientIp(request);
     const ipLimit = await checkContactIpAttemptLimit(ip);
 
@@ -394,7 +404,7 @@ export async function POST(request: NextRequest) {
     const verified = await verifyTurnstile({
       token: submission.token,
       ip,
-      expectedAction: "contact"
+      expectedAction: TURNSTILE_ACTION
     });
 
     if (!verified) {
@@ -404,6 +414,8 @@ export async function POST(request: NextRequest) {
         "BOT_VERIFICATION_FAILED"
       );
     }
+
+    reportCompletionTiming(submission.startedAtRaw);
 
     const validation = validatePayload(submission.payload);
 

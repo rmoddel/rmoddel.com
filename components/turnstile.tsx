@@ -2,12 +2,16 @@
 
 import { useEffect, useRef } from "react";
 import Script from "next/script";
+import {
+  TURNSTILE_ACTION,
+  TURNSTILE_SITE_KEY
+} from "@/lib/security/turnstile-config";
 
 type TurnstileWidgetProps = {
   action?: string;
 };
 
-const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
+const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || TURNSTILE_SITE_KEY;
 
 export function TurnstileScript() {
   return (
@@ -18,7 +22,7 @@ export function TurnstileScript() {
   );
 }
 
-export function TurnstileWidget({ action = "contact" }: TurnstileWidgetProps) {
+export function TurnstileWidget({ action = TURNSTILE_ACTION }: TurnstileWidgetProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
 

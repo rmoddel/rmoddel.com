@@ -179,7 +179,7 @@ export function ContactForm() {
         <input name="notes" type="text" />
       </label>
 
-      <TurnstileWidget action="contact" />
+      <TurnstileWidget />
 
       <button className="button" type="submit" disabled={formState.status === "submitting"}>
         {formState.status === "submitting" ? "Sending..." : "Send Message"}
