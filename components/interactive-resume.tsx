@@ -263,7 +263,7 @@ export function InteractiveResume({
       const data = (await response.json()) as { reply?: string; error?: string };
 
       if (!response.ok) {
-        throw new Error(data.error || "I cannot answer from the résumé right now.");
+        throw new Error(data.error || "I cannot answer from the resume right now.");
       }
 
       setMessages((current) => [
@@ -369,7 +369,7 @@ export function InteractiveResume({
     }
 
     formData.set("timeline", "");
-    formData.set("budget", "Submitted through interactive résumé");
+    formData.set("budget", "Submitted through interactive resume");
 
     setContactStatus({ state: "sending", message: "Sending..." });
 
@@ -450,7 +450,7 @@ export function InteractiveResume({
           <a href="/">RM</a>
           <div>
             <strong>Reuben Moddel</strong>
-            <span>Interactive Résumé</span>
+            <span>Interactive Resume</span>
           </div>
           <button
             aria-label="Close topics"
@@ -466,7 +466,7 @@ export function InteractiveResume({
           New Conversation
         </button>
 
-        <nav className="topicNav" aria-label="Interactive résumé topics">
+        <nav className="topicNav" aria-label="Interactive resume topics">
           {topics.map((topic) => (
             <a
               aria-current={activeTopicId === topic.id ? "page" : undefined}
@@ -501,21 +501,21 @@ export function InteractiveResume({
         ) : null}
 
         <div className="chatSidebarLinks">
-          <a href="/resume">Résumé</a>
+          <a href="/resume">Resume</a>
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
         </div>
       </aside>
 
-      <section className="chatMain" aria-label="Interactive résumé conversation">
+      <section className="chatMain" aria-label="Interactive resume conversation">
         <header className="chatTopBar">
           <div>
-            <p className="eyebrow">Interactive Résumé</p>
+            <p className="eyebrow">Interactive Resume</p>
             <h1>{activeTopic?.label ?? "Ask Anything About My Background"}</h1>
           </div>
           <div className="chatTopActions">
             <a className="button buttonSecondary smallButton" href="/resume">
-              View Résumé
+              View Resume
             </a>
             <a className="button smallButton" href="/contact">
               Contact Me

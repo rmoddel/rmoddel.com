@@ -50,7 +50,7 @@ export default function PrivacyPage() {
         </div>
 
         <p className="sectionIntro">
-          This Privacy Policy applies to rmoddel.com, the interactive résumé,
+          This Privacy Policy applies to rmoddel.com, the interactive resume,
           contact forms, and related software projects, tools, and browser
           extensions published by Reuben Moddel. It is written to function as a
           general site policy while also preserving the current disclosures for
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
           collect the information you choose to submit, such as your name,
           email address, phone number, organization, role or project context,
           process details, timing, compensation, budget, or related notes. If
-          you use the interactive résumé, your questions may be processed by an
+          you use the interactive resume, your questions may be processed by an
           AI service to generate a response. Please avoid confidential or
           sensitive details.
         </p>
@@ -122,9 +122,9 @@ export default function PrivacyPage() {
           </article>
 
           <article className="contentCard">
-            <h3>Interactive résumé questions</h3>
+            <h3>Interactive resume questions</h3>
             <p>
-              Questions submitted to the interactive résumé may be processed by
+              Questions submitted to the interactive resume may be processed by
               an AI provider so the site can generate a relevant answer about
               Reuben&apos;s public professional background. Standard analytics
               should not include full message text.

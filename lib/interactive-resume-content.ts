@@ -26,7 +26,7 @@ export const clientPromise =
 export const landingNavigation = [
   {
     title: "Read the Resume",
-    body: "See my roles, responsibilities, education, and career progression in a clean résumé format.",
+    body: "See my roles, responsibilities, education, and career progression in a clean resume format.",
     href: "/resume",
     cta: "View Resume"
   },

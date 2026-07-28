@@ -5,8 +5,8 @@
 Rebuild **rmoddel.com** into a coherent personal career site with three complementary experiences:
 
 1. **A concise landing page** that explains who Reuben is, what he does, and why he is valuable within five seconds.
-2. **A conventional résumé page** that remains scannable, printable, downloadable, and easy to share.
-3. **A full-page ChatGPT-style interactive résumé** where visitors can explore Reuben’s experience, strengths, projects, leadership approach, AI capabilities, values, and fit for an opportunity.
+2. **A conventional resume page** that remains scannable, printable, downloadable, and easy to share.
+3. **A full-page ChatGPT-style interactive resume** where visitors can explore Reuben’s experience, strengths, projects, leadership approach, AI capabilities, values, and fit for an opportunity.
 
 Support these with:
 
@@ -14,7 +14,7 @@ Support these with:
 - `/contact` — a direct standalone contact path.
 - Optional `/work` and case-study pages for real project proof.
 
-The site should feel like one intentional product—not a résumé site, consulting site, AI agency, and creative portfolio competing with one another.
+The site should feel like one intentional product—not a resume site, consulting site, AI agency, and creative portfolio competing with one another.
 
 ---
 
@@ -132,8 +132,8 @@ Important nuance: do not promise unlimited no-code customization. Promise that r
 Create or preserve:
 
 - `/` — concise landing page
-- `/resume` — conventional résumé
-- `/chat` — full-page interactive résumé
+- `/resume` — conventional resume
+- `/chat` — full-page interactive resume
 - `/about` — career story, values, leadership, human component, AI and GPS
 - `/contact` — standalone contact form
 - `/privacy` — privacy policy for chat and contact submissions
@@ -150,12 +150,12 @@ Optional:
 Use:
 
 - Home
-- Résumé
-- Interactive Résumé
+- Resume
+- Interactive Resume
 - About
 - Contact
 
-Use **Interactive Résumé** as the visible label for `/chat`. “Chat” alone may look like customer support.
+Use **Interactive Resume** as the visible label for `/chat`. “Chat” alone may look like customer support.
 
 The name/logo always links to `/`.
 
@@ -173,7 +173,7 @@ Secondary CTA:
 
 ### Purpose
 
-The landing page should orient visitors quickly and send them to the experience they prefer. It must not become another long portfolio or repeat the entire résumé.
+The landing page should orient visitors quickly and send them to the experience they prefer. It must not become another long portfolio or repeat the entire resume.
 
 ### Required Order
 
@@ -182,7 +182,7 @@ The landing page should orient visitors quickly and send them to the experience 
 3. Credibility strip
 4. Compact GPS section
 5. Three core strengths
-6. Three clear paths: Résumé, Interactive Résumé, Contact
+6. Three clear paths: Resume, Interactive Resume, Contact
 7. Optional compact project proof
 8. Footer
 
@@ -208,11 +208,11 @@ The landing page should orient visitors quickly and send them to the experience 
 
 Primary:
 
-> **Ask My Interactive Résumé**
+> **Ask My Interactive Resume**
 
 Secondary:
 
-> **View My Résumé**
+> **View My Resume**
 
 Text link:
 
@@ -266,13 +266,13 @@ Include this line once:
 
 ### Three Navigation Choices
 
-#### Read the Résumé
+#### Read the Resume
 
 > Review Reuben’s employment history, responsibilities, education, and career progression.
 
-CTA: **View Résumé**
+CTA: **View Resume**
 
-#### Chat With My Résumé
+#### Chat With My Resume
 
 > Ask about Reuben’s experience, leadership style, AI work, skills, projects, or fit for an opportunity.
 
@@ -289,22 +289,22 @@ CTA: **Contact Reuben**
 - Keep it concise.
 - Do not recreate the old long homepage.
 - Do not duplicate the entire About page.
-- Do not duplicate the résumé.
+- Do not duplicate the resume.
 - Do not lead with abstract phrases such as “messy work” without explaining the actual value.
 - Do not make AI the only message.
 - Do not make Reuben sound like a generic manager who merely uses ChatGPT.
 
 ---
 
-## 6. Résumé Page
+## 6. Resume Page
 
 ### Purpose
 
-The résumé page is conventional, factual, scannable, printable, downloadable, and easy to share.
+The resume page is conventional, factual, scannable, printable, downloadable, and easy to share.
 
 ### Critical Restriction
 
-Do **not** substantively rewrite the actual résumé as part of this project. Reuben will review it separately with a résumé professional.
+Do **not** substantively rewrite the actual resume as part of this project. Reuben will review it separately with a resume professional.
 
 The implementation may improve:
 
@@ -315,7 +315,7 @@ The implementation may improve:
 - PDF download
 - Navigation
 - Accessibility
-- A short introductory pitch above the résumé
+- A short introductory pitch above the resume
 
 Do not:
 
@@ -325,9 +325,9 @@ Do not:
 - Rewrite achievements
 - Add unverified metrics
 - Change dates
-- Retitle the résumé without approval
+- Retitle the resume without approval
 
-### Intro Above Résumé
+### Intro Above Resume
 
 Use a short 2–3 sentence pitch:
 
@@ -336,10 +336,10 @@ Use a short 2–3 sentence pitch:
 Buttons:
 
 - **Download PDF**
-- **Ask About This Résumé**
+- **Ask About This Resume**
 - **Contact Reuben**
 
-“Ask About This Résumé” should open `/chat` with **Reuben’s Experience** preselected.
+“Ask About This Resume” should open `/chat` with **Reuben’s Experience** preselected.
 
 ### Requirements
 
@@ -349,8 +349,8 @@ Buttons:
 - Provide strong print styling.
 - Provide an obvious PDF download.
 - Use a single-column mobile layout.
-- Do not convert the résumé into chat bubbles.
-- Keep a visible link to the interactive résumé.
+- Do not convert the resume into chat bubbles.
+- Keep a visible link to the interactive resume.
 
 ---
 
@@ -358,9 +358,9 @@ Buttons:
 
 ### Purpose
 
-Explain the person behind the résumé: career progression, human understanding, compassion, work ethic, leadership style, technology philosophy, and GPS.
+Explain the person behind the resume: career progression, human understanding, compassion, work ethic, leadership style, technology philosophy, and GPS.
 
-Do not repeat the résumé role by role.
+Do not repeat the resume role by role.
 
 ### Suggested Structure
 
@@ -421,7 +421,7 @@ Explain GPS in greater depth here, including the mashal.
 
 ---
 
-## 8. Interactive Résumé
+## 8. Interactive Resume
 
 ### Route and Name
 
@@ -429,7 +429,7 @@ Route: `/chat`
 
 Visible title:
 
-> **Interactive Résumé**
+> **Interactive Resume**
 
 ### Core Concept
 
@@ -452,7 +452,7 @@ Include:
 - Reuben Moddel branding
 - New conversation
 - Curated/prepopulated conversation topics
-- Links to Résumé, About, and Contact
+- Links to Resume, About, and Contact
 - Optional locally stored recent conversations
 - Clear conversation/reset control
 
@@ -654,7 +654,7 @@ The chatbot must answer from approved content only.
 
 ### Approved Sources
 
-- Current résumé
+- Current resume
 - Approved About copy
 - Approved GPS framework
 - Approved project descriptions
@@ -709,7 +709,7 @@ Use:
 Then show:
 
 - Contact Reuben
-- View Résumé
+- View Resume
 - Ask another question
 
 ### Prompt Injection Response
@@ -954,10 +954,10 @@ The site should feel:
 
 ### Page-Specific Treatment
 
-- Landing, About, Résumé, and Contact should look like a polished professional website.
+- Landing, About, Resume, and Contact should look like a polished professional website.
 - Only `/chat` should use the full conversational application interface.
 
-### Interactive Résumé
+### Interactive Resume
 
 Use:
 
@@ -1118,21 +1118,21 @@ Description:
 
 > Reuben Moddel combines 15+ years across operations, systems, team leadership, and software delivery with AI-enabled solutions that improve cumbersome real-world processes.
 
-### Résumé
+### Resume
 
 Title:
 
-> **Résumé | Reuben Moddel**
+> **Resume | Reuben Moddel**
 
-### Interactive Résumé
+### Interactive Resume
 
 Title:
 
-> **Interactive Résumé | Ask About Reuben Moddel**
+> **Interactive Resume | Ask About Reuben Moddel**
 
 Description:
 
-> Ask an AI-powered interactive résumé about Reuben Moddel’s experience, strengths, leadership, projects, and approach to improving cumbersome processes.
+> Ask an AI-powered interactive resume about Reuben Moddel’s experience, strengths, leadership, projects, and approach to improving cumbersome processes.
 
 ### About
 
@@ -1149,9 +1149,9 @@ Add appropriate Person, ProfilePage, WebSite, and breadcrumb structured data whe
 Track privacy-conscious events only:
 
 - Landing CTA clicked
-- Résumé viewed
-- Résumé downloaded
-- Interactive résumé opened
+- Resume viewed
+- Resume downloaded
+- Interactive resume opened
 - Starter prompt selected
 - Sidebar topic selected
 - Project opened
@@ -1179,11 +1179,11 @@ Do not send full chat text to normal analytics.
 
 Show:
 
-> The interactive résumé is temporarily unavailable. You can still view Reuben’s résumé, learn about him, or contact him directly.
+> The interactive resume is temporarily unavailable. You can still view Reuben’s resume, learn about him, or contact him directly.
 
 Buttons:
 
-- View Résumé
+- View Resume
 - About Reuben
 - Contact Reuben
 
@@ -1201,7 +1201,7 @@ Buttons:
 ### Phase 1 — Audit and Foundation
 
 - Audit current routes, components, copy, forms, and deployment.
-- Preserve working résumé and contact functionality.
+- Preserve working resume and contact functionality.
 - Establish shared header, footer, typography, and positioning.
 - Create structured content files.
 - Add `/privacy`.
@@ -1215,14 +1215,14 @@ Buttons:
 - Add three navigation choices.
 - Add responsive design and metadata.
 
-### Phase 3 — Résumé
+### Phase 3 — Resume
 
 - Preserve content.
 - Add short intro.
 - Add PDF download.
 - Add print CSS.
-- Add “Ask About This Résumé.”
-- Verify all facts against the source résumé.
+- Add “Ask About This Resume.”
+- Verify all facts against the source resume.
 
 ### Phase 4 — About
 
@@ -1232,7 +1232,7 @@ Buttons:
 - Add technology philosophy.
 - Add complete GPS explanation.
 
-### Phase 5 — Interactive Résumé UI
+### Phase 5 — Interactive Resume UI
 
 - Build full-page layout.
 - Build desktop sidebar.
@@ -1292,8 +1292,8 @@ The project is complete only when all of the following are true.
 ### Structure
 
 - `/` is a concise landing page.
-- `/resume` remains a conventional résumé.
-- `/chat` is a full-page interactive résumé.
+- `/resume` remains a conventional resume.
+- `/chat` is a full-page interactive resume.
 - `/about` explains values, human understanding, career progression, AI, and GPS.
 - `/contact` works independently.
 - Navigation and positioning are consistent.
@@ -1304,19 +1304,19 @@ The project is complete only when all of the following are true.
 - AI is clearly part of Reuben’s capability.
 - Reuben is not positioned as a traditional developer.
 - GPS is visible but does not dominate the page.
-- Résumé, interactive résumé, and contact paths are obvious.
-- The page does not repeat the entire résumé or About story.
+- Resume, interactive resume, and contact paths are obvious.
+- The page does not repeat the entire resume or About story.
 
-### Résumé
+### Resume
 
 - Existing factual content is preserved unless separately approved.
 - PDF download works.
 - Print layout works.
 - Mobile layout works.
-- “Ask About This Résumé” opens the correct chat topic.
-- All facts match the approved résumé.
+- “Ask About This Resume” opens the correct chat topic.
+- All facts match the approved resume.
 
-### Interactive Résumé
+### Interactive Resume
 
 - Opens with useful content rather than a blank composer.
 - Includes the approved sidebar topics.
@@ -1337,7 +1337,7 @@ The project is complete only when all of the following are true.
 - Honest, direct, and ethical work style is present.
 - GPS is explained.
 - Technology is framed as a way to reduce burdens.
-- The page does not duplicate the résumé.
+- The page does not duplicate the resume.
 
 ### Projects
 
@@ -1352,7 +1352,7 @@ The project is complete only when all of the following are true.
 - Chat secrets remain server-side.
 - Rate limiting is enabled.
 - Contact endpoints are protected.
-- Chat code does not bloat the landing or résumé pages.
+- Chat code does not bloat the landing or resume pages.
 - Accessibility requirements are met.
 - Sensitive message text is excluded from standard analytics.
 - Errors preserve user input and provide recovery.
@@ -1361,4 +1361,4 @@ The project is complete only when all of the following are true.
 
 ## 26. Final Governing Instruction to GSD
 
-> Rebuild rmoddel.com as a coherent personal career site with three complementary experiences: a short landing page, a conventional résumé page, and a full-page AI-powered interactive résumé. The landing page must immediately establish Reuben as an experienced operations, people, systems, and AI-solutions leader who improves cumbersome processes through human understanding, practical judgment, and personalized software. The résumé page must remain conventional and should not be substantively rewritten without separate approval. The interactive résumé must let visitors explore Reuben’s experience, strengths, values, leadership, projects, GPS philosophy, and fit through curated conversations and grounded free-form questions. It must never invent experience or overstate technical depth. Preserve the GPS framework—Genuine, Personalized Solutions—and its analogy of sophisticated technology presented through simple client controls. Keep direct contact available everywhere, preserve privacy and accessibility, and ensure every page tells one consistent professional story.
+> Rebuild rmoddel.com as a coherent personal career site with three complementary experiences: a short landing page, a conventional resume page, and a full-page AI-powered interactive resume. The landing page must immediately establish Reuben as an experienced operations, people, systems, and AI-solutions leader who improves cumbersome processes through human understanding, practical judgment, and personalized software. The resume page must remain conventional and should not be substantively rewritten without separate approval. The interactive resume must let visitors explore Reuben’s experience, strengths, values, leadership, projects, GPS philosophy, and fit through curated conversations and grounded free-form questions. It must never invent experience or overstate technical depth. Preserve the GPS framework—Genuine, Personalized Solutions—and its analogy of sophisticated technology presented through simple client controls. Keep direct contact available everywhere, preserve privacy and accessibility, and ensure every page tells one consistent professional story.

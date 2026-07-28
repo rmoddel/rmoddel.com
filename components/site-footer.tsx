@@ -1,7 +1,7 @@
 const footerLinks = [
   { href: "/", label: "Home" },
-  { href: "/resume", label: "Résumé" },
-  { href: "/chat", label: "Interactive Résumé" },
+  { href: "/resume", label: "Resume" },
+  { href: "/chat", label: "Interactive Resume" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" }

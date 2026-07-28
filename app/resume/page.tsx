@@ -15,16 +15,16 @@ import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 import { siteProfile } from "@/lib/site-profile";
 
 export const metadata: Metadata = {
-  title: "Résumé",
+  title: "Resume",
   description:
-    "A clean résumé view with employment history, education, skills, a PDF download, and a way to ask follow-up questions.",
+    "A clean resume view with employment history, education, skills, a PDF download, and a way to ask follow-up questions.",
   alternates: {
     canonical: "/resume"
   },
   openGraph: {
-    title: "Résumé | Reuben Moddel",
+    title: "Resume | Reuben Moddel",
     description:
-      "Employment history, education, skills, and downloadable résumé for Reuben Moddel.",
+      "Employment history, education, skills, and downloadable resume for Reuben Moddel.",
     url: "/resume",
     siteName: "rmoddel.com",
     locale: "en_US",
@@ -42,9 +42,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Résumé | Reuben Moddel",
+    title: "Resume | Reuben Moddel",
     description:
-      "Employment history, education, skills, and downloadable résumé for Reuben Moddel.",
+      "Employment history, education, skills, and downloadable resume for Reuben Moddel.",
     images: [twitterImagePath]
   }
 };
@@ -57,7 +57,7 @@ export default function ResumePage() {
       <section className="heroSection resumeHero">
         <div className="heroCopy">
           <div className="heroRibbon">
-            <p className="eyebrow">Résumé</p>
+            <p className="eyebrow">Resume</p>
             <span className="heroSpark">Clean, scannable, shareable</span>
           </div>
           <h1>{resumeIdentity.name}</h1>
@@ -85,7 +85,7 @@ export default function ResumePage() {
               Download PDF
             </a>
             <a className="button buttonSecondary smallButton" href="/chat/experience">
-              Ask About This Résumé
+              Ask About This Resume
             </a>
             <a className="button buttonSecondary smallButton" href="/contact">
               Contact Me
@@ -97,8 +97,8 @@ export default function ResumePage() {
           <div>
             <div className="heroPanelBadge">Profile</div>
             <p className="panelResult">
-              This is the straight résumé: roles, education, skills, and a PDF.
-              If you want to dig into a topic, chat with my résumé.
+              This is the straight resume: roles, education, skills, and a PDF.
+              If you want to dig into a topic, chat with my resume.
             </p>
           </div>
           <div className="heroOutcomeList">
