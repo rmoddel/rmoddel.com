@@ -379,13 +379,13 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
 
       setContactStatus({
         state: "sent",
-        message: "Message sent. I have your note and can reply directly."
+        message: "Thanks — your message was sent."
       });
       setMessages((current) => [
         ...current,
         {
           role: "assistant",
-          content: "Sent. I have your note and can reply directly."
+          content: "Thanks — your message was sent."
         }
       ]);
     } catch (error) {

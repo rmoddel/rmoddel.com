@@ -77,7 +77,7 @@ export function ContactForm() {
       setInquiryType(inquiryTypes[0]);
       setFormState({
         status: "success",
-        message: "Message sent. I can reply directly."
+        message: "Thanks — your message was sent."
       });
     } catch (error) {
       const message =

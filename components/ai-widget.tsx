@@ -310,7 +310,7 @@ export function AiWidget() {
           setContactStep("idle");
           setContactDraft({});
 
-          return "Sent. I have your note and can reply directly.";
+          return "Thanks — your message was sent.";
         } catch (error) {
           const message =
             error instanceof Error
