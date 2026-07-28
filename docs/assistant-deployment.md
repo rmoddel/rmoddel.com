@@ -215,8 +215,6 @@ EMAIL_API_URL=
 EMAIL_API_SECRET=
 EMAIL_FROM=
 CONTACT_TO=
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=
-TURNSTILE_SECRET_KEY=
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 ASSISTANT_PROVIDER=bedrock
@@ -226,9 +224,9 @@ BEDROCK_MODEL_ID=amazon.nova-lite-v1:0
 
 Important:
 
-- The contact form and assistant email flow both use `/api/contact`, so production needs the contact email variables, Turnstile keys, and persistent rate-limit variables as SSR environment variables.
+- The contact form and assistant email flow both use `/api/contact`, so production needs the contact email variables and persistent rate-limit variables as SSR environment variables.
 - Contact email variables are captured during `next build`; redeploy the branch after changing them in Amplify.
-- `TURNSTILE_SECRET_KEY` and `UPSTASH_REDIS_REST_TOKEN` must stay server-side. Only `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is safe to expose to the browser.
+- `UPSTASH_REDIS_REST_TOKEN` must stay server-side.
 - Do not create your own env var with an `AWS_` prefix in Amplify. Amplify reserves that prefix.
 - This is why this project uses `BEDROCK_REGION` instead of telling you to define `AWS_REGION`.
 

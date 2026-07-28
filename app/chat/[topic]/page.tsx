@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { InteractiveResume } from "@/components/interactive-resume";
-import { TurnstileScript } from "@/components/turnstile";
 import { chatTopics, starterQuestions } from "@/lib/interactive-resume-content";
 import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 
@@ -87,7 +86,6 @@ export default function ChatTopicPage({ params }: ChatTopicPageProps) {
 
   return (
     <>
-      <TurnstileScript />
       <Suspense fallback={<ChatFallback />}>
         <InteractiveResume
           initialTopicId={topic.id}

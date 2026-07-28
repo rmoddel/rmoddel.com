@@ -70,8 +70,6 @@ EMAIL_API_URL=
 EMAIL_API_SECRET=
 EMAIL_FROM=
 CONTACT_TO=
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=
-TURNSTILE_SECRET_KEY=
 UPSTASH_REDIS_REST_URL=
 UPSTASH_REDIS_REST_TOKEN=
 OLLAMA_BASE_URL=
@@ -84,21 +82,12 @@ Notes:
 - `EMAIL_API_SECRET` stays server-side and should not be exposed as a public browser env var
 - `EMAIL_FROM` must match a sender recognized by the relay
 - `CONTACT_TO` is the inbox that should receive website inquiries
-- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` is the public Cloudflare Turnstile site key. Production uses the existing `rmoddel-contact` widget: `0x4AAAAAAD_YHJOD4zhGoAs1`
-- `TURNSTILE_SECRET_KEY` stays server-side and is used by `/api/contact` for Siteverify
 - `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` enable persistent contact rate limiting
 - `ASSISTANT_PROVIDER` selects the assistant backend: `ollama` for local development or `bedrock` for Amplify production
 - `OLLAMA_BASE_URL` points to a local Ollama instance if you want real local-model replies
 - `OLLAMA_MODEL` is the local model tag to use for the assistant
 - `BEDROCK_REGION` is the AWS Region to use for Amazon Bedrock
 - `BEDROCK_MODEL_ID` is the Bedrock model identifier used when `ASSISTANT_PROVIDER=bedrock`
-
-For local Turnstile testing, use Cloudflare's development keys:
-
-```bash
-NEXT_PUBLIC_TURNSTILE_SITE_KEY=1x00000000000000000000AA
-TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
-```
 
 ## Local Assistant
 
@@ -161,8 +150,8 @@ npm run start
 
 1. User submits the form in `components/contact-form.tsx`
 2. The form posts `FormData` to `app/api/contact/route.ts`
-3. The route discards honeypot and unrealistically fast submissions
-4. The route rate-limits attempts and verifies Cloudflare Turnstile server-side
+3. The route rejects honeypot submissions without reporting success
+4. The route rate-limits attempts
 5. The route validates required fields and email format
 6. The route formats the message using `lib/contact-email.ts`
 7. The route sends the message through the configured relay

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { InteractiveResume } from "@/components/interactive-resume";
-import { TurnstileScript } from "@/components/turnstile";
 import { chatTopics, starterQuestions } from "@/lib/interactive-resume-content";
 import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 
@@ -59,7 +58,6 @@ function ChatFallback() {
 export default function ChatPage() {
   return (
     <>
-      <TurnstileScript />
       <Suspense fallback={<ChatFallback />}>
         <InteractiveResume topics={chatTopics} starterQuestions={starterQuestions} />
       </Suspense>

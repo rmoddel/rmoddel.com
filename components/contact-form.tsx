@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { TurnstileWidget } from "@/components/turnstile";
 
 type FormState = {
   status: "idle" | "submitting" | "success" | "error";
@@ -21,10 +20,6 @@ const inquiryTypes = [
   "General inquiry"
 ] as const;
 
-function getText(formData: FormData, name: string) {
-  return String(formData.get(name) || "").trim();
-}
-
 export function ContactForm() {
   const startedAt = useRef(Date.now());
   const [formState, setFormState] = useState<FormState>(initialState);
@@ -37,16 +32,6 @@ export function ContactForm() {
 
     const form = event.currentTarget;
     const formData = new FormData(form);
-    const turnstileToken = getText(formData, "cf-turnstile-response");
-
-    if (!turnstileToken) {
-      setFormState({
-        status: "error",
-        message: "Please complete the security verification."
-      });
-      window.turnstile?.reset();
-      return;
-    }
 
     setFormState({
       status: "submitting",
@@ -90,7 +75,6 @@ export function ContactForm() {
         status: "error",
         message
       });
-      window.turnstile?.reset();
     }
   }
 
@@ -178,8 +162,6 @@ export function ContactForm() {
         Notes <span>optional</span>
         <input name="notes" type="text" />
       </label>
-
-      <TurnstileWidget />
 
       <button className="button" type="submit" disabled={formState.status === "submitting"}>
         {formState.status === "submitting" ? "Sending..." : "Send Message"}

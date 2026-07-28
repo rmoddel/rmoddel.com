@@ -6,8 +6,6 @@ import {
   getContactClientIp,
   recordContactEmailSuccess
 } from "@/lib/security/contact-rate-limit";
-import { TURNSTILE_ACTION } from "@/lib/security/turnstile-config";
-import { verifyTurnstile } from "@/lib/security/verify-turnstile";
 
 export const runtime = "nodejs";
 
@@ -21,7 +19,6 @@ type ContactSubmission = {
   payload: ContactPayload;
   honeypot: string;
   startedAtRaw: string;
-  token: string;
 };
 
 class ContactRouteError extends Error {
@@ -131,7 +128,6 @@ function summarizeSubmission(submission: ContactSubmission) {
   return {
     hasHoneypot: Boolean(submission.honeypot),
     hasStartedAt: Boolean(submission.startedAtRaw),
-    hasToken: Boolean(submission.token),
     helpType: submission.payload.helpType || "missing",
     messageLength: submission.payload.project.length,
     nameLength: submission.payload.name.length,
@@ -156,7 +152,7 @@ function reportCompletionTiming(startedAtRaw: string) {
   }
 
   if (elapsed < 2_000) {
-    console.warn("[contact] fast completion after Turnstile verification", {
+    console.warn("[contact] fast form completion", {
       elapsed
     });
   }
@@ -262,8 +258,7 @@ function normalizeFromFormData(formData: FormData): ContactSubmission {
       getFormString(formData, "contactPreference", 300) ||
       getFormString(formData, "companyWebsite", 300) ||
       getFormString(formData, "website", 300),
-    startedAtRaw: getFormString(formData, "startedAt", 40),
-    token: getFormString(formData, "cf-turnstile-response", 2_048)
+    startedAtRaw: getFormString(formData, "startedAt", 40)
   };
 }
 
@@ -296,10 +291,7 @@ function normalizeFromJson(body: Record<string, unknown>): ContactSubmission {
       clean(body.contactPreference, 300) ||
       clean(body.companyWebsite, 300) ||
       clean(body.website, 300),
-    startedAtRaw: clean(body.startedAt, 40),
-    token:
-      clean(body["cf-turnstile-response"], 2_048) ||
-      clean(body.turnstileToken, 2_048)
+    startedAtRaw: clean(body.startedAt, 40)
   };
 }
 
@@ -409,15 +401,6 @@ async function sendContactMessage(payload: ContactPayload) {
   });
 }
 
-function getRequestHostname(request: NextRequest) {
-  return (
-    request.nextUrl.hostname ||
-    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ||
-    request.headers.get("host")?.trim() ||
-    undefined
-  );
-}
-
 export async function POST(request: NextRequest) {
   try {
     const submission = await readSubmission(request);
@@ -446,36 +429,7 @@ export async function POST(request: NextRequest) {
       remaining: ipLimit.remaining
     });
 
-    if (!submission.token) {
-      console.warn("[contact] blocked before relay", {
-        stage: "missing_turnstile_token"
-      });
-      return clientError(
-        "Please complete the security verification.",
-        400,
-        "BOT_TOKEN_MISSING"
-      );
-    }
-
-    const verified = await verifyTurnstile({
-      token: submission.token,
-      ip,
-      expectedAction: TURNSTILE_ACTION,
-      expectedHostname: getRequestHostname(request)
-    });
-
-    if (!verified) {
-      console.warn("[contact] blocked before relay", {
-        stage: "turnstile_verification_failed"
-      });
-      return clientError(
-        "We couldn’t verify the submission. Please try again.",
-        400,
-        "BOT_VERIFICATION_FAILED"
-      );
-    }
-
-    logContactStage("turnstile_verified");
+    logContactStage("bot_challenge_skipped");
 
     reportCompletionTiming(submission.startedAtRaw);
 

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { ContactSection } from "@/components/profile-sections";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { TurnstileScript } from "@/components/turnstile";
 import { professionalDescriptor } from "@/lib/interactive-resume-content";
 import { siteProfile } from "@/lib/site-profile";
 
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <main className="pageShell">
-      <TurnstileScript />
       <SiteHeader brandLine={professionalDescriptor} />
       <ContactSection />
       <SiteFooter

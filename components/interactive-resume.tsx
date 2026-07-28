@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { TurnstileWidget } from "@/components/turnstile";
 import type { ChatTopic } from "@/lib/interactive-resume-content";
 
 type ChatMessage = {
@@ -357,16 +356,6 @@ export function InteractiveResume({
     }
 
     const formData = new FormData(form);
-    const turnstileToken = String(formData.get("cf-turnstile-response") || "").trim();
-
-    if (!turnstileToken) {
-      setContactStatus({
-        state: "error",
-        message: "Please complete the security verification."
-      });
-      window.turnstile?.reset();
-      return;
-    }
 
     formData.set("timeline", "");
     formData.set("budget", "Submitted through interactive resume");
@@ -413,7 +402,6 @@ export function InteractiveResume({
             ? `${error.message} Your message is still here so you can retry.`
             : "The message could not be sent. Your message is still here so you can retry."
       });
-      window.turnstile?.reset();
     }
   }
 
@@ -727,7 +715,6 @@ export function InteractiveResume({
                   >
                     {contactStatus.message || "Review the details before sending."}
                   </p>
-                  {canSendContact ? <TurnstileWidget /> : null}
                   <div className="contactReviewActions">
                     <button className="button buttonSecondary smallButton" type="submit">
                       Review Message

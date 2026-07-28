@@ -1172,15 +1172,6 @@ h3 {
   gap: 8px;
 }
 
-.turnstileWrap {
-  width: min(100%, 320px);
-  min-height: 68px;
-}
-
-.contactForm .turnstileWrap {
-  width: 100%;
-}
-
 .chatContextPanel {
   display: grid;
   gap: 10px;
