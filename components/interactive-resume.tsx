@@ -365,11 +365,12 @@ export function InteractiveResume({ topics, starterQuestions }: InteractiveResum
 
       const data = (await response.json()) as {
         ok?: boolean;
+        sent?: boolean;
         error?: string;
         message?: string;
       };
 
-      if (!response.ok || !data.ok) {
+      if (!response.ok || !data.ok || data.sent !== true) {
         throw new Error(
           data.message ||
             data.error ||

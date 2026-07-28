@@ -119,6 +119,11 @@ function rateLimitResponse(retryAfter: number) {
   );
 }
 
+function silentDiscard(reason: "honeypot" | "completion_time") {
+  console.warn("[contact] silently discarded submission", { reason });
+  return contactJson({ ok: true, sent: false });
+}
+
 function contactErrorResponse(error: unknown) {
   const routeError =
     error instanceof ContactRouteError
@@ -361,7 +366,14 @@ export async function POST(request: NextRequest) {
     const submission = await readSubmission(request);
 
     if (submission.honeypot) {
-      return contactJson({ ok: true });
+      return silentDiscard("honeypot");
+    }
+
+    const startedAt = Number(submission.startedAtRaw);
+    const elapsed = Date.now() - startedAt;
+
+    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
+      return silentDiscard("completion_time");
     }
 
     const ip = getContactClientIp(request);
@@ -393,13 +405,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const startedAt = Number(submission.startedAtRaw);
-    const elapsed = Date.now() - startedAt;
-
-    if (!Number.isFinite(elapsed) || elapsed < 2_000) {
-      return contactJson({ ok: true });
-    }
-
     const validation = validatePayload(submission.payload);
 
     if (!validation.ok) {
@@ -415,7 +420,7 @@ export async function POST(request: NextRequest) {
     await sendContactMessage(validation.payload);
     await recordContactEmailSuccess(validation.payload.email);
 
-    return contactJson({ ok: true });
+    return contactJson({ ok: true, sent: true });
   } catch (error) {
     return contactErrorResponse(error);
   }

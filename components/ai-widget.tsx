@@ -202,9 +202,9 @@ export function AiWidget() {
       })
     });
 
-    const data = (await response.json()) as { ok?: boolean; error?: string };
+    const data = (await response.json()) as { ok?: boolean; sent?: boolean; error?: string };
 
-    if (!response.ok || !data.ok) {
+    if (!response.ok || !data.ok || data.sent !== true) {
       throw new Error(data.error || "Could not send the message.");
     }
   }
