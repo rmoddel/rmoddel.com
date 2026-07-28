@@ -11,14 +11,33 @@ type VerifyTurnstileOptions = {
   token: string;
   ip?: string;
   expectedAction: string;
+  expectedHostname?: string;
 };
 
 const PRODUCTION_HOSTNAMES = new Set(["rmoddel.com", "www.rmoddel.com"]);
 
+function normalizeHostname(hostname?: string) {
+  return hostname?.toLowerCase().split(":")[0]?.trim() || "";
+}
+
+function getAllowedProductionHostnames(expectedHostname?: string) {
+  const configured = (process.env.TURNSTILE_ALLOWED_HOSTNAMES || "")
+    .split(",")
+    .map(normalizeHostname)
+    .filter(Boolean);
+
+  return new Set([
+    ...PRODUCTION_HOSTNAMES,
+    ...configured,
+    normalizeHostname(expectedHostname)
+  ].filter(Boolean));
+}
+
 export async function verifyTurnstile({
   token,
   ip,
-  expectedAction
+  expectedAction,
+  expectedHostname
 }: VerifyTurnstileOptions): Promise<boolean> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
@@ -78,12 +97,20 @@ export async function verifyTurnstile({
       return false;
     }
 
+    const hostname = normalizeHostname(result.hostname);
+
+    if (process.env.NODE_ENV === "production" && !hostname) {
+      console.warn("Turnstile response did not include a hostname");
+      return false;
+    }
+
     if (
       process.env.NODE_ENV === "production" &&
-      (!result.hostname || !PRODUCTION_HOSTNAMES.has(result.hostname))
+      !getAllowedProductionHostnames(expectedHostname).has(hostname)
     ) {
       console.warn("Unexpected Turnstile hostname", {
-        hostname: result.hostname
+        expectedHostname: normalizeHostname(expectedHostname) || undefined,
+        hostname
       });
       return false;
     }

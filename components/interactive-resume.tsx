@@ -575,11 +575,11 @@ export function InteractiveResume({
               <form onSubmit={reviewContactMessage} ref={contactFormRef}>
                 <input type="hidden" name="startedAt" value={contactStartedAt.current} />
                 <div className="hiddenField" aria-hidden="true">
-                  <label htmlFor="chatCompanyWebsite">Company website</label>
+                  <label htmlFor="chatContactPreference">Leave this field empty</label>
                   <input
-                    autoComplete="off"
-                    id="chatCompanyWebsite"
-                    name="companyWebsite"
+                    autoComplete="new-password"
+                    id="chatContactPreference"
+                    name="contactPreference"
                     tabIndex={-1}
                     type="text"
                   />

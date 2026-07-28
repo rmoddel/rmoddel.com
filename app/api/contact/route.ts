@@ -80,8 +80,8 @@ function getContactConfigSnapshot() {
     apiUrl,
     hasSecret: Boolean(emailApiSecret),
     secretLength: emailApiSecret?.length ?? 0,
-    from: emailFrom || "missing",
-    to: contactTo || "missing"
+    hasFrom: Boolean(emailFrom),
+    hasTo: Boolean(contactTo)
   };
 }
 
@@ -120,9 +120,30 @@ function rateLimitResponse(retryAfter: number) {
   );
 }
 
+function logContactStage(stage: string, detail?: Record<string, unknown>) {
+  console.info("[contact] stage", {
+    stage,
+    ...(detail ?? {})
+  });
+}
+
+function summarizeSubmission(submission: ContactSubmission) {
+  return {
+    hasHoneypot: Boolean(submission.honeypot),
+    hasStartedAt: Boolean(submission.startedAtRaw),
+    hasToken: Boolean(submission.token),
+    helpType: submission.payload.helpType || "missing",
+    messageLength: submission.payload.project.length,
+    nameLength: submission.payload.name.length,
+    hasEmail: Boolean(submission.payload.email),
+    hasPhone: Boolean(submission.payload.phone),
+    hasOrganization: Boolean(submission.payload.organization)
+  };
+}
+
 function silentDiscard(reason: "honeypot" | "completion_time") {
-  console.warn("[contact] silently discarded submission", { reason });
-  return contactJson({ ok: true, sent: false });
+  console.warn("[contact] silently discarded submission before relay", { reason });
+  return contactJson({ ok: false, sent: false });
 }
 
 function reportCompletionTiming(startedAtRaw: string) {
@@ -238,6 +259,7 @@ function normalizeFromFormData(formData: FormData): ContactSubmission {
         getFormString(formData, "notes", 500)
     },
     honeypot:
+      getFormString(formData, "contactPreference", 300) ||
       getFormString(formData, "companyWebsite", 300) ||
       getFormString(formData, "website", 300),
     startedAtRaw: getFormString(formData, "startedAt", 40),
@@ -270,7 +292,10 @@ function normalizeFromJson(body: Record<string, unknown>): ContactSubmission {
       timeline: clean(body.timeline, 200),
       budget: clean(body.budget, 500) || clean(body.notes, 500)
     },
-    honeypot: clean(body.companyWebsite, 300) || clean(body.website, 300),
+    honeypot:
+      clean(body.contactPreference, 300) ||
+      clean(body.companyWebsite, 300) ||
+      clean(body.website, 300),
     startedAtRaw: clean(body.startedAt, 40),
     token:
       clean(body["cf-turnstile-response"], 2_048) ||
@@ -337,6 +362,8 @@ async function sendContactMessage(payload: ContactPayload) {
   const to = requiredEnv("CONTACT_TO");
   const { subject, text, html } = createContactEmail(payload);
 
+  logContactStage("relay_request_start", getContactConfigSnapshot());
+
   const relayResponse = await fetch(apiUrl, {
     method: "POST",
     headers: {
@@ -376,24 +403,53 @@ async function sendContactMessage(payload: ContactPayload) {
       "Your message could not be sent. Your information has been preserved—please try again."
     );
   }
+
+  logContactStage("relay_request_success", {
+    status: relayResponse.status
+  });
+}
+
+function getRequestHostname(request: NextRequest) {
+  return (
+    request.nextUrl.hostname ||
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim() ||
+    request.headers.get("host")?.trim() ||
+    undefined
+  );
 }
 
 export async function POST(request: NextRequest) {
   try {
     const submission = await readSubmission(request);
+    logContactStage("submission_received", summarizeSubmission(submission));
 
     if (submission.honeypot) {
       return silentDiscard("honeypot");
     }
 
+    logContactStage("honeypot_passed");
+
     const ip = getContactClientIp(request);
     const ipLimit = await checkContactIpAttemptLimit(ip);
 
     if (!ipLimit.allowed) {
+      console.warn("[contact] blocked before relay", {
+        stage: "ip_rate_limit",
+        persistent: ipLimit.persistent,
+        retryAfter: ipLimit.retryAfter
+      });
       return rateLimitResponse(ipLimit.retryAfter);
     }
 
+    logContactStage("ip_rate_limit_passed", {
+      persistent: ipLimit.persistent,
+      remaining: ipLimit.remaining
+    });
+
     if (!submission.token) {
+      console.warn("[contact] blocked before relay", {
+        stage: "missing_turnstile_token"
+      });
       return clientError(
         "Please complete the security verification.",
         400,
@@ -404,10 +460,14 @@ export async function POST(request: NextRequest) {
     const verified = await verifyTurnstile({
       token: submission.token,
       ip,
-      expectedAction: TURNSTILE_ACTION
+      expectedAction: TURNSTILE_ACTION,
+      expectedHostname: getRequestHostname(request)
     });
 
     if (!verified) {
+      console.warn("[contact] blocked before relay", {
+        stage: "turnstile_verification_failed"
+      });
       return clientError(
         "We couldn’t verify the submission. Please try again.",
         400,
@@ -415,19 +475,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    logContactStage("turnstile_verified");
+
     reportCompletionTiming(submission.startedAtRaw);
 
     const validation = validatePayload(submission.payload);
 
     if (!validation.ok) {
+      console.warn("[contact] blocked before relay", {
+        stage: "payload_validation_failed"
+      });
       return validation.response;
     }
+
+    logContactStage("payload_validated");
 
     const emailLimit = await checkContactEmailSuccessLimit(validation.payload.email);
 
     if (!emailLimit.allowed) {
+      console.warn("[contact] blocked before relay", {
+        stage: "email_success_rate_limit",
+        persistent: emailLimit.persistent,
+        retryAfter: emailLimit.retryAfter
+      });
       return rateLimitResponse(emailLimit.retryAfter);
     }
+
+    logContactStage("email_success_rate_limit_passed", {
+      persistent: emailLimit.persistent,
+      remaining: emailLimit.remaining
+    });
 
     await sendContactMessage(validation.payload);
     await recordContactEmailSuccess(validation.payload.email);

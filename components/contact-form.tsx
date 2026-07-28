@@ -102,11 +102,11 @@ export function ContactForm() {
       <input type="hidden" name="startedAt" value={startedAt.current} />
 
       <div className="hiddenField" aria-hidden="true">
-        <label htmlFor="companyWebsite">Company website</label>
+        <label htmlFor="contactPreference">Leave this field empty</label>
         <input
-          autoComplete="off"
-          id="companyWebsite"
-          name="companyWebsite"
+          autoComplete="new-password"
+          id="contactPreference"
+          name="contactPreference"
           tabIndex={-1}
           type="text"
         />
