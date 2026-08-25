@@ -26,7 +26,7 @@ export { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
 export type AssistantSource = "booting" | "local-llm" | "bedrock" | "site-knowledge" | "error";
 
 const unknownAnswer =
-  "I don't have that published here yet. Contact me if you need the specifics.";
+  "I don't have an honest answer to that from the public profile, and I would rather not make one up.";
 
 const promptInjectionAnswer =
   "I can answer questions about my professional background and work: experience, strengths, projects, leadership approach, GPS philosophy, or contact information.";
@@ -90,10 +90,12 @@ const topicTriggers: Record<string, string[]> = {
 export function buildAssistantSystemPrompt(context = approvedKnowledge) {
   return `
 You are ${assistantName}, a plainspoken ${assistantTitle.toLowerCase()} for rmoddel.com.
-You answer only questions about my professional background, resume, strengths, leadership, projects, GPS approach, AI/software work, and contact path.
+You primarily answer questions about my professional background, resume, strengths, leadership, projects, GPS approach, AI/software work, and contact path.
 Write as my authorized representative, using first person: "I", "my", and "me".
-Do not sound like a press release or a distant biography. Avoid stiff qualifying phrases and repeated third-person references.
-Answer the question directly. If a visitor asks about languages, tools, or technical background, answer from the approved technical background instead of refusing or restating the site boundary.
+Do not sound like a press release, a resume parser, or a distant biography. Use natural, varied language; do not reuse a stock opening or turn every answer into a list of capabilities.
+Answer the exact question first. A short, candid answer is better than a broad summary that only loosely relates to the question.
+If a visitor asks about languages, tools, technical background, whether I am a developer, or whether I can code, answer the distinction plainly: I have real hands-on software experience, but I do not position myself as a coding-only engineer.
+For ordinary personal questions that are not covered by the public material, say you do not know rather than redirecting into a professional pitch. Never invent a preference, anecdote, or personal fact.
 If a visitor asks one of the suggested follow-up questions, answer that specific question instead of repeating the broader topic overview.
 Use only the approved knowledge below. If a fact is not supported, say that plainly and stop.
 Do not invent metrics, clients, responsibilities, dates, team sizes, budget numbers, salary expectations, private details, or project status.
@@ -230,6 +232,22 @@ function buildSkillsAnswer() {
   ].join("\n");
 }
 
+function buildDeveloperAnswer() {
+  return [
+    "I have worked as a developer and I can code.",
+    "",
+    "My background includes hands-on work with PHP, JavaScript, SQL, Python, React, Next.js, databases, cloud services, automation, and AI integrations. I do not present myself as a coding-only engineer, though. The work that fits me best combines technical judgment with operations, people, communication, and getting a useful solution across the finish line."
+  ].join("\n");
+}
+
+function buildPersonalUnknownAnswer(question: string) {
+  const cleanedQuestion = question.trim().replace(/\s+/g, " ").replace(/[?.!]+$/, "");
+
+  return cleanedQuestion
+    ? `I don't know about \"${cleanedQuestion}\"—my public profile doesn't cover that, and I shouldn't pretend it does.`
+    : unknownAnswer;
+}
+
 function buildTechnicalBackgroundAnswer() {
   return [
     "My public profile lists this technical range:",
@@ -335,10 +353,14 @@ export function buildFallbackReply(
   messages?: AssistantMessage[],
   topicId?: string
 ) {
-  const contextualQuestion =
-    messages?.length && ["more", "tell me more", "details"].includes(normalizeForMatch(question))
-      ? [...messages].reverse().find((message) => message.role === "user")?.content ?? question
-      : question;
+  const isContinuation = ["more", "tell me more", "details", "what else", "go on"].includes(
+    normalizeForMatch(question)
+  );
+  const previousUserQuestion = messages
+    ?.slice(0, -1)
+    .reverse()
+    .find((message) => message.role === "user")?.content;
+  const contextualQuestion = isContinuation ? previousUserQuestion ?? question : question;
   const normalized = normalizeForMatch(contextualQuestion);
 
   if (!normalized) {
@@ -367,6 +389,20 @@ export function buildFallbackReply(
     ])
   ) {
     return "I don't publish salary expectations, pricing, or budget details here. Contact me with context and I can respond directly.";
+  }
+
+  if (
+    includesAny(normalized, [
+      "developer",
+      "develop software",
+      "software developer",
+      "write code",
+      "can code",
+      "can he code",
+      "can you code"
+    ])
+  ) {
+    return buildDeveloperAnswer();
   }
 
   if (includesAny(normalized, ["education", "degree", "school", "njit", "dale carnegie"])) {
@@ -424,11 +460,13 @@ export function buildFallbackReply(
     return buildContactAnswer();
   }
 
-  const topic = selectTopic(contextualQuestion, topicId);
+  // A selected sidebar topic provides context only for a genuine continuation.
+  // Otherwise the visitor's new question must stand on its own.
+  const topic = selectTopic(contextualQuestion, isContinuation ? topicId : undefined);
 
   if (topic) {
     return buildTopicReply(topic);
   }
 
-  return unknownAnswer;
+  return buildPersonalUnknownAnswer(contextualQuestion);
 }
