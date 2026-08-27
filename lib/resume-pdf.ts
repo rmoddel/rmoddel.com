@@ -17,6 +17,10 @@ export type ResumePdfContent = {
     heading: string;
     items: readonly string[];
   }>;
+  projects?: Array<{
+    title: string;
+    summary: string;
+  }>;
   education: {
     school: string;
     degree: string;
@@ -157,6 +161,19 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
   commands.push(textBlock(leftSkillLines, MARGIN_X, y, "F1", 8.7, 11, bodyTone));
   commands.push(textBlock(rightSkillLines, 322, y, "F1", 8.7, 11, bodyTone));
   y -= Math.max(leftSkillLines.length, rightSkillLines.length) * 11 + 16;
+
+  if (content.projects?.length) {
+    commands.push(textBlock(["SELECTED CLIENT PROJECTS"], MARGIN_X, y, "F2", 10.5, 12, accent));
+    y -= 14;
+
+    for (const project of content.projects) {
+      const projectLines = wrapText(`${project.title}: ${project.summary}`, 100);
+      commands.push(textBlock(projectLines, MARGIN_X, y, "F1", 8.2, 10, bodyTone));
+      y -= projectLines.length * 10 + 4;
+    }
+
+    y -= 10;
+  }
 
   commands.push(textBlock(["EDUCATION & DEVELOPMENT"], MARGIN_X, y, "F2", 10.5, 12, accent));
   y -= 15;

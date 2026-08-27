@@ -52,15 +52,6 @@ function isContactPrompt(text: string) {
   );
 }
 
-function normalizePrompt(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/[’']/g, "'")
-    .replace(/[^a-z0-9+#.\s/-]/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
 function renderMessage(content: string) {
   return content
     .split(/\n\s*\n/)
@@ -103,13 +94,11 @@ function buildContactMessage(draft: ContactDraft) {
 type InteractiveResumeProps = {
   initialTopicId?: string;
   topics: ChatTopic[];
-  starterQuestions: readonly string[];
 };
 
 export function InteractiveResume({
   initialTopicId,
-  topics,
-  starterQuestions
+  topics
 }: InteractiveResumeProps) {
   const initialTopic = initialTopicId
     ? topics.find((topic) => topic.id === initialTopicId)
@@ -120,9 +109,7 @@ export function InteractiveResume({
   const [activeTopicId, setActiveTopicId] = useState<string | null>(
     initialTopic?.id ?? null
   );
-  const [messages, setMessages] = useState<ChatMessage[]>(
-    initialTopic ? [{ role: "assistant", content: initialTopic.openingAnswer }] : []
-  );
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [recentTopicIds, setRecentTopicIds] = useState<string[]>([]);
@@ -189,7 +176,7 @@ export function InteractiveResume({
   function loadTopic(topic: ChatTopic, updateUrl = true) {
     loadedTopicRef.current = topic.id;
     setActiveTopicId(topic.id);
-    setMessages([{ role: "assistant", content: topic.openingAnswer }]);
+    setMessages([]);
     setInput("");
     setContactStatus({
       state: topic.id === "contact" ? "editing" : "idle",
@@ -415,13 +402,6 @@ export function InteractiveResume({
   const canSendContact =
     contactStatus.state === "review" &&
     Boolean(contactDraft.name && contactDraft.email && contactDraft.message);
-  const latestUserQuestion =
-    [...messages].reverse().find((message) => message.role === "user")?.content ?? "";
-  const visibleFollowUps =
-    activeTopic?.followUps.filter(
-      (question) => normalizePrompt(question) !== normalizePrompt(latestUserQuestion)
-    ) ?? [];
-
   return (
     <main className="chatShell">
       <button
@@ -528,17 +508,6 @@ export function InteractiveResume({
                   real-world processes.
                 </p>
               </article>
-              <div className="starterGrid" aria-label="Starter questions">
-                {starterQuestions.map((question) => (
-                  <button
-                    key={question}
-                    onClick={() => void submitQuestion(question)}
-                    type="button"
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
             </section>
           ) : null}
 
@@ -735,21 +704,6 @@ export function InteractiveResume({
         </div>
 
         <div className="chatContextPanel">
-          {visibleFollowUps.length ? (
-            <div className="followUpRow" aria-label="Suggested follow-up questions">
-              {visibleFollowUps.map((question) => (
-                <button
-                  disabled={busy}
-                  key={question}
-                  onClick={() => void submitQuestion(question)}
-                  type="button"
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
           {activeTopic?.links.length ? (
             <div className="contextLinks" aria-label="Relevant links">
               {activeTopic.links.map((link) => (

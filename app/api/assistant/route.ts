@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import {
   assistantName,
-  buildFallbackReply,
   retrieveAssistantContext,
   type AssistantMessage
 } from "@/lib/assistant";
@@ -66,10 +65,9 @@ export async function POST(request: Request) {
       assistant: assistantName
     });
   } catch {
-    return NextResponse.json({
-      reply: buildFallbackReply(latestUserMessage.content, messages, topic),
-      source: "site-knowledge",
-      assistant: assistantName
-    });
+    return NextResponse.json(
+      { error: "I can't answer that right now." },
+      { status: 503 }
+    );
   }
 }

@@ -1,13 +1,14 @@
 import {
   education,
   employmentHistory,
-  leadershipSkills,
   professionalDevelopment,
   resumeIdentity,
-  resumeSummary,
-  technicalSkills
+  singlePageLeadershipSkills,
+  singlePageResumeSummary,
+  singlePageTechnicalSkills
 } from "@/lib/resume-content";
 import { buildSinglePageResumePdf } from "@/lib/resume-pdf";
+import { siteProfile } from "@/lib/site-profile";
 
 export function GET() {
   const pdf = buildSinglePageResumePdf({
@@ -16,20 +17,27 @@ export function GET() {
     location: resumeIdentity.location,
     phone: resumeIdentity.phone,
     email: resumeIdentity.email,
-    summary: [...resumeSummary],
+    summary: [...singlePageResumeSummary],
     skillSections: [
       {
         heading: "Technical, AI & Systems Execution",
-        items: [...technicalSkills]
+        items: [...singlePageTechnicalSkills]
       },
       {
         heading: "Leadership & Operations",
-        items: [...leadershipSkills]
+        items: [...singlePageLeadershipSkills]
       }
     ],
+    projects: siteProfile.caseStudies.map((project) => ({
+      title: `${project.title} (${project.status})`,
+      summary: project.summary
+    })),
     education,
     development: professionalDevelopment,
-    experience: [...employmentHistory],
+    experience: employmentHistory.map((role) => ({
+      ...role,
+      points: role.points.slice(0, 2)
+    })),
     filename: "reuben-moddel-resume.pdf"
   });
 

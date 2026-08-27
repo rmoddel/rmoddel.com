@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { InteractiveResume } from "@/components/interactive-resume";
-import { chatTopics, starterQuestions } from "@/lib/interactive-resume-content";
+import { chatTopics } from "@/lib/interactive-resume-content";
 import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 
 type ChatTopicPageProps = {
@@ -90,7 +90,6 @@ export default function ChatTopicPage({ params }: ChatTopicPageProps) {
         <InteractiveResume
           initialTopicId={topic.id}
           topics={chatTopics}
-          starterQuestions={starterQuestions}
         />
       </Suspense>
     </>

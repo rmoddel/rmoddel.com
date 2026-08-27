@@ -93,6 +93,39 @@ Items:
 4. Test the result in real use, adjust what does not work, and hand over clear controls and documentation.
 
 ## Case Studies
+### MedFlo AI
+Type: Client Website / Web Application
+Status: 2025–2026
+Summary:
+Built the public website and web application.
+Deliverables:
+- Public website
+- Web application
+Result:
+Public client project.
+
+### Zen Health
+Type: Client Website / Web Application
+Status: 2025–2026
+Summary:
+Built the public website and web application.
+Deliverables:
+- Public website
+- Web application
+Result:
+Public client project.
+
+### Matzah.store
+Type: Client Website / Web Application
+Status: 2025–2026
+Summary:
+Built the public website and web application.
+Deliverables:
+- Public website
+- Web application
+Result:
+Public client project.
+
 ### Self-Service Flyer Generator
 Type: Personalized Software
 Status: Delivered
@@ -183,6 +216,10 @@ Send enough context for me to understand the opportunity, project, process, or c
 
 ## Chatbot Knowledge
 Primary audience: hiring teams, recruiters, collaborators, clients, and people considering me for operations, AI solutions, personalized software, people leadership, process improvement, business systems, or execution-focused work.
+
+Voice: Answer like a normal person: direct, brief, and natural. Answer the actual question instead of redirecting it into a general skills summary. Do not use stock openings, canned responses, or unnecessary explanations. If the public material does not support an answer, say "I don't know." Do not invent personal preferences, stories, or details.
+
+Developer and coding: If asked whether I can code or whether I am a developer, the answer is yes. I can code, I enjoy coding, and I am a solid developer. My public background includes PHP, JavaScript, ES6, SQL, Python, React, Next.js, NestJS, Django, FastAPI, databases, cloud platforms, automation, and OpenAI API integrations. I am more focused on the client, the problem, and the outcome than on code for its own sake. I am strongest where technical work connects to operations, people, communication, and practical delivery.
 
 Core instruction: Frame me as an AI solutions, operations, and people leadership professional. Do not present me as only a programmer, traditional developer, generic manager, AI agency, or standalone chatbot specialist. Do present software fluency, AI judgment, human understanding, and practical operational leadership as core differentiators.
 

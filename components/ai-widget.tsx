@@ -3,15 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
 
-const starterMessage =
-  "Ask about my background, work themes, capabilities, or send me a note.";
-
-const quickPrompts = [
-  { label: "Background", prompt: "What is your professional background?" },
-  { label: "Capabilities", prompt: "Where are you most useful?" },
-  { label: "Send email", prompt: "I want to send you an email." }
-] as const;
-
 type ContactDraft = {
   name?: string;
   email?: string;
@@ -157,9 +148,7 @@ export function AiWidget() {
   const [busy, setBusy] = useState(false);
   const [contactStep, setContactStep] = useState<ContactStep>("idle");
   const [contactDraft, setContactDraft] = useState<ContactDraft>({});
-  const [messages, setMessages] = useState<AssistantMessage[]>([
-    { role: "assistant", content: starterMessage }
-  ]);
+  const [messages, setMessages] = useState<AssistantMessage[]>([]);
   const messagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -465,19 +454,6 @@ export function AiWidget() {
           <p className="aiWidgetNote">
             Ask about background, work themes, capabilities, or send a note.
           </p>
-          <div className="aiPromptRow" aria-label="Suggested questions">
-            {quickPrompts.map(({ label, prompt }) => (
-              <button
-                className="aiPromptChip"
-                disabled={busy}
-                key={label}
-                onClick={() => void submitQuestion(prompt)}
-                type="button"
-              >
-                {label}
-              </button>
-            ))}
-          </div>
           <div aria-live="polite" className="aiWidgetMessages" ref={messagesRef}>
             {messages.map((message, index) => (
               <div className={`aiBubble ${message.role}`} key={`${message.role}-${index}`}>

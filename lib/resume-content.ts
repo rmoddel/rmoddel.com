@@ -16,6 +16,26 @@ export const resumeSummary = [
   siteProfile.experience.body
 ] as const;
 
+export const singlePageResumeSummary = [
+  "Client-focused developer and operations leader with 15+ years across software, business systems, process improvement, and team leadership. I can code and enjoy coding; I use that technical depth to understand the client problem, improve the workflow, and deliver a practical result."
+] as const;
+
+export const singlePageTechnicalSkills = [
+  "Hands-on development: PHP, JavaScript, Python, SQL, React, and Next.js",
+  "AI integrations, workflow automation, and internal tools",
+  "Databases, cloud platforms, and systems analysis",
+  "Requirements, technical solution design, and delivery coordination",
+  "Client and stakeholder communication"
+] as const;
+
+export const singlePageLeadershipSkills = [
+  "Process improvement and operational execution",
+  "Cross-functional and technical team leadership",
+  "Hiring, mentoring, onboarding, and training",
+  "Workflow, KPI, and systems improvement",
+  "Practical delivery focused on adoption and outcomes"
+] as const;
+
 export const technicalSkills = [
   "Problem diagnosis and technical solution translation",
   "Advanced AI solution evaluation and workflow design",
