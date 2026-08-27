@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { starterQuestions } from "@/lib/chat-starter-questions";
 import type { ChatTopic } from "@/lib/interactive-resume-content";
 
 type ChatMessage = {
@@ -109,7 +110,9 @@ export function InteractiveResume({
   const [activeTopicId, setActiveTopicId] = useState<string | null>(
     initialTopic?.id ?? null
   );
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() =>
+    initialTopic ? [{ role: "assistant", content: initialTopic.openingAnswer }] : []
+  );
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
   const [recentTopicIds, setRecentTopicIds] = useState<string[]>([]);
@@ -176,7 +179,7 @@ export function InteractiveResume({
   function loadTopic(topic: ChatTopic, updateUrl = true) {
     loadedTopicRef.current = topic.id;
     setActiveTopicId(topic.id);
-    setMessages([]);
+    setMessages([{ role: "assistant", content: topic.openingAnswer }]);
     setInput("");
     setContactStatus({
       state: topic.id === "contact" ? "editing" : "idle",
@@ -508,6 +511,18 @@ export function InteractiveResume({
                   real-world processes.
                 </p>
               </article>
+              <div className="starterGrid" aria-label="Suggested questions">
+                {starterQuestions.map((question) => (
+                  <button
+                    disabled={busy}
+                    key={question}
+                    onClick={() => void submitQuestion(question)}
+                    type="button"
+                  >
+                    {question}
+                  </button>
+                ))}
+              </div>
             </section>
           ) : null}
 
@@ -704,6 +719,20 @@ export function InteractiveResume({
         </div>
 
         <div className="chatContextPanel">
+          {activeTopic?.followUps.length ? (
+            <div className="followUpRow" aria-label="Suggested follow-up questions">
+              {activeTopic.followUps.map((question) => (
+                <button
+                  disabled={busy}
+                  key={question}
+                  onClick={() => void submitQuestion(question)}
+                  type="button"
+                >
+                  {question}
+                </button>
+              ))}
+            </div>
+          ) : null}
           {activeTopic?.links.length ? (
             <div className="contextLinks" aria-label="Relevant links">
               {activeTopic.links.map((link) => (

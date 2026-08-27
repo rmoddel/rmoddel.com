@@ -1,4 +1,5 @@
 import { employmentHistory, resumeIdentity } from "@/lib/resume-content";
+export { starterQuestions } from "@/lib/chat-starter-questions";
 import { technicalBackground } from "@/lib/site-content";
 import { siteProfile } from "@/lib/site-profile";
 
@@ -70,17 +71,6 @@ export const contactInquiryTypes = [
   "Process improvement",
   "Collaboration",
   "General inquiry"
-] as const;
-
-export const starterQuestions = [
-  "Tell me about your background.",
-  "Walk me through your experience.",
-  "What are your strongest skills?",
-  "How do you lead people and projects?",
-  "How do you use AI?",
-  "What have you built?",
-  "What is the GPS approach?",
-  "How can I contact you?"
 ] as const;
 
 const roleHistory = employmentHistory
