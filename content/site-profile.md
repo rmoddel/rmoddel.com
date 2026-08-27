@@ -94,37 +94,39 @@ Items:
 
 ## Case Studies
 ### MedFlo AI
-Type: Client Website / Web Application
-Status: 2025–2026
+Type: Contractual Temporary Role
+Status: 2025
 Summary:
-Built the public website and web application.
+Short-term contract work supporting the stabilization of an AI healthcare startup, with a focus on strengthening its public-facing website and web application.
 Deliverables:
 - Public website
 - Web application
 Result:
-Public client project.
+Provided focused web and application support during an important growth and stabilization period.
 
 ### Zen Health
-Type: Client Website / Web Application
-Status: 2025–2026
+Type: Public Website Experience
+Status: 2025
 Summary:
-Built the public website and web application.
+Designed and collaborated on Zen Health Care Services’ public website, shaping its information, presentation, and a more tailored level of customization.
 Deliverables:
 - Public website
-- Web application
+- Website information and presentation
+- Custom experience refinement
 Result:
-Public client project.
+A more considered, customized web presence built through close collaboration.
 
 ### Matzah.store
-Type: Client Website / Web Application
-Status: 2025–2026
+Type: E-commerce Website
+Status: 2025
 Summary:
-Built the public website and web application.
+Designed and collaborated on Matzah.store’s public e-commerce experience, creating a distinctly tailored storefront with a higher level of customization.
 Deliverables:
-- Public website
-- Web application
+- Public e-commerce website
+- Storefront design and customization
+- Collaborative experience refinement
 Result:
-Public client project.
+A distinctive, customized online storefront designed around the brand and shopping experience.
 
 ### Self-Service Flyer Generator
 Type: Personalized Software
