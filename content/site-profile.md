@@ -97,7 +97,7 @@ Items:
 Type: Contractual Temporary Role
 Status: 2025
 Summary:
-Short-term contract work supporting the stabilization of an AI healthcare startup, with a focus on strengthening its public-facing website and web application.
+Short-term contract work helping stabilize an AI healthcare startup’s public website and web application.
 Deliverables:
 - Public website
 - Web application
@@ -108,7 +108,7 @@ Provided focused web and application support during an important growth and stab
 Type: Public Website Experience
 Status: 2025
 Summary:
-Designed and collaborated on Zen Health Care Services’ public website, shaping its information, presentation, and a more tailored level of customization.
+Collaborated on a tailored public website with clearer information, presentation, and customization.
 Deliverables:
 - Public website
 - Website information and presentation
@@ -120,7 +120,7 @@ A more considered, customized web presence built through close collaboration.
 Type: E-commerce Website
 Status: 2025
 Summary:
-Designed and collaborated on Matzah.store’s public e-commerce experience, creating a distinctly tailored storefront with a higher level of customization.
+Collaborated on a customized public e-commerce storefront and shopping experience.
 Deliverables:
 - Public e-commerce website
 - Storefront design and customization

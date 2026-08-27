@@ -21,6 +21,8 @@ export type ResumePdfContent = {
     title: string;
     summary: string;
   }>;
+  projectsHeading?: string;
+  educationBeforeProjects?: boolean;
   education: {
     school: string;
     degree: string;
@@ -162,8 +164,30 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
   commands.push(textBlock(rightSkillLines, 322, y, "F1", 8.7, 11, bodyTone));
   y -= Math.max(leftSkillLines.length, rightSkillLines.length) * 11 + 16;
 
-  if (content.projects?.length) {
-    commands.push(textBlock(["SELECTED CLIENT PROJECTS"], MARGIN_X, y, "F2", 10.5, 12, accent));
+  const addEducationSection = () => {
+    commands.push(textBlock(["EDUCATION & DEVELOPMENT"], MARGIN_X, y, "F2", 10.5, 12, accent));
+    y -= 15;
+
+    const educationLines = [
+      content.education.school,
+      content.education.degree,
+      content.education.completed
+    ];
+    const developmentLines = [content.development.program, content.development.year];
+
+    commands.push(textBlock(educationLines, MARGIN_X, y, "F1", 8.7, 11, bodyTone));
+    commands.push(textBlock(developmentLines, 322, y, "F1", 8.7, 11, bodyTone));
+    y -= Math.max(educationLines.length, developmentLines.length) * 11 + 18;
+  };
+
+  const addProjectsSection = () => {
+    if (!content.projects?.length) {
+      return;
+    }
+
+    commands.push(
+      textBlock([content.projectsHeading ?? "SELECTED CLIENT PROJECTS"], MARGIN_X, y, "F2", 10.5, 12, accent)
+    );
     y -= 14;
 
     for (const project of content.projects) {
@@ -173,17 +197,15 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
     }
 
     y -= 10;
+  };
+
+  if (content.educationBeforeProjects) {
+    addEducationSection();
+    addProjectsSection();
+  } else {
+    addProjectsSection();
+    addEducationSection();
   }
-
-  commands.push(textBlock(["EDUCATION & DEVELOPMENT"], MARGIN_X, y, "F2", 10.5, 12, accent));
-  y -= 15;
-
-  const educationLines = [content.education.school, content.education.degree, content.education.completed];
-  const developmentLines = [content.development.program, content.development.year];
-
-  commands.push(textBlock(educationLines, MARGIN_X, y, "F1", 8.7, 11, bodyTone));
-  commands.push(textBlock(developmentLines, 322, y, "F1", 8.7, 11, bodyTone));
-  y -= Math.max(educationLines.length, developmentLines.length) * 11 + 18;
 
   commands.push(textBlock(["EMPLOYMENT HISTORY"], MARGIN_X, y, "F2", 10.5, 12, accent));
   y -= 14;

@@ -28,7 +28,9 @@ export function GET() {
         items: [...singlePageLeadershipSkills]
       }
     ],
-    projects: siteProfile.caseStudies.map((project) => ({
+    projectsHeading: "RECENT CLIENT & CONTRACT WORK",
+    educationBeforeProjects: true,
+    projects: siteProfile.caseStudies.slice(0, 3).map((project) => ({
       title: `${project.title} (${project.status})`,
       summary: project.summary
     })),
