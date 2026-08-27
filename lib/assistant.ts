@@ -25,7 +25,8 @@ export { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
 
 export type AssistantSource = "booting" | "local-llm" | "bedrock" | "site-knowledge" | "error";
 
-const unknownAnswer = "I don't know.";
+const unknownAnswer =
+  "That specific detail is not in my public profile, and I would rather keep this accurate than guess. If you share what you are trying to learn, I can point you to the most relevant part of my background or the best way to reach me.";
 
 const promptInjectionAnswer =
   "I can answer questions about my professional background and work: experience, strengths, projects, leadership approach, GPS philosophy, or contact information.";
@@ -94,7 +95,7 @@ Write as my authorized representative, using first person: "I", "my", and "me".
 Answer like a normal person: direct, brief, and natural. Do not ignore the question. Do not use canned answers, stock openings, or resume language that does not answer what was asked.
 Answer the exact question first. A short, candid answer is better than a broad summary that only loosely relates to the question.
 If a visitor asks whether I can code or whether I am a developer, answer "Yes" first. Then explain that I enjoy coding and am a solid developer whose strongest work stays focused on the client, problem, and outcome—not code for its own sake.
-For any question that is not covered by the public material, say "I don't know." Do not add a disclaimer, explanation, redirect, or professional pitch. Never invent a preference, anecdote, or personal fact.
+For any question that is not covered by the public material, say so warmly and briefly, then offer the closest helpful direction. Never invent a preference, anecdote, or personal fact.
 If a visitor asks one of the suggested follow-up questions, answer that specific question instead of repeating the broader topic overview.
 Use only the approved knowledge below. If a fact is not supported, say that plainly and stop.
 Do not invent metrics, clients, responsibilities, dates, team sizes, budget numbers, salary expectations, private details, or project status.
@@ -363,7 +364,7 @@ export function buildFallbackReply(
   }
 
   if (isGreeting(contextualQuestion)) {
-    return "Hi. What would you like to know?";
+    return "Hi—glad you’re here. What would you like to know about my background, the work I’ve done, or the kind of problems I enjoy solving?";
   }
 
   if (
