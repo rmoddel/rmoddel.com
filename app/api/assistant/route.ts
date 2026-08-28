@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import {
   assistantName,
-  buildFallbackReply,
+  buildProviderUnavailableReply,
+  getDeterministicAssistantReply,
+  normalizeAssistantIdentity,
   retrieveAssistantContext,
   type AssistantMessage
 } from "@/lib/assistant";
@@ -33,7 +35,7 @@ export async function POST(request: Request) {
     .slice(-8)
     .map((message) => ({
       role: message.role,
-      content: message.content.trim().slice(0, 1200)
+      content: normalizeAssistantIdentity(message.content.trim().slice(0, 1200))
     }));
 
   if (!messages?.length) {
@@ -54,7 +56,17 @@ export async function POST(request: Request) {
   }
 
   const topic = body.topic?.slice(0, 80);
-  const context = retrieveAssistantContext(latestUserMessage.content, topic);
+  const deterministicReply = getDeterministicAssistantReply(latestUserMessage.content);
+
+  if (deterministicReply) {
+    return NextResponse.json({
+      reply: deterministicReply,
+      source: "site-knowledge",
+      assistant: assistantName
+    });
+  }
+
+  const context = retrieveAssistantContext(topic);
 
   try {
     const result = await askAssistantProvider(messages, context);
@@ -70,7 +82,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       {
-        reply: buildFallbackReply(latestUserMessage.content, messages, topic),
+        reply: buildProviderUnavailableReply(),
         source: "site-knowledge",
         assistant: assistantName
       },
