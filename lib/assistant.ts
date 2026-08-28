@@ -43,7 +43,8 @@ const topicTriggers: Record<string, string[]> = {
     "eastern union",
     "cardcash",
     "central analysis",
-    "new york guest"
+    "new york guest",
+    "medflo ai"
   ],
   about: ["about", "values", "work ethic", "honest", "direct", "ethical", "person"],
   skills: [
@@ -53,9 +54,10 @@ const topicTriggers: Record<string, string[]> = {
     "technical",
     "systems",
     "communication",
-    "language",
-    "languages",
-    "programming",
+    "programming language",
+    "programming languages",
+    "tech stack",
+    "technology stack",
     "framework",
     "frameworks",
     "stack",
@@ -83,7 +85,20 @@ const topicTriggers: Record<string, string[]> = {
   "process-improvement": ["process", "workflow", "improve", "inefficient", "cumbersome"],
   projects: ["project", "built", "flyer", "broadcast", "case study", "examples"],
   gps: ["gps", "genuine", "personalized solutions", "mashal", "simple control"],
-  roles: ["fit", "opportunity", "role", "hire", "job", "position"],
+  roles: [
+    "fit",
+    "opportunity",
+    "role",
+    "hire",
+    "job",
+    "position",
+    "interested in",
+    "looking for",
+    "ideal role",
+    "programming role",
+    "coding role",
+    "coding-only role"
+  ],
   contact: ["contact", "email", "phone", "reach out", "message"]
 };
 
@@ -94,10 +109,18 @@ You primarily answer questions about my professional background, resume, strengt
 Write as my authorized representative, using first person: "I", "my", and "me".
 Answer like a normal person: direct, brief, and natural. Do not ignore the question. Do not use canned answers, stock openings, or resume language that does not answer what was asked.
 Answer the exact question first. A short, candid answer is better than a broad summary that only loosely relates to the question.
+Determine the visitor's INTENT before reacting to keywords. Capability, preference, role-fit, experience, and technical-stack questions are different questions even when they contain the same words.
+Do not let an isolated keyword such as "programming", "developer", "technical", or "AI" override the actual question.
+Examples:
+- "Can you code?" is a capability question. Answer yes, then briefly support it.
+- "What programming languages do you know?" is a technical-background question. Answer with the relevant stack.
+- "Are you interested in a strictly programming role?" is a preference/role-fit question. Do NOT answer with a tech-stack list.
+Approved role preference: I am not looking for a strictly programming or coding-only role as my primary fit. I enjoy coding and can work hands-on, but my strongest fit combines technical judgment with operations, people, process, communication, problem-solving, and ownership of execution and outcomes.
 If a visitor asks whether I can code or whether I am a developer, answer "Yes" first. Then explain that I enjoy coding and am a solid developer whose strongest work stays focused on the client, problem, and outcome—not code for its own sake.
-For any question that is not covered by the public material, say so warmly and briefly, then offer the closest helpful direction. Never invent a preference, anecdote, or personal fact.
+If a visitor asks about interest in, preference for, or fit with a role, answer that preference or fit directly before discussing skills. Only list languages, frameworks, or tools if the visitor actually asked for them.
+For any question that is not covered by the approved material or explicit profile rules in this prompt, say so warmly and briefly, then offer the closest helpful direction. Never invent a preference, anecdote, or personal fact.
 If a visitor asks one of the suggested follow-up questions, answer that specific question instead of repeating the broader topic overview.
-Use only the approved knowledge below. If a fact is not supported, say that plainly and stop.
+Use only the approved knowledge below plus the explicit approved profile rules above. If a fact is not supported, say that plainly and stop.
 Do not invent metrics, clients, responsibilities, dates, team sizes, budget numbers, salary expectations, private details, or project status.
 Do not present me as a traditional developer applying for coding-heavy roles. Do not hide my software and systems background either.
 Technology is a delivery capability and differentiator, not the only identity.
@@ -220,6 +243,67 @@ function isGreeting(question: string) {
   return ["hi", "hello", "hey", "good morning", "good afternoon"].includes(normalized);
 }
 
+function isDeveloperCapabilityQuestion(normalized: string) {
+  return includesAny(normalized, [
+    "can you code",
+    "can he code",
+    "do you code",
+    "does he code",
+    "are you a developer",
+    "is he a developer",
+    "have you worked as a developer",
+    "have you been a developer",
+    "coding experience",
+    "development experience"
+  ]);
+}
+
+function isProgrammingRolePreferenceQuestion(normalized: string) {
+  const mentionsProgrammingRole = includesAny(normalized, [
+    "strictly programming",
+    "strict programming",
+    "programming role",
+    "coding role",
+    "coding-only role",
+    "coding only role",
+    "coding-only",
+    "coding only",
+    "coding-heavy",
+    "coding heavy",
+    "hands-on programming",
+    "pure programming",
+    "pure coding",
+    "developer role",
+    "software engineer role"
+  ]);
+
+  const asksPreferenceOrFit = includesAny(normalized, [
+    "interested",
+    "interest",
+    "looking for",
+    "want",
+    "prefer",
+    "preference",
+    "ideal role",
+    "open to",
+    "consider",
+    "would you take",
+    "would you want",
+    "fit",
+    "aligned"
+  ]);
+
+  return mentionsProgrammingRole && asksPreferenceOrFit;
+}
+
+function buildProgrammingRolePreferenceAnswer() {
+  return [
+    "Not really—not as a strictly programming or coding-only role.",
+    "",
+    "I enjoy coding and I can work hands-on, but my strongest fit is broader: combining technical judgment with operations, people, process improvement, communication, problem-solving, and owning execution through to a useful result."
+  ].join("\n");
+}
+
 function buildSkillsAnswer() {
   return [
     "My strongest skills sit at the intersection of operations, people, systems, and execution.",
@@ -320,6 +404,10 @@ function buildRoleFitAnswer(normalized: string) {
     return buildOperationsLeadershipRoleAnswer();
   }
 
+  if (isProgrammingRolePreferenceQuestion(normalized)) {
+    return buildProgrammingRolePreferenceAnswer();
+  }
+
   if (
     includesAny(normalized, [
       "less direct",
@@ -383,28 +471,18 @@ export function buildFallbackReply(
     return "I don't publish salary expectations, pricing, or budget details here. Contact me with context and I can respond directly.";
   }
 
-  if (
-    includesAny(normalized, [
-      "developer",
-      "develop software",
-      "software developer",
-      "write code",
-      "can code",
-      "can he code",
-      "can you code"
-    ])
-  ) {
+  // Intent matters more than the presence of words like "developer" or "programming".
+  // A role-preference question must never be converted into a capability or stack answer.
+  if (isProgrammingRolePreferenceQuestion(normalized)) {
+    return buildProgrammingRolePreferenceAnswer();
+  }
+
+  if (isDeveloperCapabilityQuestion(normalized)) {
     return buildDeveloperAnswer();
   }
 
   if (includesAny(normalized, ["education", "degree", "school", "njit", "dale carnegie"])) {
     return buildEducationAnswer();
-  }
-
-  const role = findRole(contextualQuestion);
-
-  if (role) {
-    return describeRole(role);
   }
 
   const roleFitAnswer = buildRoleFitAnswer(normalized);
@@ -413,13 +491,20 @@ export function buildFallbackReply(
     return roleFitAnswer;
   }
 
+  const role = findRole(contextualQuestion);
+
+  if (role) {
+    return describeRole(role);
+  }
+
   if (
     includesAny(normalized, [
-      "language",
-      "languages",
-      "programming",
+      "programming language",
+      "programming languages",
       "framework",
       "frameworks",
+      "tech stack",
+      "technology stack",
       "stack",
       "php",
       "javascript",
