@@ -3,10 +3,7 @@ const buildTimeServerEnvKeys = [
   "EMAIL_API_URL",
   "EMAIL_API_SECRET",
   "EMAIL_FROM",
-  "CONTACT_TO",
-  "ASSISTANT_PROVIDER",
-  "BEDROCK_MODEL_ID",
-  "BEDROCK_REGION"
+  "CONTACT_TO"
 ];
 
 const buildTimeServerEnv = Object.fromEntries(

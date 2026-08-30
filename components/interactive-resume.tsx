@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { starterQuestions } from "@/lib/chat-starter-questions";
 import type { ChatTopic } from "@/lib/interactive-resume-content";
 
 type ChatMessage = {
@@ -434,7 +433,7 @@ export function InteractiveResume({
         </div>
 
         <button className="newChatButton" onClick={newConversation} type="button">
-          New Conversation
+          Resume overview
         </button>
 
         <nav className="topicNav" aria-label="Interactive resume topics">
@@ -482,7 +481,7 @@ export function InteractiveResume({
         <header className="chatTopBar">
           <div>
             <p className="eyebrow">Interactive Resume</p>
-            <h1>{activeTopic?.label ?? "Ask Anything About My Background"}</h1>
+            <h1>{activeTopic?.label ?? "Resume Guide"}</h1>
           </div>
           <div className="chatTopActions">
             <a className="button buttonSecondary smallButton" href="/resume">
@@ -498,31 +497,16 @@ export function InteractiveResume({
           {!messages.length ? (
             <section className="chatWelcome">
               <p className="sectionIntro">
-                Explore my experience, leadership approach, skills,
-                projects, AI work, values, or the kinds of problems I am best
-                equipped to solve.
+                A quick guide to my experience, strengths, work style, projects,
+                and the kinds of problems I am best equipped to solve.
               </p>
               <article className="introCard">
                 <p>
-                  I bring 15+ years across business systems,
-                  operations, software delivery, process improvement, and team
-                  leadership. I combine human understanding and practical
-                  execution with AI-enabled software to improve cumbersome
-                  real-world processes.
+                  Choose a topic from the menu, or ask a specific question.
+                  The guide draws from both my public resume and the broader
+                  professional profile on this site.
                 </p>
               </article>
-              <div className="starterGrid" aria-label="Suggested questions">
-                {starterQuestions.map((question) => (
-                  <button
-                    disabled={busy}
-                    key={question}
-                    onClick={() => void submitQuestion(question)}
-                    type="button"
-                  >
-                    {question}
-                  </button>
-                ))}
-              </div>
             </section>
           ) : null}
 
@@ -718,22 +702,8 @@ export function InteractiveResume({
           ) : null}
         </div>
 
-        <div className="chatContextPanel">
-          {activeTopic?.followUps.length ? (
-            <div className="followUpRow" aria-label="Suggested follow-up questions">
-              {activeTopic.followUps.map((question) => (
-                <button
-                  disabled={busy}
-                  key={question}
-                  onClick={() => void submitQuestion(question)}
-                  type="button"
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          ) : null}
-          {activeTopic?.links.length ? (
+        {activeTopic?.links.length ? (
+          <div className="chatContextPanel">
             <div className="contextLinks" aria-label="Relevant links">
               {activeTopic.links.map((link) => (
                 <a href={link.href} key={link.href}>
@@ -741,8 +711,8 @@ export function InteractiveResume({
                 </a>
               ))}
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
 
         <form className="chatComposer" onSubmit={handleSubmit}>
           <label>
@@ -759,8 +729,7 @@ export function InteractiveResume({
             Send
           </button>
           <p className="chatPrivacyNote">
-            Please avoid confidential or sensitive details. Questions may be
-            processed by an AI service to generate a response. <a href="/privacy">Privacy</a>
+            Please avoid confidential or sensitive details. This guide uses the public information on this site. <a href="/privacy">Privacy</a>
           </p>
         </form>
       </section>

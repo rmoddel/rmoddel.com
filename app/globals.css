@@ -1026,7 +1026,8 @@ h3 {
 }
 
 .chatTopBar h1 {
-  font-size: 2rem;
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  line-height: 1.05;
 }
 
 .chatTopActions {
@@ -1178,6 +1179,10 @@ h3 {
   padding: 14px 28px;
   border-top: 1px solid var(--line);
   background: #fff;
+}
+
+.chatContextPanel:empty {
+  display: none;
 }
 
 .followUpRow,
@@ -1421,9 +1426,12 @@ h3 {
   }
 
   .chatTopBar {
-    padding: 66px 16px 16px;
-    align-items: stretch;
-    flex-direction: column;
+    padding: 64px 16px 14px;
+    align-items: flex-start;
+  }
+
+  .chatTopBar h1 {
+    font-size: 2rem;
   }
 
   .chatTopActions {

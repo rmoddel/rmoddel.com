@@ -3,5 +3,5 @@ export type AssistantMessage = {
   content: string;
 };
 
-export const assistantName = "Interactive Resume Agent";
-export const assistantTitle = "Authorized resume agent";
+export const assistantName = "Interactive Resume Guide";
+export const assistantTitle = "Guided resume assistant";

@@ -90,10 +90,9 @@ export default function PrivacyPage() {
           If you contact Reuben Moddel through this website, the site may
           collect the information you choose to submit, such as your name,
           email address, phone number, organization, role or project context,
-          process details, timing, compensation, budget, or related notes. If
-          you use the interactive resume, your questions may be processed by an
-          AI service to generate a response. Please avoid confidential or
-          sensitive details.
+          process details, timing, compensation, budget, or related notes.
+          The interactive resume uses public information from this site to
+          provide guided answers. Please avoid confidential or sensitive details.
         </p>
       </section>
 
@@ -124,10 +123,9 @@ export default function PrivacyPage() {
           <article className="contentCard">
             <h3>Interactive resume questions</h3>
             <p>
-              Questions submitted to the interactive resume may be processed by
-              an AI provider so the site can generate a relevant answer about
-              Reuben&apos;s public professional background. Standard analytics
-              should not include full message text.
+              Questions submitted to the interactive resume are matched against
+              public professional information published on this site. Standard
+              analytics should not include full message text.
             </p>
           </article>
 

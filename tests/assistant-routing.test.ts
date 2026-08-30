@@ -33,3 +33,7 @@ test("answers ordinary professional questions from the local response library", 
 test("uses a friendly response when the question is outside the profile", () => {
   assert.match(getSimulatedAssistantReply("What is the weather tomorrow?"), /different kind|all-purpose|outside my lane|general-purpose/i);
 });
+
+test("answers named resume roles directly", () => {
+  assert.match(getSimulatedAssistantReply("What did you do at GPARENCY?"), /Director of Product Operations/i);
+});

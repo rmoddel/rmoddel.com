@@ -95,6 +95,22 @@ export function getSimulatedAssistantReply(question: string) {
     return "Not as my primary fit. I enjoy coding and can work hands-on, but I’m strongest where technical judgment is combined with operations, people, process improvement, communication, and responsibility for a useful outcome.";
   }
 
+  if (normalized.includes("gparency")) {
+    return "At GPARENCY, I was Director of Product Operations and Technical Lead from November 2021 through June 2025. I built and scaled an agile development team, hired and mentored contributors, translated product and business priorities into executable work for an MVP marketplace, coordinated internal and overseas developers, and created systems and analytics that gave leadership clearer visibility.";
+  }
+
+  if (normalized.includes("eastern union")) {
+    return "At Eastern Union, I was Technical Operations Manager. I helped move work from third-party tools into internal systems, led onboarding and training for junior team members, supported reliable operations and adoption, and improved workflows across business units.";
+  }
+
+  if (normalized.includes("cardcash")) {
+    return "At CardCash, I worked as a Software Analyst, developing automated workflows to reduce manual processing and operational friction. I collaborated across departments on systems improvements, testing, analytics, data integrity, and documentation.";
+  }
+
+  if (includesAny(normalized, ["education", "degree", "njit", "school"])) {
+    return "I earned a Master of Science in Management Information Systems from the New Jersey Institute of Technology, completed in January 2011. I also completed Dale Carnegie’s Skills for Success program in 2019.";
+  }
+
   if (includesAny(normalized, ["role fits", "role fit", "what kind of role", "best role", "what roles", "interested in a role", "opportunity fit"])) {
     return "I’m strongest in roles that connect operations, people, systems, and execution—such as operations or solutions leadership, implementation, program or project management, customer success, AI operations, and client-facing technical operations. The details of the responsibilities matter most.";
   }
@@ -117,6 +133,10 @@ export function getSimulatedAssistantReply(question: string) {
 
   if (includesAny(normalized, ["experience", "background", "career", "worked", "employment", "resume", "who is reuben", "tell me about yourself"])) {
     return "I bring 15+ years across business systems, operations, software delivery, process improvement, and team leadership. The throughline is practical execution: understand the real problem, align people and technology, and deliver something useful.";
+  }
+
+  if (includesAny(normalized, ["working style", "work style", "value at work", "values", "approach different", "how do you work"])) {
+    return "My style is honest, direct, practical, and people-aware. I listen before prescribing, take time to understand the pressures around a process, and care whether the final result actually works for the people who have to live with it.";
   }
 
   if (includesAny(normalized, ["skill", "strength", "good at", "most useful"])) {

@@ -82,7 +82,7 @@ const mostRecentRole = employmentHistory[0];
 export const chatTopics: ChatTopic[] = [
   {
     id: "experience",
-    label: "My Experience",
+    label: "Experience",
     openingAnswer:
       "I bring 15+ years across business systems, operations, software delivery, process improvement, and team leadership. My career moved from hands-on web development into software and systems analysis, technical operations, product operations, and leadership roles where I coordinated people, process, and delivery.\n\nMy public resume includes roles at GPARENCY, Eastern Union, CardCash, Central Analysis Bureau, and New York Guest Services. The throughline is practical execution: understanding the real problem, aligning technical and nontechnical contributors, and moving useful work forward.",
     followUps: [
@@ -99,7 +99,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "about",
-    label: "About Me",
+    label: "About",
     openingAnswer:
       "My working style is honest, direct, practical, and people-aware. I listen before prescribing, try to understand the pressures around a process, and care whether the final result actually works for the people who have to live with it.\n\nMy value is not only technical fluency. It is the combination of human understanding, clear communication, operational judgment, and enough software and AI fluency to lead useful solutions from idea to execution.",
     followUps: [
@@ -113,7 +113,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "skills",
-    label: "Skills and Strengths",
+    label: "Skills",
     openingAnswer:
       "My strongest skills sit at the intersection of operations, people, systems, and execution.\n\nKey areas include operations and process improvement, team and cross-functional leadership, requirements and problem discovery, AI-enabled solutions, software and systems fluency, communication, and follow-through. I am most useful when a process is cumbersome, unclear, cross-functional, or technical enough that business and implementation realities need to be translated clearly.",
     followUps: [
@@ -130,7 +130,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "leadership",
-    label: "Leadership and Management",
+    label: "Leadership",
     openingAnswer:
       "My leadership experience includes hiring and mentoring, coordinating internal and overseas contributors, clarifying priorities, establishing practical operating rhythms, communicating with stakeholders, and helping teams move through ambiguity.\n\nMy management approach combines empathy with accountability: understand the people and pressures first, then create enough clarity, ownership, and follow-up for work to move.",
     followUps: [
@@ -144,7 +144,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "ai-software",
-    label: "AI and Personalized Software",
+    label: "AI & Software",
     openingAnswer:
       "I treat AI and software as delivery capabilities, not decoration. The useful question is not whether a process can include AI; it is whether AI, automation, a form, a dashboard, document intelligence, or an integration would reduce friction in a real workflow.\n\nThe goal is personalized software around the organization’s actual needs, with sophisticated technology behind the scenes and understandable controls in the user’s hands.",
     followUps: [
@@ -186,7 +186,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "gps",
-    label: "The GPS Approach",
+    label: "GPS Approach",
     openingAnswer:
       `${gpsPrinciples[0].title}: ${gpsPrinciples[0].body}\n\n${gpsPrinciples[1].title}: ${gpsPrinciples[1].body}\n\n${gpsPrinciples[2].title}: ${gpsPrinciples[2].body}\n\n${gpsMashal}\n\n${gpsSupportLine}`,
     followUps: [
@@ -199,7 +199,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "roles",
-    label: "Roles and Opportunities",
+    label: "Role Fit",
     openingAnswer:
       "I am strongest in roles that combine operations, people, systems, and execution. Possible role families include operations leadership, program or project management, implementation, customer success, solutions leadership, AI operations, business systems, cross-functional management, and client-facing technical operations.\n\nFit depends on the actual responsibilities. For a role centered only on advanced hands-on programming, my current positioning is less direct than for roles requiring operational judgment, stakeholder alignment, process improvement, AI-enabled tools, and practical delivery.",
     followUps: [
@@ -216,7 +216,7 @@ export const chatTopics: ChatTopic[] = [
   },
   {
     id: "contact",
-    label: "Contact Me",
+    label: "Contact",
     openingAnswer:
       "You can contact me about a role, collaboration, personalized AI or software solution, or a cumbersome process that should work better. Start a message here or use the contact page.",
     followUps: [

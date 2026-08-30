@@ -7,7 +7,7 @@ import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Chat With My Resume | Ask About Reuben Moddel",
   description:
-    "Ask an AI-powered interactive resume about Reuben Moddel’s experience, strengths, leadership, projects, and approach to improving cumbersome processes.",
+    "Explore Reuben Moddel’s experience, strengths, leadership, projects, and approach to improving cumbersome processes.",
   alternates: {
     canonical: "/chat"
   },
