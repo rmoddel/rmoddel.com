@@ -9,7 +9,10 @@ import {
 } from "@/lib/assistant-shared";
 
 export { assistantName, type AssistantMessage } from "@/lib/assistant-shared";
-export { getDeterministicAssistantReply, normalizeAssistantIdentity } from "@/lib/assistant-routing";
+export {
+  getSimulatedAssistantReply,
+  normalizeAssistantIdentity
+} from "@/lib/assistant-routing";
 
 export type AssistantSource =
   | "booting"

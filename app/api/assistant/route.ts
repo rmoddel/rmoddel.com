@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import {
   assistantName,
-  buildProviderUnavailableReply,
-  getDeterministicAssistantReply,
+  getSimulatedAssistantReply,
   normalizeAssistantIdentity,
-  retrieveAssistantContext,
   type AssistantMessage
 } from "@/lib/assistant";
-import { askAssistantProvider } from "@/lib/assistant-provider";
 import { checkRateLimit, getClientKey } from "@/lib/rate-limit";
 
 type AssistantRequestBody = {
@@ -55,38 +52,9 @@ export async function POST(request: Request) {
     );
   }
 
-  const topic = body.topic?.slice(0, 80);
-  const deterministicReply = getDeterministicAssistantReply(latestUserMessage.content);
-
-  if (deterministicReply) {
-    return NextResponse.json({
-      reply: deterministicReply,
-      source: "site-knowledge",
-      assistant: assistantName
-    });
-  }
-
-  const context = retrieveAssistantContext(topic);
-
-  try {
-    const result = await askAssistantProvider(messages, context);
-
-    return NextResponse.json({
-      reply: result.content,
-      source: result.source,
-      model: result.model,
-      assistant: assistantName
-    });
-  } catch (error) {
-    console.error("Assistant provider request failed.", error);
-
-    return NextResponse.json(
-      {
-        reply: buildProviderUnavailableReply(),
-        source: "site-knowledge",
-        assistant: assistantName
-      },
-      { status: 200 }
-    );
-  }
+  return NextResponse.json({
+    reply: getSimulatedAssistantReply(latestUserMessage.content),
+    source: "site-knowledge",
+    assistant: assistantName
+  });
 }
