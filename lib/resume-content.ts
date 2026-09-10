@@ -100,7 +100,7 @@ export const employmentHistory = [
     title: "Self-Employed Consultant / Website Developer",
     company: "Self-Employed",
     location: "Lakewood, NJ",
-    dates: "2025 - 2026",
+    dates: "2025 - Present",
     points: [
       "Provided consulting and website support for individuals and small organizations.",
       "Built and improved public websites, e-commerce experiences, and web applications around client needs.",
