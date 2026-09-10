@@ -108,7 +108,7 @@ Provided focused web and application support during an important growth and stab
 Type: Public Website Experience
 Status: 2025
 Summary:
-Collaborated on a tailored public website with clearer information, presentation, and customization.
+Built a tailored public website with clearer information, presentation, and customization.
 Deliverables:
 - Public website
 - Website information and presentation
@@ -120,7 +120,7 @@ A more considered, customized web presence built through close collaboration.
 Type: E-commerce Website
 Status: 2025
 Summary:
-Collaborated on a customized public e-commerce storefront and shopping experience.
+Built a customized public e-commerce storefront and shopping experience.
 Deliverables:
 - Public e-commerce website
 - Storefront design and customization
