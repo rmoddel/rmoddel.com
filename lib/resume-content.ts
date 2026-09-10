@@ -97,6 +97,18 @@ export const professionalDevelopment = {
 
 export const employmentHistory = [
   {
+    title: "Self-Employed Consultant / Website Developer",
+    company: "Self-Employed",
+    location: "Lakewood, NJ",
+    dates: "2025 - 2026",
+    points: [
+      "Provided consulting and website support for individuals and small organizations.",
+      "Built and improved public websites, e-commerce experiences, and web applications around client needs.",
+      "Translated client goals into practical project plans, content structure, and usable digital experiences.",
+      "Used AI, automation, and software judgment where helpful to simplify workflows."
+    ]
+  },
+  {
     title: "Director, Product Operations / Technical Lead",
     company: "GPARENCY",
     location: "Howell, NJ",

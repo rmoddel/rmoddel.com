@@ -38,9 +38,11 @@ export type ResumePdfContent = {
 
 const PAGE_WIDTH = 612;
 const PAGE_HEIGHT = 792;
-const MARGIN_X = 40;
-const MARGIN_TOP = 42;
+const MARGIN_X = 36;
+const MARGIN_TOP = 36;
 const CONTENT_WIDTH = PAGE_WIDTH - MARGIN_X * 2;
+const RIGHT_COLUMN_X = 326;
+const BOTTOM_MARGIN = 28;
 
 function escapePdfText(text: string) {
   return text.replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)");
@@ -94,6 +96,12 @@ ${escapedLines.join("\nT*\n")}
 ET`;
 }
 
+function assertSinglePage(y: number) {
+  if (y < BOTTOM_MARGIN) {
+    throw new Error("Resume PDF content exceeds one standard Letter page.");
+  }
+}
+
 function horizontalRule(y: number, color: [number, number, number], width = CONTENT_WIDTH) {
   const [r, g, b] = color.map((value) => value.toFixed(3));
 
@@ -114,59 +122,59 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
   const commands: string[] = [];
   let y = PAGE_HEIGHT - MARGIN_TOP;
 
-  commands.push(textBlock([content.name], MARGIN_X, y, "F2", 21, 24, titleTone));
-  y -= 24;
+  commands.push(textBlock([content.name], MARGIN_X, y, "F2", 20, 22, titleTone));
+  y -= 22;
 
-  commands.push(textBlock([content.title], MARGIN_X, y, "F1", 10.5, 13, mutedTone));
+  commands.push(textBlock([content.title], MARGIN_X, y, "F1", 9.5, 11, mutedTone));
   commands.push(
     textBlock(
       [`${content.location}   |   ${content.phone}   |   ${content.email}`],
-      340,
+      330,
       y,
       "F1",
-      9.5,
-      12,
+      8.6,
+      10,
       mutedTone
     )
   );
-  y -= 16;
+  y -= 14;
 
   commands.push(horizontalRule(y, accent));
-  y -= 20;
-
-  commands.push(textBlock(["SUMMARY"], MARGIN_X, y, "F2", 10.5, 12, accent));
   y -= 16;
 
+  commands.push(textBlock(["SUMMARY"], MARGIN_X, y, "F2", 9.4, 11, accent));
+  y -= 13;
+
   const summaryLines = content.summary.flatMap((paragraph) => [
-    ...wrapText(paragraph, 108),
+    ...wrapText(paragraph, 120),
     ""
   ]);
   summaryLines.pop();
-  commands.push(textBlock(summaryLines, MARGIN_X, y, "F1", 9.1, 12.2, bodyTone));
-  y -= summaryLines.length * 12.2 + 16;
+  commands.push(textBlock(summaryLines, MARGIN_X, y, "F1", 8, 9.6, bodyTone));
+  y -= summaryLines.length * 9.6 + 12;
 
-  commands.push(textBlock(["CORE SKILLS"], MARGIN_X, y, "F2", 10.5, 12, accent));
-  y -= 15;
+  commands.push(textBlock(["CORE SKILLS"], MARGIN_X, y, "F2", 9.4, 11, accent));
+  y -= 12;
 
   const [leftSkills = { heading: "", items: [] }, rightSkills = { heading: "", items: [] }] =
     content.skillSections;
 
   const leftSkillLines = [
     leftSkills.heading,
-    ...leftSkills.items.flatMap((skill) => wrapText(`- ${skill}`, 43))
+    ...leftSkills.items.flatMap((skill) => wrapText(`- ${skill}`, 58))
   ];
   const rightSkillLines = [
     rightSkills.heading,
-    ...rightSkills.items.flatMap((skill) => wrapText(`- ${skill}`, 43))
+    ...rightSkills.items.flatMap((skill) => wrapText(`- ${skill}`, 58))
   ];
 
-  commands.push(textBlock(leftSkillLines, MARGIN_X, y, "F1", 8.7, 11, bodyTone));
-  commands.push(textBlock(rightSkillLines, 322, y, "F1", 8.7, 11, bodyTone));
-  y -= Math.max(leftSkillLines.length, rightSkillLines.length) * 11 + 16;
+  commands.push(textBlock(leftSkillLines, MARGIN_X, y, "F1", 7.1, 8.25, bodyTone));
+  commands.push(textBlock(rightSkillLines, RIGHT_COLUMN_X, y, "F1", 7.1, 8.25, bodyTone));
+  y -= Math.max(leftSkillLines.length, rightSkillLines.length) * 8.25 + 12;
 
   const addEducationSection = () => {
-    commands.push(textBlock(["EDUCATION & DEVELOPMENT"], MARGIN_X, y, "F2", 10.5, 12, accent));
-    y -= 15;
+    commands.push(textBlock(["EDUCATION & DEVELOPMENT"], MARGIN_X, y, "F2", 9.4, 11, accent));
+    y -= 12;
 
     const educationLines = [
       content.education.school,
@@ -175,9 +183,9 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
     ];
     const developmentLines = [content.development.program, content.development.year];
 
-    commands.push(textBlock(educationLines, MARGIN_X, y, "F1", 8.7, 11, bodyTone));
-    commands.push(textBlock(developmentLines, 322, y, "F1", 8.7, 11, bodyTone));
-    y -= Math.max(educationLines.length, developmentLines.length) * 11 + 18;
+    commands.push(textBlock(educationLines, MARGIN_X, y, "F1", 7.3, 8.4, bodyTone));
+    commands.push(textBlock(developmentLines, RIGHT_COLUMN_X, y, "F1", 7.3, 8.4, bodyTone));
+    y -= Math.max(educationLines.length, developmentLines.length) * 8.4 + 12;
   };
 
   const addProjectsSection = () => {
@@ -186,17 +194,17 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
     }
 
     commands.push(
-      textBlock([content.projectsHeading ?? "SELECTED CLIENT PROJECTS"], MARGIN_X, y, "F2", 10.5, 12, accent)
+      textBlock([content.projectsHeading ?? "SELECTED CLIENT PROJECTS"], MARGIN_X, y, "F2", 9.4, 11, accent)
     );
-    y -= 14;
+    y -= 11;
 
     for (const project of content.projects) {
-      const projectLines = wrapText(`${project.title}: ${project.summary}`, 100);
-      commands.push(textBlock(projectLines, MARGIN_X, y, "F1", 8.2, 10, bodyTone));
-      y -= projectLines.length * 10 + 4;
+      const projectLines = wrapText(`${project.title}: ${project.summary}`, 118);
+      commands.push(textBlock(projectLines, MARGIN_X, y, "F1", 7.1, 8.1, bodyTone));
+      y -= projectLines.length * 8.1 + 3;
     }
 
-    y -= 10;
+    y -= 8;
   };
 
   if (content.educationBeforeProjects) {
@@ -207,23 +215,25 @@ export function buildSinglePageResumePdf(content: ResumePdfContent) {
     addEducationSection();
   }
 
-  commands.push(textBlock(["EMPLOYMENT HISTORY"], MARGIN_X, y, "F2", 10.5, 12, accent));
-  y -= 14;
+  commands.push(textBlock(["EMPLOYMENT HISTORY"], MARGIN_X, y, "F2", 9.4, 11, accent));
+  y -= 11;
 
   for (const role of content.experience) {
-    commands.push(textBlock([role.title], MARGIN_X, y, "F2", 9.3, 10.7, titleTone));
-    commands.push(textBlock([role.dates], 432, y, "F1", 8.2, 9.8, mutedTone));
-    y -= 11;
+    commands.push(textBlock([role.title], MARGIN_X, y, "F2", 8, 9.2, titleTone));
+    commands.push(textBlock([role.dates], 430, y, "F1", 6.8, 7.8, mutedTone));
+    y -= 8.8;
 
     commands.push(
-      textBlock([`${role.company} | ${role.location}`], MARGIN_X, y, "F1", 8.2, 9.8, mutedTone)
+      textBlock([`${role.company} | ${role.location}`], MARGIN_X, y, "F1", 6.9, 8, mutedTone)
     );
-    y -= 10;
+    y -= 7.8;
 
-    const pointLines = role.points.flatMap((point) => wrapText(`- ${point}`, 97));
-    commands.push(textBlock(pointLines, MARGIN_X + 8, y, "F1", 7.9, 9.1, bodyTone));
-    y -= pointLines.length * 9.1 + 8;
+    const pointLines = role.points.flatMap((point) => wrapText(`- ${point}`, 118));
+    commands.push(textBlock(pointLines, MARGIN_X + 7, y, "F1", 6.7, 7.5, bodyTone));
+    y -= pointLines.length * 7.5 + 5;
   }
+
+  assertSinglePage(y);
 
   const contentStream = commands.join("\n");
   const objects = [

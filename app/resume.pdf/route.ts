@@ -1,14 +1,14 @@
 import {
   education,
   employmentHistory,
+  leadershipSkills,
   professionalDevelopment,
   resumeIdentity,
-  singlePageLeadershipSkills,
-  singlePageResumeSummary,
-  singlePageTechnicalSkills
+  resumeSummary,
+  selectedClientWork,
+  technicalSkills
 } from "@/lib/resume-content";
 import { buildSinglePageResumePdf } from "@/lib/resume-pdf";
-import { siteProfile } from "@/lib/site-profile";
 
 export function GET() {
   const pdf = buildSinglePageResumePdf({
@@ -17,29 +17,26 @@ export function GET() {
     location: resumeIdentity.location,
     phone: resumeIdentity.phone,
     email: resumeIdentity.email,
-    summary: [...singlePageResumeSummary],
+    summary: [...resumeSummary],
     skillSections: [
       {
         heading: "Technical, AI & Systems Execution",
-        items: [...singlePageTechnicalSkills]
+        items: [...technicalSkills]
       },
       {
         heading: "Leadership & Operations",
-        items: [...singlePageLeadershipSkills]
+        items: [...leadershipSkills]
       }
     ],
-    projectsHeading: "RECENT CLIENT & CONTRACT WORK",
+    projectsHeading: "SELECTED CLIENT & CONTRACT WORK (2025-2026)",
     educationBeforeProjects: true,
-    projects: siteProfile.caseStudies.slice(0, 3).map((project) => ({
-      title: `${project.title} (${project.status})`,
+    projects: selectedClientWork.map((project) => ({
+      title: `${project.title} (${project.year})`,
       summary: project.summary
     })),
     education,
     development: professionalDevelopment,
-    experience: employmentHistory.map((role) => ({
-      ...role,
-      points: role.points.slice(0, 2)
-    })),
+    experience: employmentHistory,
     filename: "reuben-moddel-resume.pdf"
   });
 

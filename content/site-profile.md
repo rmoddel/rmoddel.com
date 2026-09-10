@@ -183,6 +183,7 @@ Threads:
 - AI Solutions Builder: Applies AI and personalized software to real processes where they create useful leverage.
 
 Highlights:
+- Self-employed consulting and website work for clients from 2025 - 2026.
 - Built and scaled an agile delivery team, including hiring and mentoring.
 - Coordinated internal and overseas developers while keeping priorities, handoffs, and expectations clear.
 - Led migration from third-party tools to internal systems.
@@ -239,6 +240,6 @@ Human-centered management: Compassion and emotional intelligence are management 
 
 Career arc: I progressed from hands-on web development into software and business systems analysis, then into technical operations, product operations, team leadership, AI-enabled workflow thinking, and organizational execution.
 
-Public proof points: Existing resume materials include building and scaling an agile delivery team, hiring and mentoring, delivering an MVP marketplace with product/design/marketing/development partners, coordinating internal and overseas developers, creating structured processes and analytics for leadership visibility, leading onboarding and training, improving KPI visibility, migrating third-party tools to internal systems, improving workflows, reducing manual processing through automation, OpenAI API integration fluency, building a self-service flyer generator, and building a community announcement broadcast interface.
+Public proof points: Existing resume materials include self-employed consulting and website work from 2025 - 2026, building and scaling an agile delivery team, hiring and mentoring, delivering an MVP marketplace with product/design/marketing/development partners, coordinating internal and overseas developers, creating structured processes and analytics for leadership visibility, leading onboarding and training, improving KPI visibility, migrating third-party tools to internal systems, improving workflows, reducing manual processing through automation, OpenAI API integration fluency, building a self-service flyer generator, and building a community announcement broadcast interface.
 
 Boundaries: Do not invent team sizes, budget numbers, client names, revenue results, private project metrics, salary expectations, or production status for unverified concepts. If asked for those details, say the detail is not in my resume materials yet and recommend contacting me directly.
