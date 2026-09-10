@@ -855,6 +855,53 @@ h3 {
   margin-top: 16px;
 }
 
+.resumeSummarySection {
+  padding: 48px 0;
+}
+
+.resumeSummarySection .sectionHeading {
+  margin-bottom: 14px;
+}
+
+.resumeSummarySection h2 {
+  max-width: 860px;
+  font-size: 2.1rem;
+  line-height: 1.12;
+}
+
+.resumeSummaryCopy {
+  display: grid;
+  gap: 10px;
+  max-width: 920px;
+}
+
+.resumeSummaryCopy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.resumeClientNote {
+  margin-bottom: 18px;
+}
+
+.resumeClientGrid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.resumeClientCard {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  border-top: 4px solid var(--accent-2);
+}
+
+.resumeClientCard h3,
+.resumeClientCard p {
+  margin: 0;
+}
+
 .resumeRoleCard {
   display: grid;
   gap: 18px;
@@ -1336,6 +1383,7 @@ h3 {
   .twoGrid,
   .threeGrid,
   .fourGrid,
+  .resumeClientGrid,
   .contactSection,
   .careerArc,
   .arcLine,
@@ -1346,6 +1394,14 @@ h3 {
   .sectionCard,
   .contactSection {
     padding: 52px 0;
+  }
+
+  .resumeSummarySection {
+    padding: 40px 0;
+  }
+
+  .resumeSummarySection h2 {
+    font-size: 1.8rem;
   }
 
   .resumeHero,

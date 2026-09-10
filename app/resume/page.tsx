@@ -9,6 +9,8 @@ import {
   professionalDevelopment,
   resumeIdentity,
   resumeSummary,
+  selectedClientWork,
+  selectedClientWorkNote,
   technicalSkills
 } from "@/lib/resume-content";
 import { openGraphImagePath, twitterImagePath } from "@/lib/seo";
@@ -110,12 +112,12 @@ export default function ResumePage() {
         </aside>
       </section>
 
-      <section className="sectionCard">
+      <section className="sectionCard resumeSummarySection">
         <div className="sectionHeading">
           <p className="eyebrow">Summary</p>
           <h2>Clear communication, technical judgment, and practical follow-through.</h2>
         </div>
-        <div className="twoColumn">
+        <div className="resumeSummaryCopy">
           {resumeSummary.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -166,6 +168,23 @@ export default function ResumePage() {
             <h3>{professionalDevelopment.program}</h3>
             <p className="resumeMeta">{professionalDevelopment.year}</p>
           </article>
+        </div>
+      </section>
+
+      <section className="sectionCard">
+        <div className="sectionHeading compactHeading">
+          <p className="eyebrow">Recent Work</p>
+          <h2>Selected Client &amp; Contract Work (2025–2026)</h2>
+        </div>
+        <p className="sectionIntro resumeClientNote">{selectedClientWorkNote}</p>
+        <div className="grid resumeClientGrid">
+          {selectedClientWork.map((project) => (
+            <article className="contentCard resumeClientCard" key={project.title}>
+              <p className="microLabel">{project.year}</p>
+              <h3>{project.title}</h3>
+              <p>{project.summary}</p>
+            </article>
+          ))}
         </div>
       </section>
 

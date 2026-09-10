@@ -11,9 +11,30 @@ export const resumeIdentity = {
 } as const;
 
 export const resumeSummary = [
-  `${siteProfile.identity.resumeTitle} with ${siteProfile.positioning.credential.toLowerCase()}.`,
-  siteProfile.positioning.summary,
-  siteProfile.experience.body
+  "AI Solutions and Operations Leader with 15+ years across business systems, operations, software delivery, process improvement, and team leadership. I use AI, automation, and personalized software to simplify cumbersome real-world processes.",
+  "My strength is understanding the people, process, and objective clearly enough to lead practical solutions from idea to execution."
+] as const;
+
+export const selectedClientWorkNote =
+  "Selected public-facing examples; additional projects involve proprietary client systems." as const;
+
+export const selectedClientWork = [
+  {
+    title: "MedFlo AI",
+    year: "2025",
+    summary:
+      "Short-term technical work supporting an AI healthcare startup's website and web application."
+  },
+  {
+    title: "Zen Health",
+    year: "2025",
+    summary: "Built a tailored public website and customized user experience."
+  },
+  {
+    title: "Matzah.store",
+    year: "2025",
+    summary: "Built a customized e-commerce storefront and supporting integrations."
+  }
 ] as const;
 
 export const singlePageResumeSummary = [
