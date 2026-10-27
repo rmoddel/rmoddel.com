@@ -293,6 +293,15 @@ export default function GmailTrashPurgePage() {
 
       <section className="sectionCard">
         <div className="sectionHeading">
+          <p className="eyebrow">Announcements</p>
+          <h2>Announcement feed</h2>
+        </div>
+        <p className="sectionIntro">View the automatically updated announcements page.</p>
+        <a className="button buttonSecondary smallButton" href="/auth/announcements">Open announcements</a>
+      </section>
+
+      <section className="sectionCard">
+        <div className="sectionHeading">
           <p className="eyebrow">Gmail Trash Purge</p>
           <h1>Delete Trash Forever</h1>
         </div>

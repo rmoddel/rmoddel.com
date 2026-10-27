@@ -1,5 +1,7 @@
 # rmoddel.com
 
+Announcement feed implementation and deployment instructions: [docs/announcements-setup.md](docs/announcements-setup.md).
+
 Responsive Next.js personal portfolio site for Reuben Moddel.
 
 ## Stack

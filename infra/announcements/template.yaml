@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Google Voice announcements feed
+
+Parameters:
+  SiteOrigin:
+    Type: String
+    Default: https://rmoddel.com
+    AllowedPattern: '^https://[A-Za-z0-9.-]+$'
+  WriterSecretArn:
+    Type: String
+    Description: ARN of an existing Secrets Manager secret containing the writer key as a plain string
+
+Resources:
+  AnnouncementsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: feed
+          AttributeType: S
+        - AttributeName: publishedAt
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: ByPublishedAt
+          KeySchema:
+            - AttributeName: feed
+              KeyType: HASH
+            - AttributeName: publishedAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+      SSESpecification:
+        SSEEnabled: true
+
+  AnnouncementsApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - !Ref SiteOrigin
+        AllowMethods:
+          - GET
+          - POST
+        AllowHeaders:
+          - content-type
+          - x-announcements-key
+        MaxAge: 600
+
+  AnnouncementsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: python3.11
+      Handler: handler.lambda_handler
+      CodeUri: ./src/
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          TABLE_NAME: !Ref AnnouncementsTable
+          WRITER_SECRET_ARN: !Ref WriterSecretArn
+      Policies:
+        - Statement:
+            - Effect: Allow
+              Action:
+                - dynamodb:PutItem
+                - dynamodb:Query
+              Resource:
+                - !GetAtt AnnouncementsTable.Arn
+                - !Sub '${AnnouncementsTable.Arn}/index/ByPublishedAt'
+            - Effect: Allow
+              Action: secretsmanager:GetSecretValue
+              Resource: !Ref WriterSecretArn
+      Events:
+        GetAnnouncements:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref AnnouncementsApi
+            Path: /announcements
+            Method: GET
+        PostAnnouncement:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref AnnouncementsApi
+            Path: /announcements
+            Method: POST
+
+Outputs:
+  ApiUrl:
+    Description: Public API base URL; safe to set as NEXT_PUBLIC_ANNOUNCEMENTS_API_URL
+    Value: !Sub 'https://${AnnouncementsApi}.execute-api.${AWS::Region}.amazonaws.com'
+  TableName:
+    Value: !Ref AnnouncementsTable

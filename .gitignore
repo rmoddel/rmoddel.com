@@ -1,7 +1,10 @@
 .next
+.aws-sam/
 node_modules
 .env.local
 .env.production
 .env.example
 npm-debug.log*
+__pycache__/
+*.tsbuildinfo
 client_secret_*.json

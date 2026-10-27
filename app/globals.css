@@ -531,6 +531,21 @@ h3 {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
+.announcementsList {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.announcementText {
+  margin: 12px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  unicode-bidi: plaintext;
+  color: var(--ink);
+  line-height: 1.65;
+}
+
 .contentCard h3 + p,
 .contentCard .compactList {
   margin-top: 12px;
